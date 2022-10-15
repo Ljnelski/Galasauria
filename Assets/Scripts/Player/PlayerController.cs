@@ -32,6 +32,6 @@ public class PlayerController : MonoBehaviour
 
     public void AttackPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("HyiYA");
+        //Debug.Log("HyiYA");
     }
 }
