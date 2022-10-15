@@ -24,26 +24,28 @@ public class InventoryScreen : MonoBehaviour
                 Destroy(inventoryContainer.GetChild(i).gameObject);
             }
         }
-        
+
         StartCoroutine(waitForManager());
     }
 
     private IEnumerator waitForManager()
     {
-        if (InventoryManager.Instance == null
-            || ItemManager.Instance == null || !ItemManager.Instance.Inited)
+
+        if (InventoryManager.Instance == null)
         {
             yield return new WaitForEndOfFrame();
         }
 
         // add item to the grid
-        foreach (var pair in InventoryManager.Instance.InventoryDictionary)
+        // TODO Deal; with inventory Id's
+        Inventory targetInventory = InventoryManager.Instance.Inventories[0];
+        foreach (Item item in targetInventory.inventory)
         {
             InventoryItemDisplay display = Instantiate(inventoryItemPrefab, inventoryContainer);
-            ItemData itemData = ItemManager.Instance.GetItemData(pair.Key);
+            ItemData itemData = item.data;
             if (itemData != null)
             {
-                display.Init(itemData.icon, pair.Value, itemData.name);
+                display.Init(itemData.icon, item.stackSize, itemData.name);
             }
         }
     }

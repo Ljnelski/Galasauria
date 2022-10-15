@@ -1,3 +1,10 @@
+/*  Filename:           InventoryManager.cs
+ *  Author:             Liam Nelski (301064116)
+ *  Last Update:        October 14, 2022
+ *  Description:        Attaches a inventory to the gameobject
+ *  Revision History:   October 12, 2022 (Liam Nelski): Initial script. *                     
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +12,18 @@ using System;
 
 public class Inventory : MonoBehaviour
 {
+    public int Id;
+
     public Dictionary<ItemData, Item> itemDictionary;
     public List<Item> inventory;
 
-    public void Awake()
+
+    public void Start()
     {
         inventory = new List<Item>();
         itemDictionary = new Dictionary<ItemData, Item>();
+
+        InventoryManager.Instance.AssignInventory(Id, GetComponent<Inventory>());
     }
 
     public void AddItem(ItemData referenceData)
@@ -19,15 +31,14 @@ public class Inventory : MonoBehaviour
         if (itemDictionary.TryGetValue(referenceData, out Item item))
         {
             item.AddToStack();
-            Debug.Log("Adding to: " + item.stackSize);
         }
         else
         {
             Item newItem = new Item(referenceData);
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
-            Debug.Log("Adding first: " + referenceData.name);
         }
+        NotificationController.Instance.Notify(referenceData.icon, referenceData.name, 1);
     }
 
     public void RemoveItem(ItemData referenceData)
@@ -42,6 +53,12 @@ public class Inventory : MonoBehaviour
                 itemDictionary.Remove(referenceData);
             }
         }
+    }
+
+    public void ClearInventory()
+    {
+        inventory.Clear();
+        itemDictionary.Clear();
     }
 
     public void CraftItem(RecipeData recipe)
@@ -77,7 +94,6 @@ public class Inventory : MonoBehaviour
 
 
     }
-
 }
 
 public interface IEquipable<TUpgrade> where TUpgrade : Enum
