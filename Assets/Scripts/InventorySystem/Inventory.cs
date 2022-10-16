@@ -95,9 +95,3 @@ public class Inventory : MonoBehaviour
 
     }
 }
-
-public interface IEquipable<TUpgrade> where TUpgrade : Enum
-{
-    public Action Attack { get; }
-    public abstract void Upgrade();
-}
