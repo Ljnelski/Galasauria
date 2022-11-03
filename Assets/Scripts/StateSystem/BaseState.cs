@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseState<StateController> where StateController : MonoBehaviour
+public abstract class BaseState<Context> where Context : MonoBehaviour
 {
-    public StateController ControllerScript;
-    BaseState(StateController controllerScript)
+    protected Context controller;
+    public BaseState(Context context)
     {
-        ControllerScript = controllerScript;
+        controller = context;
     }
 
     public abstract void OnStateEnter();

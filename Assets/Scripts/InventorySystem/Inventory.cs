@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
-        NotificationController.Instance.Notify(referenceData.icon, referenceData.name, 1);
+        NotificationController.Instance.Notify(referenceData.icon, referenceData.itemName, 1);
     }
 
     public void RemoveItem(ItemData referenceData)
@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour
             itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);  
             if (inventoryItem == null || inventoryItem.stackSize < recipeItem.itemCount)
             {
-                Debug.Log("Does not have the required number of " + recipeItem.data.name);
+                Debug.Log("Does not have the required number of " + recipeItem.data.itemName);
                 return;
             }
         }
@@ -94,10 +94,4 @@ public class Inventory : MonoBehaviour
 
 
     }
-}
-
-public interface IEquipable<TUpgrade> where TUpgrade : Enum
-{
-    public Action Attack { get; }
-    public abstract void Upgrade();
 }

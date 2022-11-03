@@ -30,7 +30,6 @@ public class InventoryManager : MonoBehaviour
     public void AssignInventory(int inventoryId, Inventory newInventory)
     {
         bool inventoryExists = Inventories.TryGetValue(inventoryId, out Inventory duplicateInventory);
-        Debug.Log(inventoryExists);
         if (inventoryExists)
         {
             Debug.LogError("InventoryManager ERROR: Trying to add duplicate inventory");

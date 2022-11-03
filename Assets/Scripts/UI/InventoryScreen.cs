@@ -45,7 +45,7 @@ public class InventoryScreen : MonoBehaviour
             ItemData itemData = item.data;
             if (itemData != null)
             {
-                display.Init(itemData.icon, item.stackSize, itemData.name);
+                display.Init(itemData.icon, item.stackSize, itemData.itemName);
             }
         }
     }
