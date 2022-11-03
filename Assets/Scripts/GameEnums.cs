@@ -63,4 +63,11 @@ public class GameEnums
         TOGGLE = 3,
         CHECKBOX = 4,
     }
+
+    public enum EquipableInput
+    {
+        PRIMARY = -1,
+        NONE = 0,
+        SECONDARY = 1,
+    }
 }

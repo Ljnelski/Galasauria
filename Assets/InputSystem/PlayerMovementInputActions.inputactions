@@ -15,9 +15,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack1",
-                    "type": "Button",
+                    "name": "Attack",
+                    "type": "Value",
                     "id": "3c47296a-5103-47d6-bc81-f5cd634a711e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SwapWeapon",
+                    "type": "Button",
+                    "id": "a2f77236-7872-446b-aa3e-6063a5168f97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "972b3a03-cb7d-4868-b7dc-46031f2e5b48",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -81,13 +99,57 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "46027f47-db6a-411f-894f-7b0dfa9c5f22",
+                    "name": "1D Axis",
+                    "id": "510c9656-ee1a-43aa-923c-ca8cfdbfe94c",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "7a39b5ec-161c-4ee5-8085-a1eae16832e4",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack1",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "87424fab-902b-4186-ace7-da55110bcf3a",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9608528b-657a-4085-a52e-b5bac28d0b83",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f137d4b1-b645-448c-90ea-98cc153f4830",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

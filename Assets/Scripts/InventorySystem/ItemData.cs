@@ -14,7 +14,7 @@ using System;
 public class ItemData : ScriptableObject
 {    
     public string id;
-    public string name;
+    public string itemName;
     public string description;
     public GameEnums.ItemType type;
     [Header("Stats")]

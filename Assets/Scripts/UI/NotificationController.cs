@@ -24,7 +24,6 @@ public class NotificationController : MonoBehaviour
 
     public void Notify(Sprite itemIcon, string itemName, int itemCount)
     {
-        Debug.Log(itemName + " " + itemCount);
         // TODO, recycle
         ItemReceivedNotification notification = Instantiate(itemReceivedNotificationPrefab, notificationContainer);
         notification.Init(itemIcon, itemName, itemCount);
