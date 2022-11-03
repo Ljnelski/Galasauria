@@ -15,15 +15,24 @@ public class PlayerCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       camera = GetComponent<CinemachineVirtualCamera>();
+        camera = GetComponent<CinemachineVirtualCamera>();        
         Transform playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        camera.Follow = playerPos;
-        camera.LookAt = playerPos;
+        
+        if(playerPos != null)
+        {
+            Debug.LogError("Player Camera ERROR: Could Not Find Player In Scene");
+        }
+        else
+        {
+            camera.Follow = playerPos;
+            camera.LookAt = playerPos;
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
