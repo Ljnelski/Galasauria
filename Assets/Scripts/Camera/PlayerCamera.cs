@@ -18,7 +18,7 @@ public class PlayerCamera : MonoBehaviour
         camera = GetComponent<CinemachineVirtualCamera>();        
         Transform playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         
-        if(playerPos != null)
+        if(playerPos == null)
         {
             Debug.LogError("Player Camera ERROR: Could Not Find Player In Scene");
         }
