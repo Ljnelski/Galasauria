@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 4337988883135521622}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5069461504538144191
 MeshFilter:
@@ -133,8 +133,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 4337988883135521622}
   attackInput: 0
+  lookAtPosition: {x: 0, y: 0, z: 0}
   movementInput: {x: 0, y: 0}
   speed: 10
+  turnSpeed: 30
   equipables:
   - {fileID: 5894126535628105377, guid: 0f42f0ec8237a014d8a21247bc495665, type: 3}
   - {fileID: 901567424666014213, guid: e533f35f24404304aa999a45c3abbd94, type: 3}
