@@ -13,10 +13,8 @@ using System;
 public class Inventory : MonoBehaviour
 {
     public int Id;
-
     public Dictionary<ItemData, Item> itemDictionary;
     public List<Item> inventory;
-
 
     public void Start()
     {
