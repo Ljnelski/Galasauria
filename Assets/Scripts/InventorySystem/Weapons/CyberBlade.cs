@@ -19,9 +19,7 @@ public class CyberBlade : MonoBehaviour, IEquipable
     private Transform blade;
     private Transform hilt;
     private Transform handle;
-
     private CapsuleCollider hitBox;
-
     private Animator animator;
 
     private void Awake()
@@ -35,7 +33,6 @@ public class CyberBlade : MonoBehaviour, IEquipable
 
         InUse = false;
         Debug.Log(InUse);
-
     }
 
     public void BeginUse(GameEnums.EquipableInput attack)
