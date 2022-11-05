@@ -14,37 +14,56 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public PlayerInputActions Input { get; private set; }
-    public EquipedItem EquipedItem { get; private set; }
+    public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
         
+    // Monobehaviours
     private PlayerState activeState;
-    private int equipablesIndex = -1;
     private Camera mainCamera;
 
+    // State switches
+    
     // States
     public PlayerIdleState idleState;
+    public PlayerUseItemState useItemState;
+    public PlayerDashState dashState;
 
 
     // TODO => Move to Scriptable Object to be able to move across levels
-    // Player Values
-    public Transform weaponSlot;
-    public GameEnums.EquipableInput attackInput;
-    public Vector3 lookAtPosition;
-    public Vector2 movementInput;
-    public float speed = 5f;
+
+
+    // Player Input
+    public GameEnums.EquipableInput AttackInput { get; private set; }
+    public Vector3 LookAtPosition { get; private set; }
+    public Vector2 MovementInput { get; private set; }
+    public bool DashInput { get; private set; }
+    // Values that control player behviour
+    [Header("Movement")]
+    public float baseSpeed = 5f;
     public float turnSpeed = 90f;
+    [Header("Dash")]
+    public float dashSpeed = 10f;
+    public float dashDurationMiliseconds = 1000f;
+    public float dashCoolDownMiliseconds = 10000f;
+    public float DashCoolDownTimer { get; private set; } = 0f;
+   
+
     public List<GameObject> equipables;
+    public int equipablesIndex { get; private set; } = -1;
+
 
     private void Awake()
     {
         Input = new PlayerInputActions();
         Input.Player.Enable();
 
-        idleState = new PlayerIdleState(this);       
+        idleState = new PlayerIdleState(this);
+        useItemState = new PlayerUseItemState(this);
+        dashState = new PlayerDashState(this);  
 
         Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        EquipedItem = weaponSlot.GetComponentInChildren<EquipedItem>();
+        EquipedItem = GetComponentInChildren<EquipSlot>();
 
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;
@@ -53,11 +72,14 @@ public class PlayerController : MonoBehaviour
         Input.Player.Attack.started += OnAttackInput;
         Input.Player.Attack.canceled += OnAttackInput;
 
-        Input.Player.SwapWeapon.performed += OnSwapWeapon;
+        Input.Player.SwapWeapon.performed += OnSwapWeaponInput;
 
-        Input.Player.Aim.started += OnAim;
-        Input.Player.Aim.performed += OnAim;
-        Input.Player.Aim.canceled += OnAim;
+        Input.Player.Aim.started += OnAimInput;
+        Input.Player.Aim.performed += OnAimInput;
+        Input.Player.Aim.canceled += OnAimInput;
+
+        Input.Player.Dash.started += OnDashInput;
+        Input.Player.Dash.canceled += OnDashInput;
 
         activeState = idleState;
         activeState.OnStateEnter();
@@ -70,16 +92,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnMovementInput(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
+        MovementInput = context.ReadValue<Vector2>();
     }    
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         GameEnums.EquipableInput attackValue = (GameEnums.EquipableInput)(int)context.ReadValue<float>();
-        attackInput = attackValue;
+        AttackInput = attackValue;
     }
 
-    public void OnSwapWeapon(InputAction.CallbackContext context)
+    public void OnSwapWeaponInput(InputAction.CallbackContext context)
     {
         Debug.Log("equipable.Count: " + equipables.Count);
         if (equipables.Count == 0)
@@ -106,7 +128,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnAim(InputAction.CallbackContext context) 
+    public void OnAimInput(InputAction.CallbackContext context) 
     {
         Vector3 mousePos = Input.Player.Aim.ReadValue<Vector2>();
 
@@ -131,12 +153,19 @@ public class PlayerController : MonoBehaviour
         float xPos = mainCamera.transform.position.x + (Mathf.Tan(xAngle) * yheight);
 
         // Set Y pos
-        lookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
+        LookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
 
     }
 
+    public void OnDashInput(InputAction.CallbackContext context)
+    {
+        DashInput = context.ReadValue<float>() > 0.5f;
+    }
+
     public void ChangeState(PlayerState newState)
-    { 
+    {
+        Debug.Log("Changing State");
+
         activeState.OnStateExit();
 
         activeState = newState;
@@ -154,6 +183,17 @@ public abstract class PlayerState : BaseState<PlayerController>
     public PlayerState(PlayerController playerController) : base(playerController)
     {
         ;
+    }
+
+    protected void MovePlayer()
+    {
+        context.Rb.velocity = Vector3.Slerp(context.Rb.velocity, new Vector3(context.MovementInput.x, 0, context.MovementInput.y) * context.baseSpeed, 0.1f);
+    }
+
+    protected void RotatePlayer()
+    {
+        Quaternion rotation = Quaternion.LookRotation(context.LookAtPosition);
+        context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, context.turnSpeed));
     }
 }
 
@@ -176,16 +216,83 @@ public class PlayerIdleState : PlayerState
 
     public override void OnStateRun()
     {
-        controller.Rb.AddForce(new Vector3(controller.movementInput.x, 0, controller.movementInput.y) * controller.speed, ForceMode.Force);
+        MovePlayer();
   
-        if(controller.EquipedItem != null && controller.attackInput != GameEnums.EquipableInput.NONE && !controller.EquipedItem.InUse)
+        if(context.EquipedItem.ItemEquiped && context.AttackInput != GameEnums.EquipableInput.NONE && !context.EquipedItem.InUse)
         {
-            controller.EquipedItem.UseItem(controller.attackInput);
+            context.ChangeState(context.useItemState);
+        }
+
+        if(context.DashInput && context.DashCoolDownTimer <= 0)
+        {
+            context.ChangeState(context.dashState);
         }
 
         // Look At Mouse Position
-        Quaternion rotation = Quaternion.LookRotation(controller.lookAtPosition);
-        controller.Rb.MoveRotation(Quaternion.RotateTowards(controller.transform.rotation, rotation, controller.turnSpeed));
+        RotatePlayer();
+    }
+}
+
+public class PlayerUseItemState : PlayerState
+{
+    public PlayerUseItemState(PlayerController playerController) : base(playerController)
+    {
+    }
+
+    public override void OnStateEnter()
+    {
+        context.EquipedItem.UseItem(context.AttackInput);
+    }
+
+    public override void OnStateExit()
+    {
+
+    }
+
+    public override void OnStateRun()
+    {
+        MovePlayer();
+        RotatePlayer();
+
+        if(!context.EquipedItem.InUse)
+        {
+            context.ChangeState(context.idleState);
+        }
+    }
+}
+
+public class PlayerDashState : PlayerState
+{
+    private float currentTime = 0f;
+    private Vector3 dashDirection;
+
+    public PlayerDashState(PlayerController playerController) : base(playerController)
+    {
+    }
+
+    public override void OnStateEnter()
+    {
+        dashDirection = new Vector3(context.MovementInput.x, 0.0f, context.MovementInput.y);
+        currentTime = 0f;
+    }
+
+    public override void OnStateExit()
+    {
+        context.Rb.velocity = Vector3.zero;
+    }
+
+    public override void OnStateRun()
+    {
+        currentTime += Time.fixedDeltaTime * 1000;
+        Debug.Log("currentTime: " + currentTime);
+        if (currentTime >= context.dashDurationMiliseconds)
+        {
+            context.ChangeState(context.idleState);
+        }
+        else
+        {
+            context.Rb.velocity = dashDirection * context.dashSpeed;
+        }
     }
 }
 

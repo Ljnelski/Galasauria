@@ -131,12 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d813bdb07338043be56d8a267396cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSlot: {fileID: 4337988883135521622}
-  attackInput: 0
-  lookAtPosition: {x: 0, y: 0, z: 0}
-  movementInput: {x: 0, y: 0}
-  speed: 10
+  baseSpeed: 20
   turnSpeed: 30
+  dashSpeed: 60
+  dashDurationMiliseconds: 500
+  dashCoolDownMiliseconds: 5000
   equipables:
   - {fileID: 5894126535628105377, guid: 0f42f0ec8237a014d8a21247bc495665, type: 3}
   - {fileID: 901567424666014213, guid: e533f35f24404304aa999a45c3abbd94, type: 3}

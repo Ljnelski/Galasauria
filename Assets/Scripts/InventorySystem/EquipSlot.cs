@@ -1,14 +1,15 @@
-/*  Filename:           CyberBlade.cs
+/*  Filename:           EquipSlot.cs
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        November 2, 2022
  *  Description:        Creates and Deletes Weapons, and Acts as a wrapper to the IEquipable Equiped Item
- *  Revision History:   November 2, 2022 (Liam Nelski): Initial script. *                     
+ *  Revision History:   November 2, 2022 (Liam Nelski): Initial script.
+ *                      November 4, 2022 (Liam Nelski): Renamed To EquipSlot 
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipedItem : MonoBehaviour
+public class EquipSlot : MonoBehaviour
 {
     GameObject currentObject;
     public bool InUse { 
@@ -20,7 +21,7 @@ public class EquipedItem : MonoBehaviour
         } 
     }
 
-    public bool WeaponEquiped
+    public bool ItemEquiped
     {
         get
         {
