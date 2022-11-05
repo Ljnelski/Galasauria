@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class BaseState<Context> where Context : MonoBehaviour
 {
-    protected Context controller;
+    protected Context context;
     public BaseState(Context context)
     {
-        controller = context;
+        this.context = context;
     }
 
     public abstract void OnStateEnter();
