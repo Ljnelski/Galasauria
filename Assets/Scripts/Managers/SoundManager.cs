@@ -1,8 +1,9 @@
 /*  Filename:           SoundManager.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        October 12, 2022
+ *  Last Update:        November 8, 2022
  *  Description:        Contains functions to mute and unmute sfx and music; stores audio clips for different screens and scenes to play sfx and music
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 8, 2022 (Yuk Yee Wong): Add score audio.
  */
 
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource changeSceneAudio;
     [SerializeField] private AudioSource toggleAudio;
     [SerializeField] private AudioSource checkboxAudio;
+    [SerializeField] private AudioSource scoreAudio;
 
     [Header("Music")]
     [SerializeField] private AudioSource musicAudio;
@@ -87,6 +89,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case GameEnums.GeneralAudio.CHECKBOX:
                 checkboxAudio.Play();
+                break;
+            case GameEnums.GeneralAudio.SCORE:
+                scoreAudio.Play();
                 break;
             default:
                 Debug.LogError("Please assign the general audio type before playing audio");
