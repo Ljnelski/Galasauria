@@ -134,7 +134,7 @@ MonoBehaviour:
   baseSpeed: 20
   turnSpeed: 30
   dashSpeed: 60
-  dashDurationMiliseconds: 500
+  dashDurationMiliseconds: 200
   dashCoolDownMiliseconds: 5000
   equipables:
   - {fileID: 5894126535628105377, guid: 0f42f0ec8237a014d8a21247bc495665, type: 3}

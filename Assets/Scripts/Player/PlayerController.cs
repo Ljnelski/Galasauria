@@ -7,18 +7,18 @@
  *                      November 3th (Liam Nelski): Moved Equipable from interface to script
  *                      November 3th (Liam Nelski): Made Player Point to the mouse
  */
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController<PlayerController>
 {
     public PlayerInputActions Input { get; private set; }
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
         
     // Monobehaviours
-    private PlayerState activeState;
     private Camera mainCamera;
 
     // State switches
@@ -83,11 +83,6 @@ public class PlayerController : MonoBehaviour
 
         activeState = idleState;
         activeState.OnStateEnter();
-    }
-
-    private void FixedUpdate()
-    {
-        activeState.OnStateRun();
     }
 
     public void OnMovementInput(InputAction.CallbackContext context)
@@ -160,139 +155,6 @@ public class PlayerController : MonoBehaviour
     public void OnDashInput(InputAction.CallbackContext context)
     {
         DashInput = context.ReadValue<float>() > 0.5f;
-    }
-
-    public void ChangeState(PlayerState newState)
-    {
-        Debug.Log("Changing State");
-
-        activeState.OnStateExit();
-
-        activeState = newState;
-
-        activeState.OnStateEnter();
-    }
-}
-
-/*  Author:             Liam Nelski (301064116)
- *  Last Update:        October 10th, 2022
- *  Description:        Basic playerState that all other can inherit from to reducee duplicate code
- */
-public abstract class PlayerState : BaseState<PlayerController>
-{
-    public PlayerState(PlayerController playerController) : base(playerController)
-    {
-        ;
-    }
-
-    protected void MovePlayer()
-    {
-        context.Rb.velocity = Vector3.Slerp(context.Rb.velocity, new Vector3(context.MovementInput.x, 0, context.MovementInput.y) * context.baseSpeed, 0.1f);
-    }
-
-    protected void RotatePlayer()
-    {
-        Quaternion rotation = Quaternion.LookRotation(context.LookAtPosition);
-        context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, context.turnSpeed));
-    }
-}
-
-
-public class PlayerIdleState : PlayerState
-{
-    public PlayerIdleState(PlayerController playerController) : base(playerController)
-    {
-
-    }
-    public override void OnStateEnter()
-    {
-
-    }
-
-    public override void OnStateExit()
-    {
-        ;
-    }
-
-    public override void OnStateRun()
-    {
-        MovePlayer();
-  
-        if(context.EquipedItem.ItemEquiped && context.AttackInput != GameEnums.EquipableInput.NONE && !context.EquipedItem.InUse)
-        {
-            context.ChangeState(context.useItemState);
-        }
-
-        if(context.DashInput && context.DashCoolDownTimer <= 0)
-        {
-            context.ChangeState(context.dashState);
-        }
-
-        // Look At Mouse Position
-        RotatePlayer();
-    }
-}
-
-public class PlayerUseItemState : PlayerState
-{
-    public PlayerUseItemState(PlayerController playerController) : base(playerController)
-    {
-    }
-
-    public override void OnStateEnter()
-    {
-        context.EquipedItem.UseItem(context.AttackInput);
-    }
-
-    public override void OnStateExit()
-    {
-
-    }
-
-    public override void OnStateRun()
-    {
-        MovePlayer();
-        RotatePlayer();
-
-        if(!context.EquipedItem.InUse)
-        {
-            context.ChangeState(context.idleState);
-        }
-    }
-}
-
-public class PlayerDashState : PlayerState
-{
-    private float currentTime = 0f;
-    private Vector3 dashDirection;
-
-    public PlayerDashState(PlayerController playerController) : base(playerController)
-    {
-    }
-
-    public override void OnStateEnter()
-    {
-        dashDirection = new Vector3(context.MovementInput.x, 0.0f, context.MovementInput.y);
-        currentTime = 0f;
-    }
-
-    public override void OnStateExit()
-    {
-        context.Rb.velocity = Vector3.zero;
-    }
-
-    public override void OnStateRun()
-    {
-        currentTime += Time.fixedDeltaTime * 1000;
-        Debug.Log("currentTime: " + currentTime);
-        if (currentTime >= context.dashDurationMiliseconds)
-        {
-            context.ChangeState(context.idleState);
-        }
-        else
-        {
-            context.Rb.velocity = dashDirection * context.dashSpeed;
-        }
     }
 }
 
