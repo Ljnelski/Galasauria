@@ -28,7 +28,6 @@ public class PlayerDashState : PlayerState
 
     public override void OnStateRun()
     {
-        Debug.Log("DASH STATE");
         currentTime += Time.fixedDeltaTime * 1000;
         if (currentTime >= context.dashDurationMiliseconds)
         {

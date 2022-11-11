@@ -13,17 +13,20 @@ public class SpiderIdleState : SpiderState
 
     public override void OnStateEnter()
     {
-        ;
+        context.Agent.isStopped = true;
     }
 
     public override void OnStateExit()
     {
-        ;
+        context.Agent.isStopped = false;
     }
 
     public override void OnStateRun()
     {
-        ;
+        if(context.PlayerInRange())
+        {
+            context.ChangeState(context.ChaseState);
+        }
     }
 }
 

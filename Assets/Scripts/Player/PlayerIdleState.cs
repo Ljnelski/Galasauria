@@ -27,7 +27,6 @@ public class PlayerIdleState : PlayerState
 
     public override void OnStateRun()
     {
-        Debug.Log("IDLE STATE");
         MovePlayer();
   
         if(context.EquipedItem.ItemEquiped && context.AttackInput != GameEnums.EquipableInput.NONE && !context.EquipedItem.InUse)
