@@ -15,7 +15,6 @@ public class BaseSingleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         Debug.Log(Instance == null);
     }
    
