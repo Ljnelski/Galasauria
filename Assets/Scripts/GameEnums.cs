@@ -1,8 +1,9 @@
 /*  Filename:           GameEnums.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        October 12, 2022
+ *  Last Update:        November 8, 2022
  *  Description:        A collection of enums used in the game, data, and scriptable objects
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 8, 2022 (Yuk Yee Wong): Add score audio enum.
  */
 
 using System.Collections;
@@ -62,6 +63,7 @@ public class GameEnums
         CHANGESCENE = 2,
         TOGGLE = 3,
         CHECKBOX = 4,
+        SCORE = 5,
     }
 
     public enum EquipableInput

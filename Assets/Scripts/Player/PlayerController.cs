@@ -7,44 +7,63 @@
  *                      November 3th (Liam Nelski): Moved Equipable from interface to script
  *                      November 3th (Liam Nelski): Made Player Point to the mouse
  */
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController<PlayerController>
 {
     public PlayerInputActions Input { get; private set; }
-    public EquipedItem EquipedItem { get; private set; }
+    public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
         
-    private PlayerState activeState;
-    private int equipablesIndex = -1;
+    // Monobehaviours
     private Camera mainCamera;
 
+    // State switches
+    
     // States
     public PlayerIdleState idleState;
+    public PlayerUseItemState useItemState;
+    public PlayerDashState dashState;
 
 
     // TODO => Move to Scriptable Object to be able to move across levels
-    // Player Values
-    public Transform weaponSlot;
-    public GameEnums.EquipableInput attackInput;
-    public Vector3 lookAtPosition;
-    public Vector2 movementInput;
-    public float speed = 5f;
+
+
+    // Player Input
+    public GameEnums.EquipableInput AttackInput { get; private set; }
+    public Vector3 LookAtPosition { get; private set; }
+    public Vector2 MovementInput { get; private set; }
+    public bool DashInput { get; private set; }
+    // Values that control player behviour
+    [Header("Movement")]
+    public float baseSpeed = 5f;
     public float turnSpeed = 90f;
+    [Header("Dash")]
+    public float dashSpeed = 10f;
+    public float dashDurationMiliseconds = 1000f;
+    public float dashCoolDownMiliseconds = 10000f;
+    public float DashCoolDownTimer { get; private set; } = 0f;
+   
+
     public List<GameObject> equipables;
+    public int equipablesIndex { get; private set; } = -1;
+
 
     private void Awake()
     {
         Input = new PlayerInputActions();
         Input.Player.Enable();
 
-        idleState = new PlayerIdleState(this);       
+        idleState = new PlayerIdleState(this);
+        useItemState = new PlayerUseItemState(this);
+        dashState = new PlayerDashState(this);  
 
         Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        EquipedItem = weaponSlot.GetComponentInChildren<EquipedItem>();
+        EquipedItem = GetComponentInChildren<EquipSlot>();
 
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;
@@ -53,33 +72,31 @@ public class PlayerController : MonoBehaviour
         Input.Player.Attack.started += OnAttackInput;
         Input.Player.Attack.canceled += OnAttackInput;
 
-        Input.Player.SwapWeapon.performed += OnSwapWeapon;
+        Input.Player.SwapWeapon.performed += OnSwapWeaponInput;
 
-        Input.Player.Aim.started += OnAim;
-        Input.Player.Aim.performed += OnAim;
-        Input.Player.Aim.canceled += OnAim;
+        Input.Player.Aim.started += OnAimInput;
+        Input.Player.Aim.performed += OnAimInput;
+        Input.Player.Aim.canceled += OnAimInput;
+
+        Input.Player.Dash.started += OnDashInput;
+        Input.Player.Dash.canceled += OnDashInput;
 
         activeState = idleState;
         activeState.OnStateEnter();
     }
 
-    private void FixedUpdate()
-    {
-        activeState.OnStateRun();
-    }
-
     public void OnMovementInput(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
+        MovementInput = context.ReadValue<Vector2>();
     }    
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         GameEnums.EquipableInput attackValue = (GameEnums.EquipableInput)(int)context.ReadValue<float>();
-        attackInput = attackValue;
+        AttackInput = attackValue;
     }
 
-    public void OnSwapWeapon(InputAction.CallbackContext context)
+    public void OnSwapWeaponInput(InputAction.CallbackContext context)
     {
         Debug.Log("equipable.Count: " + equipables.Count);
         if (equipables.Count == 0)
@@ -106,7 +123,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnAim(InputAction.CallbackContext context) 
+    public void OnAimInput(InputAction.CallbackContext context) 
     {
         Vector3 mousePos = Input.Player.Aim.ReadValue<Vector2>();
 
@@ -131,61 +148,13 @@ public class PlayerController : MonoBehaviour
         float xPos = mainCamera.transform.position.x + (Mathf.Tan(xAngle) * yheight);
 
         // Set Y pos
-        lookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
+        LookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
 
     }
 
-    public void ChangeState(PlayerState newState)
-    { 
-        activeState.OnStateExit();
-
-        activeState = newState;
-
-        activeState.OnStateEnter();
-    }
-}
-
-/*  Author:             Liam Nelski (301064116)
- *  Last Update:        October 10th, 2022
- *  Description:        Basic playerState that all other can inherit from to reducee duplicate code
- */
-public abstract class PlayerState : BaseState<PlayerController>
-{
-    public PlayerState(PlayerController playerController) : base(playerController)
+    public void OnDashInput(InputAction.CallbackContext context)
     {
-        ;
-    }
-}
-
-
-public class PlayerIdleState : PlayerState
-{
-    public PlayerIdleState(PlayerController playerController) : base(playerController)
-    {
-
-    }
-    public override void OnStateEnter()
-    {
-
-    }
-
-    public override void OnStateExit()
-    {
-        ;
-    }
-
-    public override void OnStateRun()
-    {
-        controller.Rb.AddForce(new Vector3(controller.movementInput.x, 0, controller.movementInput.y) * controller.speed, ForceMode.Force);
-  
-        if(controller.EquipedItem != null && controller.attackInput != GameEnums.EquipableInput.NONE && !controller.EquipedItem.InUse)
-        {
-            controller.EquipedItem.UseItem(controller.attackInput);
-        }
-
-        // Look At Mouse Position
-        Quaternion rotation = Quaternion.LookRotation(controller.lookAtPosition);
-        controller.Rb.MoveRotation(Quaternion.RotateTowards(controller.transform.rotation, rotation, controller.turnSpeed));
+        DashInput = context.ReadValue<float>() > 0.5f;
     }
 }
 
