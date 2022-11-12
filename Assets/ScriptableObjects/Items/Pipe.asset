@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Pipe
   m_EditorClassIdentifier: 
   id: 1
-  name: pipe
+  itemName: 
   description: 
   type: 0
   maxStack: 0
   itemWeight: 0
   prefab: {fileID: 0}
   icon: {fileID: 0}
+  score: 10

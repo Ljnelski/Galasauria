@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Crate_4_UnlockingCollectable
   m_EditorClassIdentifier: 
   randomItemCountData:
-  - chance: 0.8
+  - chance: 0.5
     itemAmount:
-      itemData: {fileID: 11400000, guid: 4c4b9bccfb0e62c4d9a236bf315709ad, type: 2}
+      itemData: {fileID: 11400000, guid: fc2ceedb7f0940948a9f6089e10bd5b4, type: 2}
       amount: 2
   - chance: 1
     itemAmount:

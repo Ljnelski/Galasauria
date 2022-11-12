@@ -3,8 +3,10 @@
  *  Last Update:        November 8, 2022
  *  Description:        Contains public function to increase the score displayed on the UI
  *  Revision History:   November 8, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 12, 2022 (Yuk Yee Wong): Assign the inventoryIncrementAction
  */
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +22,27 @@ public class ScoreCounter : MonoBehaviour
     public int CurrentScore { get; private set; }
     private int maxScore;
 
-    private void Start()
+    void Awake()
+    {
+        StartCoroutine(WaitForManagerInstance());
+    }
+
+    private IEnumerator WaitForManagerInstance()
+    {
+        if (InventoryManager.Instance == null || InventoryManager.Instance.Inventories.Count == 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        InventoryManager.Instance.Inventories[0].inventoryIncrementAction += IncreaseItemScore;
+    }
+
+    private void IncreaseItemScore(ItemData itemData)
+    {
+        IncreaseScore(itemData.score);
+    }
+
+    void Start()
     {
         maxScore = (int)Mathf.Pow(10, animatedDigits.Count) - 1;
 

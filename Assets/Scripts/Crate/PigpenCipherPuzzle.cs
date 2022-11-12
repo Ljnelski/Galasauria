@@ -1,4 +1,4 @@
-/*  Filename:           PigenCipherPuzzle.cs
+/*  Filename:           PigpenCipherPuzzle.cs
  *  Author:             Yuk Yee Wong (301234795)
  *  Last Update:        November 12, 2022
  *  Description:        Pigen cipher puzzle for unlocking crate and obtaining random items
@@ -9,10 +9,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class PigenCipherPuzzle : MonoBehaviour
+public class PigpenCipherPuzzle : MonoBehaviour
 {
     [Header("Pigen Cipher")]
-    [SerializeField] private PigenCipherPuzzleUI puzzleInterface;
+    [SerializeField] private PigpenCipherPuzzleUI puzzleInterface;
     [SerializeField] private Animation crateAnimation;
     [SerializeField] private List<KeyCode> answerKeyCodes;
     [SerializeField] private RandomListItemCollectableData unlockingCollectable;
