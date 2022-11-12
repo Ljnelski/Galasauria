@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f096eb6245bd40438db0ad5a0805b5b, type: 3}
-  m_Name: Microchip
+  m_Name: SpeedPowerUp
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: Microchip
-  description: Used for upgrades and Logic repair
-  type: 6
+  id: 
+  itemName: Speed Power Up
+  description: A Blue crystal that gives the player increased Speed
+  type: 3001
   maxStack: 0
   itemWeight: 1
-  prefab: {fileID: 4844243622099002554, guid: c70b5d48574caec4ab5e8671b1e5a663, type: 3}
-  icon: {fileID: 21300000, guid: 1fd2d165a53352a43923119ca624728f, type: 3}
-  score: 30
+  prefab: {fileID: 17720013874351660, guid: a9b224560e26bd14b9de510931e0551f, type: 3}
+  icon: {fileID: 21300000, guid: 6b4355b63d7cd74448ad968c30a1a80f, type: 3}
+  score: 10

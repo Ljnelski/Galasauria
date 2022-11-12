@@ -1,4 +1,4 @@
-/*  Filename:           PigenCipherPuzzleUI.cs
+/*  Filename:           PigpenCipherPuzzleUI.cs
  *  Author:             Yuk Yee Wong (301234795)
  *  Last Update:        November 12, 2022
  *  Description:        UI script for pigen cipher puzzle
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PigenCipherPuzzleUI : MonoBehaviour
+public class PigpenCipherPuzzleUI : MonoBehaviour
 {
     [Header("Pigen Cipher")]
     [SerializeField] private List<Text> pigenCipherLabels;
@@ -24,7 +24,7 @@ public class PigenCipherPuzzleUI : MonoBehaviour
 
     public void Refresh()
     {
-        Tuple<string, int, List<string>, List<string>> pair = PigenCipherEncoder.GetPairs(charCount, answerLabels.Count);
+        Tuple<string, int, List<string>, List<string>> pair = PigpenCipherEncoder.GetPairs(charCount, answerLabels.Count);
         if (pair != null)
         {
             password.text = pair.Item1;

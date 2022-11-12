@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Plasma Cartridge
   m_EditorClassIdentifier: 
   id: 3
-  name: Plasma Cartridge
-  description: 
-  type: 0
+  itemName: Plasma Cartridge
+  description: Used as Ammo in Plasma caster
+  type: 4
   maxStack: 0
-  itemWeight: 0
+  itemWeight: 3
   prefab: {fileID: 0}
   icon: {fileID: 0}
+  score: 0

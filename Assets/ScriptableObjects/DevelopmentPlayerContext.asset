@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f096eb6245bd40438db0ad5a0805b5b, type: 3}
-  m_Name: Plasma Capacitor
+  m_Script: {fileID: 11500000, guid: 109ea723abf358e418536361a941b017, type: 3}
+  m_Name: DevelopmentPlayerContext
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: Plasma Capacitor
-  description: Used for upgrades and Ammo
-  type: 3
-  maxStack: 0
-  itemWeight: 1
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
-  score: 50
+  _maxHealth: 100
+  _currentHealth: 100
+  _baseSpeed: 5
+  _turnSpeed: 90
+  _acceleration: 0.1
+  _dashSpeed: 10
+  _dashDurationMiliseconds: 1000
+  _dashCoolDownMiliseconds: 10000

@@ -5,6 +5,7 @@
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +15,26 @@ public class InventoryItemDisplay : MonoBehaviour
     [SerializeField] private Image itemIcon;
     [SerializeField] private Text itemCountLabel;
     [SerializeField] private Text itemNameLabel; // temp
+    [SerializeField] private Button button;
 
-    public void Init(Sprite icon, int count, string name)
+    private ItemData itemData;
+    public Action<ItemData> OnItemClick;
+
+    private void Awake()
     {
-        itemIcon.sprite = icon;
-        itemCountLabel.text = string.Format(countFormat, count);
-        itemNameLabel.text = name;
+        button.onClick.AddListener(OnButtonClick);
+    }
+
+    public void Init(ItemData itemData, int itemStackSize)
+    {
+        this.itemData = itemData;
+        itemIcon.sprite = itemData.icon;
+        itemCountLabel.text = string.Format(countFormat, itemStackSize);
+        itemNameLabel.text = itemData.itemName;
+    }
+
+    private void OnButtonClick()
+    {
+        OnItemClick?.Invoke(itemData);
     }
 }

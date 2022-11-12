@@ -4,6 +4,7 @@
  *  Last Update:        October 14, 2022
  *  Description:        Stores the item data (i.e. type, name, description) and the icon sprite
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 12, 2022 (Yuk Yee Wong): Add score data.
  */
 
 using UnityEngine;
@@ -23,5 +24,6 @@ public class ItemData : ScriptableObject
     [Header("Visual")]
     public GameObject prefab;
     public Sprite icon;
-
+    [Header("Score")]
+    public int score;
 }

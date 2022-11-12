@@ -1,4 +1,4 @@
-/*  Filename:           PigenCipherPuzzle.cs
+/*  Filename:           PigpenCipherPuzzle.cs
  *  Author:             Yuk Yee Wong (301234795)
  *  Last Update:        November 12, 2022
  *  Description:        Pigen cipher puzzle for unlocking crate and obtaining random items
@@ -9,13 +9,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class PigenCipherPuzzle : MonoBehaviour
+public class PigpenCipherPuzzle : MonoBehaviour
 {
     [Header("Pigen Cipher")]
-    [SerializeField] private PigenCipherPuzzleUI puzzleInterface;
+    [SerializeField] private PigpenCipherPuzzleUI puzzleInterface;
     [SerializeField] private Animation crateAnimation;
     [SerializeField] private List<KeyCode> answerKeyCodes;
-    [SerializeField] private RandomListItemCollectableData collectable;
+    [SerializeField] private RandomListItemCollectableData unlockingCollectable;
+    [SerializeField] private RandomListItemCollectableData breakableCollectable;
+    [SerializeField] private AudioSource openingSFX;
 
     [Header("Settings")]
     private string crateOpenAnimation = "Crate_Open";
@@ -51,11 +53,14 @@ public class PigenCipherPuzzle : MonoBehaviour
                         // Play the open crate animation
                         crateAnimation.CrossFade(crateOpenAnimation);
 
+                        // Play the opening sound
+                        openingSFX.Play();
+
                         // Disable the puzzle UI
                         puzzleInterface.gameObject.SetActive(false);
 
                         // Collect the items
-                        collectable.Collect(inventory);
+                        unlockingCollectable.Collect(inventory);
 
                         solved = true;
                     }
@@ -67,6 +72,27 @@ public class PigenCipherPuzzle : MonoBehaviour
                 }
             }
         }
+    }
+
+    // TODO, wire the IDamagable
+    public void CollectUponBroken()
+    {
+        // Play the open crate animation
+        crateAnimation.CrossFade(crateOpenAnimation);
+
+        // Disable the puzzle UI
+        puzzleInterface.gameObject.SetActive(false);
+
+        // TODO, we have to consider other method to collect the items as the player may use ranged weapons
+        // and the crate do not have the inventory
+        // we may simply spawn the another list item trigger and leave it on the spot
+        if (inventory)
+        { 
+            // Collect the items
+            breakableCollectable.Collect(inventory);
+        }
+
+        solved = true;
     }
 
     void OnTriggerEnter(Collider other)

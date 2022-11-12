@@ -1,4 +1,4 @@
-/*  Filename:           PigenCipherEncoder.cs
+/*  Filename:           PigpenCipherEncoder.cs
  *  Author:             Yuk Yee Wong (301234795)
  *  Last Update:        November 12, 2022
  *  Description:        Pigen cipher encoder to use in pigen cipher puzzle UI
@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-public class PigenCipherEncoder
+public class PigpenCipherEncoder
 {
     private static List<string> alphabets = new List<string> 
     { 

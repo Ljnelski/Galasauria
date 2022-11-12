@@ -2,19 +2,22 @@
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        October 14, 2022
  *  Description:        Attaches a inventory to the gameobject
- *  Revision History:   October 12, 2022 (Liam Nelski): Initial script. *                     
+ *  Revision History:   October 12, 2022 (Liam Nelski): Initial script.
+ *                      November 12, 2022 (Yuk Yee Wong): Replace the notification call with inventoryIncrementAction
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
     public int Id;
     public Dictionary<ItemData, Item> itemDictionary;
     public List<Item> inventory;
+    public Action<ItemData> inventoryIncrementAction;
 
     public void Start()
     {
@@ -36,7 +39,7 @@ public class Inventory : MonoBehaviour
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
-        NotificationController.Instance.Notify(referenceData.icon, referenceData.itemName, 1);
+        inventoryIncrementAction?.Invoke(referenceData);
     }
 
     public void RemoveItem(ItemData referenceData)

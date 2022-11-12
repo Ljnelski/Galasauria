@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f096eb6245bd40438db0ad5a0805b5b, type: 3}
-  m_Name: Microchip
+  m_Name: HealthPowerUp
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: Microchip
-  description: Used for upgrades and Logic repair
-  type: 6
+  id: 
+  itemName: Health Power Up
+  description: A red crystal that replenishes the player health
+  type: 2001
   maxStack: 0
   itemWeight: 1
-  prefab: {fileID: 4844243622099002554, guid: c70b5d48574caec4ab5e8671b1e5a663, type: 3}
-  icon: {fileID: 21300000, guid: 1fd2d165a53352a43923119ca624728f, type: 3}
-  score: 30
+  prefab: {fileID: 243996721981528659, guid: b9e878c622ab85a45bb83a861fbff26e, type: 3}
+  icon: {fileID: 21300000, guid: e7daa4a29d08e3d458915a98710560f6, type: 3}
+  score: 5

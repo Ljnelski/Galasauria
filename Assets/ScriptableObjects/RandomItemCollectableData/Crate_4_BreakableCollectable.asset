@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 419237336f4feba4d87f0a91ca51ad40, type: 3}
-  m_Name: Crate_2_RandomItem
+  m_Name: Crate_4_BreakableCollectable
   m_EditorClassIdentifier: 
   randomItemCountData:
-  - chance: 0.8
+  - chance: 0.3
     itemAmount:
-      itemData: {fileID: 11400000, guid: dc90d86fb6ee74d4081fb840b19fc93c, type: 2}
+      itemData: {fileID: 11400000, guid: fc2ceedb7f0940948a9f6089e10bd5b4, type: 2}
       amount: 2
   - chance: 1
     itemAmount:
