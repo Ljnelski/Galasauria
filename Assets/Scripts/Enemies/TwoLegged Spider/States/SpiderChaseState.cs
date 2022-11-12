@@ -26,7 +26,7 @@ public class SpiderChaseState : SpiderState
 
     public override void OnStateRun()
     {
-        context.Agent.destination = context.playerTransform.position;
+        context.Agent.destination = context.ChaseTarget.position;
 
         if(!context.PlayerInRange())
         {

@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 109ea723abf358e418536361a941b017, type: 3}
-  m_Name: DevelopmentPlayerContext
+  m_Script: {fileID: 11500000, guid: 63812847a6afc7a449c15acd6c9241fd, type: 3}
+  m_Name: SpiderDevelopmentContext
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 100
-  _baseSpeed: 15
-  _turnSpeed: 30
-  _acceleration: 0.2
-  _dashSpeed: 60
-  _dashDurationMiliseconds: 250
-  _dashCoolDownMiliseconds: 5000
+  _baseSpeed: 6
+  _turnSpeed: 180
+  _acceleration: 20
+  _baseDamage: 5
+  _detectionRange: 8
