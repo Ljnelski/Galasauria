@@ -21,13 +21,13 @@ public abstract class PlayerState : BaseState<PlayerController>
 
     protected void MovePlayer()
     {
-        context.Rb.velocity = Vector3.Slerp(context.Rb.velocity, new Vector3(context.MovementInput.x, 0, context.MovementInput.y) * context.baseSpeed, 0.1f);
+        context.Rb.velocity = Vector3.Lerp(context.Rb.velocity, new Vector3(context.MovementInput.x, 0, context.MovementInput.y) * context.BaseSpeed, context.Acceleration);
     }
 
     protected void RotatePlayer()
     {
         Quaternion rotation = Quaternion.LookRotation(context.LookAtPosition);
-        context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, context.turnSpeed));
+        context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, context.TurnSpeed));
     }
 }
 

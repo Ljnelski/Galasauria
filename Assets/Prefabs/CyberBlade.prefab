@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 8724911761544461186}
   m_Father: {fileID: 9162926752592998861}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &853483151983801280
 GameObject:
@@ -62,7 +62,7 @@ Transform:
   m_Children:
   - {fileID: 9162926752592998861}
   m_Father: {fileID: 2753706142059900037}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2151132488112211776
 GameObject:
@@ -94,7 +94,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6523451379554548763}
-  m_RootOrder: -1
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2518764535980665648
 SkinnedMeshRenderer:
@@ -183,7 +183,7 @@ Transform:
   m_Children:
   - {fileID: 4452764842243554401}
   m_Father: {fileID: 4313128741686752360}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3547328723331971546
 GameObject:
@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 8724911761544461186}
   - component: {fileID: 6705100129015394310}
   - component: {fileID: 6705100129015394311}
+  - component: {fileID: 8757200520002180205}
   m_Layer: 0
   m_Name: Blade
   m_TagString: Untagged
@@ -217,7 +218,7 @@ Transform:
   m_Children:
   - {fileID: 1655668491682429725}
   m_Father: {fileID: 4452764842243554401}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6705100129015394310
 CapsuleCollider:
@@ -227,7 +228,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3547328723331971546}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.08
   m_Height: 1.0371262
@@ -253,6 +254,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8757200520002180205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3547328723331971546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd0e11856275494dadda2137d756eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagedTag: Enemy
+  healthSystem: {fileID: 0}
+  damage: 10
 --- !u!1 &4371002337989093071
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +299,7 @@ Transform:
   m_Children:
   - {fileID: 4313128741686752360}
   m_Father: {fileID: 6523451379554548763}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5894126535628105377
 GameObject:
@@ -297,6 +313,8 @@ GameObject:
   - component: {fileID: 6705100129686002676}
   - component: {fileID: 6705100129686002678}
   - component: {fileID: 3429643937613590957}
+  - component: {fileID: 6571477982797512164}
+  - component: {fileID: -3875628161638946286}
   m_Layer: 0
   m_Name: CyberBlade
   m_TagString: Equipable
@@ -312,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5894126535628105377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 1, z: 0}
+  m_LocalPosition: {x: 0.6, y: 1.259, z: -0.843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -369,6 +387,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &6571477982797512164
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894126535628105377}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.09244588
+  m_Height: 1.2530882
+  m_Direction: 2
+  m_Center: {x: 0.006664008, y: 0, z: 1.3453397}
+--- !u!114 &-3875628161638946286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894126535628105377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd0e11856275494dadda2137d756eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagedTag: Enemy
+  healthSystem: {fileID: 0}
+  damage: 10
 --- !u!1 &6525626086551490467
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,5 +445,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8724911761544461186}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

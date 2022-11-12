@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 4337988883135521622}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5069461504538144191
 MeshFilter:
@@ -131,14 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d813bdb07338043be56d8a267396cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 20
-  turnSpeed: 30
-  dashSpeed: 60
-  dashDurationMiliseconds: 200
-  dashCoolDownMiliseconds: 5000
+  playerContext: {fileID: 11400000, guid: f4b20d3f2544e694d993462c1c256865, type: 2}
   equipables:
   - {fileID: 5894126535628105377, guid: 0f42f0ec8237a014d8a21247bc495665, type: 3}
   - {fileID: 901567424666014213, guid: e533f35f24404304aa999a45c3abbd94, type: 3}
+  dashCoolDownTimer: 0
 --- !u!114 &5069461504538144176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +192,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5069461504538144190}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1816532085
 MonoBehaviour:
