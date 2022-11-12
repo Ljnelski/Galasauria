@@ -14,42 +14,51 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : BaseController<PlayerController>
 {
-    public PlayerInputActions Input { get; private set; }
+    // Scripts
+    private Camera mainCamera;
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
-        
-    // Monobehaviours
-    private Camera mainCamera;
+    public HealthSystem HealthSystem { get; private set; }    
 
-    // State switches
-    
     // States
     public PlayerIdleState idleState;
     public PlayerUseItemState useItemState;
     public PlayerDashState dashState;
 
-
-    // TODO => Move to Scriptable Object to be able to move across levels
-
+    // Editor Accessable
+    public PlayerContext playerContext;
+    public List<GameObject> equipables;
 
     // Player Input
+    public PlayerInputActions Input { get; private set; }
     public GameEnums.EquipableInput AttackInput { get; private set; }
     public Vector3 LookAtPosition { get; private set; }
     public Vector2 MovementInput { get; private set; }
     public bool DashInput { get; private set; }
-    // Values that control player behviour
-    [Header("Movement")]
-    public float baseSpeed = 5f;
-    public float turnSpeed = 90f;
-    [Header("Dash")]
-    public float dashSpeed = 10f;
-    public float dashDurationMiliseconds = 1000f;
-    public float dashCoolDownMiliseconds = 10000f;
-    public float DashCoolDownTimer { get; private set; } = 0f;
-   
 
-    public List<GameObject> equipables;
-    public int equipablesIndex { get; private set; } = -1;
+    // Values that control player behviour
+    public float MaxHealth { get => playerContext._maxHealth; }
+    public float CurrentHealth { get => playerContext._currentHealth; }
+    public float BaseSpeed { get => playerContext._baseSpeed; }
+    public float TurnSpeed { get => playerContext._turnSpeed; }
+    public float Acceleration { get => playerContext._acceleration; }
+    public float dashSpeed { get => playerContext._dashSpeed; }
+    public float dashDurationMiliseconds { get => playerContext._dashDurationMiliseconds; }
+    public float dashCoolDownMiliseconds { get => playerContext._dashCoolDownMiliseconds; }
+
+    // Stored Outside of playerContext
+    public float DashCoolDownTimer
+    {
+        get { return dashCoolDownTimer; }
+        set { dashCoolDownTimer = value; }
+    }
+
+    // private varibles
+    private int equipablesIndex = -1;
+
+    // TODO => Move functionality to Timer
+    public float dashCoolDownTimer = 0f;
+
 
 
     private void Awake()
