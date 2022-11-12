@@ -1,3 +1,11 @@
+/*  Filename:           HealthSystem.cs
+ *  Author:             Jinkyu Choi (301024988)
+ *  Last Update:        November 11, 2022
+ *  Description:        Script which manages the health of the gameObject
+ *  Revision History:   November, 11, 2022 (Jinkyu Choi): Initial Script.
+ *                      November, 11, 2022 (Jinkyu Choi): Write Changes here
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
