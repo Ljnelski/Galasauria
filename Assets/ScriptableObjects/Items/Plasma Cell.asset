@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Plasma Cell
   m_EditorClassIdentifier: 
   id: 4
-  itemName: 
-  description: 
-  type: 0
+  itemName: Plasma Cell
+  description: Used for upgrades and Ammo
+  type: 2
   maxStack: 0
-  itemWeight: 0
+  itemWeight: 2
   prefab: {fileID: 0}
   icon: {fileID: 0}
   score: 80

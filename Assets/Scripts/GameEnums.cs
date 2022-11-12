@@ -26,6 +26,12 @@ public class GameEnums
         CYBERBLADE = 1001,
         PLASMACASTER = 1002,
         POWERSUIT = 1003,
+
+        // health recovery items
+        HEALTHPOWERUP = 2001,
+
+        // speed increment items
+        SPEEDPOWERUP = 3001,
     }
 
     public enum Screen

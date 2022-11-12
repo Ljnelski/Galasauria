@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Plasma Capacitor
   m_EditorClassIdentifier: 
   id: 2
-  itemName: 
-  description: 
-  type: 0
+  itemName: Plasma Capacitor
+  description: Used for upgrades and Ammo
+  type: 3
   maxStack: 0
-  itemWeight: 0
+  itemWeight: 1
   prefab: {fileID: 0}
   icon: {fileID: 0}
   score: 50

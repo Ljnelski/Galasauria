@@ -21,3 +21,7 @@ MonoBehaviour:
     itemAmount:
       itemData: {fileID: 11400000, guid: a53f44f24381a704b8add3bb08b612c0, type: 2}
       amount: 1
+  - chance: 0.5
+    itemAmount:
+      itemData: {fileID: 11400000, guid: d46e82979fe8db2438c5bf65db218902, type: 2}
+      amount: 1
