@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Microchip
   m_EditorClassIdentifier: 
   id: 0
-  itemName: 
-  description: 
-  type: 0
+  itemName: Microchip
+  description: Used for upgrades and Logic repair
+  type: 6
   maxStack: 0
   itemWeight: 0
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 4844243622099002554, guid: c70b5d48574caec4ab5e8671b1e5a663, type: 3}
+  icon: {fileID: 21300000, guid: 1fd2d165a53352a43923119ca624728f, type: 3}
   score: 30
