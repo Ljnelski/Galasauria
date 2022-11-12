@@ -129,6 +129,18 @@ public class PlayerController : BaseController<PlayerController>
 
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        {
+            if (hit.transform)
+            {
+                Vector3 worldPos = hit.point;
+                Vector3 rawLookAtPosition = Vector3.ClampMagnitude(worldPos - transform.position, 5f);
+                rawLookAtPosition.y = 0;
+                LookAtPosition = rawLookAtPosition;
+            }
+        }
+
+        /*
         Vector3 cameraAtPlayerheight = mainCamera.transform.position;
         cameraAtPlayerheight.y = transform.position.y;
 
@@ -149,7 +161,7 @@ public class PlayerController : BaseController<PlayerController>
 
         // Set Y pos
         LookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
-
+        */
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
