@@ -6,6 +6,7 @@
  *                      October 16th (Liam Nelski): Added Use of Equipable Items
  *                      November 3th (Liam Nelski): Moved Equipable from interface to script
  *                      November 3th (Liam Nelski): Made Player Point to the mouse
+ *                      November 12th (Liam Nelski): Moved Values to Scriptable Object
  */
 using System;
 using System.Collections.Generic;

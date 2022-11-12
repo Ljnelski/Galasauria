@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*  Filename:           PlayerController.cs
+ *  Author:             Liam Nelski (301064116)
+ *  Last Update:        October 12th, 2022
+ *  Description:        Scriptable Object to hold playerData
+ *  Revision History:   November 12th (Liam Nelski): Inital Script.
+ *  
+ */
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="PlayerContext", menuName ="ScriptableObjects/PlayerContext")]
