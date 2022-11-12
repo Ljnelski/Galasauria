@@ -12,6 +12,7 @@ public class InventoryScreen : MonoBehaviour
 {
     [SerializeField] private Transform inventoryContainer;
     [SerializeField] private InventoryItemDisplay inventoryItemPrefab;
+    [SerializeField] private InventoryItemDetailsDisplay inventoryItemDetailsDisplay;
 
     private void OnEnable()
     {
@@ -45,9 +46,10 @@ public class InventoryScreen : MonoBehaviour
             ItemData itemData = item.data;
             if (itemData != null)
             {
-                display.Init(itemData.icon, item.stackSize, itemData.itemName);
+                display.Init(itemData, item.stackSize);
+                display.OnItemClick = null;
+                display.OnItemClick += inventoryItemDetailsDisplay.Display;
             }
         }
     }
-
 }
