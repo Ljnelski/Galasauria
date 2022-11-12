@@ -33,6 +33,6 @@ public class NotificationController : MonoBehaviour
     {
         // TODO, recycle
         ItemReceivedNotification notification = Instantiate(itemReceivedNotificationPrefab, notificationContainer);
-        notification.Init(itemData.icon, itemData.name, 1);
+        notification.Init(itemData.icon, itemData.itemName, 1);
     }
 }
