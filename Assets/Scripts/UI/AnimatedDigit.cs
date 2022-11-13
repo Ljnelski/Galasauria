@@ -64,6 +64,12 @@ public class AnimatedDigit : MonoBehaviour
         timePassed = 0;
         currentNumber = 0;
         pendingIncrement = 0;
+
+        if (label == null)
+        {
+            label = GetComponent<TextMeshProUGUI>();
+        }
+
         label.text = "0";
         label.fontSize = normalSize;
     }
