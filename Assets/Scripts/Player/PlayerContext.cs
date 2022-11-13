@@ -26,5 +26,6 @@ public class PlayerContext : ScriptableObject
     public float _dashSpeed;
     public float _dashDurationMiliseconds;
     public float _dashCoolDownMiliseconds;
+    public float _currentDashCoolDown;
     public bool _canDash;
 }
