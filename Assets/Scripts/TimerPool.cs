@@ -3,6 +3,7 @@
  *  Last Update:        November 12th, 2022
  *  Description:        Script that can contain n number of Action Timers that can be placed on objects
  *  Revision History:   November 12th (Liam Nelski): Inital Script.
+ *                      November 13th (Liam Nelski): Added support for a Callback on tick
  *                      
  */
 using System;
@@ -36,15 +37,21 @@ public class TimerPool : MonoBehaviour
 
     public void CreateTimer(float duration, Action callback)
     {
+        CreateTimer(duration, callback, null);
+    }
+
+    public void CreateTimer(float duration, Action callback, Action<float> onTick)
+    {
         ActionTimer newTimer;
-        if (_pooledTimers.Count > 0) {
+        if (_pooledTimers.Count > 0)
+        {
             newTimer = _pooledTimers.Dequeue();
-            newTimer.StartTimer(duration, callback);
+            newTimer.StartTimer(duration, callback, onTick);
         }
         else
         {
             newTimer = new ActionTimer(PoolTimer);
-            newTimer.StartTimer(duration, callback);
+            newTimer.StartTimer(duration, callback, onTick);
         }
 
         _activeTimers.Add(newTimer);

@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _currentHealth: 100
+  _currentSpeed: 0
   _baseSpeed: 5
+  _boostSpeedMultiplier: 0
   _turnSpeed: 90
   _acceleration: 0.1
   _dashSpeed: 10
   _dashDurationMiliseconds: 1000
   _dashCoolDownMiliseconds: 10000
+  _currentDashCoolDown: -0.0025497805
+  _canDash: 1

@@ -5,8 +5,9 @@
  *  Revision History:   October 10th (Liam Nelski): Inital Script.
  *                      October 16th (Liam Nelski): Added Use of Equipable Items
  *                      November 3th (Liam Nelski): Moved Equipable from interface to script
- *                      November 3th (Liam Nelski): Made Player Point to the mouse
- *                      November 12th (Liam Nelski): Moved Values to Scriptable Object
+ *                      November 3th (Liam Nelski): Made Player Point to the mouse.
+ *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
+ *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
  */
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ public class PlayerController : BaseController<PlayerController>
     private Camera mainCamera;
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
-    public HealthSystem Health { get; private set; }    
-
+    public HealthSystem Health { get; private set; }
     public TimerPool Timers { get; private set; }
 
     // States
@@ -40,8 +40,8 @@ public class PlayerController : BaseController<PlayerController>
     public bool DashInput { get; private set; }
 
     // Values that control player behviour
+    // ReadOnly
     public float MaxHealth { get => playerContext._maxHealth; }
-    public float CurrentHealth { get => playerContext._currentHealth; }
     public float BaseSpeed { get => playerContext._baseSpeed; }
     public float TurnSpeed { get => playerContext._turnSpeed; }
     public float Acceleration { get => playerContext._acceleration; }
@@ -49,16 +49,37 @@ public class PlayerController : BaseController<PlayerController>
     public float DashDurationMiliseconds { get => playerContext._dashDurationMiliseconds; }
     public float DashCoolDownMiliseconds { get => playerContext._dashCoolDownMiliseconds; }
 
-    public bool CanDash { get; set; } = true;
-    
-   
+    // Writable
+    public float CurrentHealth
+    {
+        get => playerContext._currentHealth;
+        set
+        {
+            playerContext._currentHealth = value;
+            OnHealthUpdated?.Invoke();
+        }
+    }
+
+    public float CurrentDashCoolDown
+    {
+        get => playerContext._currentDashCoolDown;
+        set
+        {
+            playerContext._currentDashCoolDown = Mathf.Max(value, 0f);
+            OnDashCoolDownUpdated?.Invoke();
+        }
+    }
+
+
+    public float CurrentSpeed { get => playerContext._currentSpeed; set => playerContext._currentSpeed = value; }
+    public bool CanDash { get => playerContext._canDash; set => playerContext._canDash = value; }
+
+    // Events
+    public Action OnHealthUpdated;
+    public Action OnDashCoolDownUpdated;
 
     // private varibles
     private int equipablesIndex = -1;
-
-
-
-
 
     private void Awake()
     {
@@ -67,7 +88,7 @@ public class PlayerController : BaseController<PlayerController>
 
         idleState = new PlayerIdleState(this);
         useItemState = new PlayerUseItemState(this);
-        dashState = new PlayerDashState(this);  
+        dashState = new PlayerDashState(this);
 
         Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -97,7 +118,7 @@ public class PlayerController : BaseController<PlayerController>
     public void OnMovementInput(InputAction.CallbackContext context)
     {
         MovementInput = context.ReadValue<Vector2>();
-    }    
+    }
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
@@ -107,7 +128,6 @@ public class PlayerController : BaseController<PlayerController>
 
     public void OnSwapWeaponInput(InputAction.CallbackContext context)
     {
-        Debug.Log("equipable.Count: " + equipables.Count);
         if (equipables.Count == 0)
         {
             equipablesIndex = -1;
@@ -122,7 +142,7 @@ public class PlayerController : BaseController<PlayerController>
         }
 
         // No weapon avalible, Clear Weapon (Should Not Happen In Gameplay)
-        if(equipablesIndex == -1)
+        if (equipablesIndex == -1)
         {
             EquipedItem.LoadWeapon(null);
         }
@@ -132,7 +152,7 @@ public class PlayerController : BaseController<PlayerController>
         }
     }
 
-    public void OnAimInput(InputAction.CallbackContext context) 
+    public void OnAimInput(InputAction.CallbackContext context)
     {
         Vector3 mousePos = Input.Player.Aim.ReadValue<Vector2>();
 
