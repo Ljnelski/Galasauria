@@ -8,14 +8,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class InventoryScreen : MonoBehaviour
+public class InventoryScreen : BaseScreen
 {
     [SerializeField] private Transform inventoryContainer;
     [SerializeField] private InventoryItemDisplay inventoryItemPrefab;
     [SerializeField] private InventoryItemDetailsDisplay inventoryItemDetailsDisplay;
 
-    private void OnEnable()
+    private new void OnEnable()
     {
+        base.OnEnable();
+
         // clear the grid
         if (inventoryContainer.childCount > 0)
         {

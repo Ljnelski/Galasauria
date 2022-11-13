@@ -16,8 +16,6 @@ public class GameEndTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // TODO, should change player state...or freeze player movement
-
             screen.Open(true);
         }
     }

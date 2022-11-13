@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-public class GameEndScreen : MonoBehaviour
+public class GameEndScreen : BaseScreen
 {
     [SerializeField] private GameObject winLabel;
     [SerializeField] private GameObject loseLabel;
