@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
     public int Id;
     public Dictionary<ItemData, Item> itemDictionary;
     public List<Item> inventory;
-    public Action<ItemData> inventoryIncrementAction;
+    public Action<ItemData> OnAddItem;
 
     public void Start()
     {
@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
-        inventoryIncrementAction?.Invoke(referenceData);
+        OnAddItem?.Invoke(referenceData);
     }
 
     public void RemoveItem(ItemData referenceData)

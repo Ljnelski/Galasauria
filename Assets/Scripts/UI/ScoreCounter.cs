@@ -10,18 +10,16 @@
 using System.Collections;
 using UnityEngine;
 
-public class ScoreCounter : AnimatedDigitGroup<Inventory>
+public class ScoreCounter : AnimatedDigitGroup<PlayerController>
 {
     public int CurrentScore { get { return CurrentNumber; } }
-
-    void Start()
+    protected override void Start()
     {
-        GetTargetScript();
-        _targetScript.inventoryIncrementAction += IncreaseItemScore;
+        base.Start();
+        _targetScript.OnScoreIncremented += IncreaseItemScore;
     }
-
-    private void IncreaseItemScore(ItemData itemData)
+    private void IncreaseItemScore(int increase)
     {
-        Increase(itemData.score);
+        DrawNumber(increase);
     }
 }

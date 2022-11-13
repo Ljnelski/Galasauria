@@ -21,6 +21,7 @@ public class PlayerController : BaseController<PlayerController>
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
     public HealthSystem Health { get; private set; }
+    public Inventory Inventory { get; private set; }
     public TimerPool Timers { get; private set; }
 
     // States
@@ -70,6 +71,15 @@ public class PlayerController : BaseController<PlayerController>
         }
     }
 
+    public int CurrentScore
+    {
+        get => playerContext._score;
+        set
+        {
+            playerContext._score = value;
+            OnScoreIncremented?.Invoke(value);
+        }
+    }
 
     public float CurrentSpeed { get => playerContext._currentSpeed; set => playerContext._currentSpeed = value; }
     public bool CanDash { get => playerContext._canDash; set => playerContext._canDash = value; }
@@ -77,6 +87,7 @@ public class PlayerController : BaseController<PlayerController>
     // Events
     public Action OnHealthUpdated;
     public Action OnDashCoolDownUpdated;
+    public Action<int> OnScoreIncremented;
 
     // private varibles
     private int equipablesIndex = -1;
@@ -94,6 +105,7 @@ public class PlayerController : BaseController<PlayerController>
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         EquipedItem = GetComponentInChildren<EquipSlot>();
         Timers = GetComponent<TimerPool>();
+        Inventory = GetComponent<Inventory>();
 
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;
@@ -110,6 +122,9 @@ public class PlayerController : BaseController<PlayerController>
 
         Input.Player.Dash.started += OnDashInput;
         Input.Player.Dash.canceled += OnDashInput;
+
+        // Hopefully temporary
+        Inventory.OnAddItem += (ItemData data) => { CurrentScore += data.score; };
 
         activeState = idleState;
         activeState.OnStateEnter();

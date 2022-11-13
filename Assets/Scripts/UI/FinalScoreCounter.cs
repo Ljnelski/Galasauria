@@ -3,6 +3,7 @@
  *  Last Update:        November 13, 2022
  *  Description:        Automatically show the animated score in the UI
  *  Revision History:   November 13, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 13th, 2022 (Liam Nelski): Updated to grab data from player Controller
  */
 
 using UnityEngine;
@@ -11,12 +12,6 @@ public class FinalScoreCounter : AnimatedDigitGroup<PlayerController>
 {
     void OnEnable()
     {
-        //// TODO, We may have to find the specific score counter for current player when we go multiplayer
-        //ScoreCounter scoreCounter = FindObjectOfType<ScoreCounter>();
-        //Debug.Log(scoreCounter.CurrentScore);
-        //if (scoreCounter != null)
-        //{
-        //    Increase(scoreCounter.CurrentScore);
-        //}
+        DrawNumber(_targetScript.CurrentScore);
     }
 }

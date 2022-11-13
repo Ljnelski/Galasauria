@@ -29,4 +29,7 @@ public class PlayerContext : ScriptableObject
     public float _dashCoolDownMiliseconds;
     public float _currentDashCoolDown;
     public bool _canDash;
+
+    [Header("Score")]
+    public int _score;
 }

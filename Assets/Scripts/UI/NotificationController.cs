@@ -19,7 +19,7 @@ public class NotificationController : UIPlayerReader<Inventory>
     {
         GetTargetScript();
 
-        _targetScript.inventoryIncrementAction += Notify;
+        _targetScript.OnAddItem += Notify;
     }
 
     private void Notify(ItemData itemData)
@@ -30,6 +30,6 @@ public class NotificationController : UIPlayerReader<Inventory>
     }
     private void OnDestroy()
     {
-        _targetScript.inventoryIncrementAction -= Notify;
+        _targetScript.OnAddItem -= Notify;
     }
 }
