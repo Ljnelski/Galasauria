@@ -10,39 +10,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerDashBar : MonoBehaviour
+public class PlayerDashBar : UIPlayerReader<PlayerController>
 {
-    PlayerController _targetPlayerController;
     private Slider _dashCoolDownBarSlider;
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        HUDTargetPlayer playerData = GetComponentInParent<HUDTargetPlayer>();
+        GetTargetScript();
 
-        if (playerData == null)
+        if (_targetScript == null)
         {
-            Debug.LogError("PlayerHealthBar ERROR: Could not find HUDTargetPlayer, Add HUDTargetPlayer to this UI elements Parent");
+            Debug.LogError("PlayerHealthBar ERROR: HUDTargetPlayer Script does not have a valid Target");
             return;
         }
 
-        if (playerData.ValidTarget)
-        {
-            _targetPlayerController = playerData.TargetPlayer.GetComponent<PlayerController>();
-            _targetPlayerController.OnDashCoolDownUpdated += UpdateDashBar;
-            _dashCoolDownBarSlider = GetComponent<Slider>();
-
-            UpdateDashBar();
-        }
-        else
-        {
-            Debug.LogError("PlayerHealthBar ERROR: HUDTargetPlayer Script does not have a valid Target");
-        }
+        _targetScript.OnDashCoolDownUpdated += UpdateDashBar;
+        _dashCoolDownBarSlider = GetComponent<Slider>();
+        UpdateDashBar();
     }
 
     private void UpdateDashBar()
     {
-        float newValue = (_targetPlayerController.DashCoolDownMiliseconds - _targetPlayerController.CurrentDashCoolDown * 1000) / _targetPlayerController.DashCoolDownMiliseconds;
+        float newValue = (_targetScript.DashCoolDownMiliseconds - _targetScript.CurrentDashCoolDown * 1000) / _targetScript.DashCoolDownMiliseconds;
         _dashCoolDownBarSlider.value = newValue;    
     }
 }

@@ -7,16 +7,16 @@
 
 using UnityEngine;
 
-public class FinalScoreCounter : AnimatedDigitGroup
+public class FinalScoreCounter : AnimatedDigitGroup<PlayerController>
 {
     void OnEnable()
     {
-        // TODO, We may have to find the specific score counter for current player when we go multiplayer
-        ScoreCounter scoreCounter = FindObjectOfType<ScoreCounter>();
-        Debug.Log(scoreCounter.CurrentScore);
-        if (scoreCounter != null)
-        {
-            Increase(scoreCounter.CurrentScore);
-        }
+        //// TODO, We may have to find the specific score counter for current player when we go multiplayer
+        //ScoreCounter scoreCounter = FindObjectOfType<ScoreCounter>();
+        //Debug.Log(scoreCounter.CurrentScore);
+        //if (scoreCounter != null)
+        //{
+        //    Increase(scoreCounter.CurrentScore);
+        //}
     }
 }

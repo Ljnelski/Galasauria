@@ -8,16 +8,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class InventoryScreen : BaseScreen
+public class InventoryScreen : UIPlayerReader<Inventory>
 {
     [SerializeField] private Transform inventoryContainer;
     [SerializeField] private InventoryItemDisplay inventoryItemPrefab;
     [SerializeField] private InventoryItemDetailsDisplay inventoryItemDetailsDisplay;
 
-    private new void OnEnable()
+    private void Start()
     {
-        base.OnEnable();
+        GetTargetScript();
+    }
 
+    private void OnEnable()
+    {
         // clear the grid
         if (inventoryContainer.childCount > 0)
         {
@@ -28,21 +31,8 @@ public class InventoryScreen : BaseScreen
             }
         }
 
-        StartCoroutine(waitForManager());
-    }
-
-    private IEnumerator waitForManager()
-    {
-
-        if (InventoryManager.Instance == null)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
         // add item to the grid
-        // TODO Deal; with inventory Id's
-        Inventory targetInventory = InventoryManager.Instance.Inventories[0];
-        foreach (Item item in targetInventory.inventory)
+        foreach (Item item in _targetScript.inventory)
         {
             InventoryItemDisplay display = Instantiate(inventoryItemPrefab, inventoryContainer);
             ItemData itemData = item.data;
@@ -55,3 +45,4 @@ public class InventoryScreen : BaseScreen
         }
     }
 }
+    

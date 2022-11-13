@@ -22,5 +22,5 @@ MonoBehaviour:
   _dashSpeed: 10
   _dashDurationMiliseconds: 1000
   _dashCoolDownMiliseconds: 10000
-  _currentDashCoolDown: -0.0025497805
+  _currentDashCoolDown: 0
   _canDash: 1

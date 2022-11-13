@@ -6,9 +6,10 @@
  */
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class AnimatedDigitGroup : MonoBehaviour
+public class AnimatedDigitGroup<TTargetScript> : UIPlayerReader<TTargetScript> where TTargetScript : MonoBehaviour
 {
     [SerializeField] private List<AnimatedDigit> animatedDigits;
     [SerializeField] private float intialDigitDuration;
@@ -24,15 +25,7 @@ public class AnimatedDigitGroup : MonoBehaviour
     void Start()
     {
         Initiate();
-
-        // InvokeRepeating("Test", 1, 3);
     }
-
-    /*
-    private void Test()
-    {
-        IncreaseScore(1000);
-    }*/
 
     private void Initiate()
     {

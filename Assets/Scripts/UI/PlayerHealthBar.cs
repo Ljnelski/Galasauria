@@ -8,37 +8,28 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar : MonoBehaviour
+public class PlayerHealthBar : UIPlayerReader<PlayerController>
 {
-    private PlayerController _targetPlayerController;
     private Slider _healthBarSlider;
-    private void Awake()
-    {        
-        HUDTargetPlayer playerData = GetComponentInParent<HUDTargetPlayer>();
+    private void Start()
+    {
+        GetTargetScript();
 
-        if (playerData == null)
-        {
-            Debug.LogError("PlayerHealthBar ERROR: Could not find HUDTargetPlayer, Add HUDTargetPlayer to this UI elements Parent");
-            return;
-        }     
-       
-        if(playerData.ValidTarget)
-        {
-            _targetPlayerController = playerData.TargetPlayer.GetComponent<PlayerController>();
-            _targetPlayerController.OnHealthUpdated += UpdateHealthBar;
-            _healthBarSlider = GetComponent<Slider>();
-
-            UpdateHealthBar();
-        } else
+        if (_targetScript == null)
         {
             Debug.LogError("PlayerHealthBar ERROR: HUDTargetPlayer Script does not have a valid Target");
+            return;
         }
-        
+
+        _targetScript.OnHealthUpdated += UpdateHealthBar;
+        _healthBarSlider = GetComponent<Slider>();
+        UpdateHealthBar();
     }
+
     private void UpdateHealthBar()
     {
-        float newHealth = _targetPlayerController.CurrentHealth / _targetPlayerController.MaxHealth;
-        _healthBarSlider.value = _targetPlayerController.CurrentHealth / _targetPlayerController.MaxHealth;
+        float newValue = _targetScript.CurrentHealth / _targetScript.MaxHealth;
+        _healthBarSlider.value = newValue;
     }
 
 }

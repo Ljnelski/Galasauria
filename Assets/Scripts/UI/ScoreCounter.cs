@@ -4,28 +4,20 @@
  *  Description:        Contains public function to increase the score displayed on the UI
  *  Revision History:   November 8, 2022 (Yuk Yee Wong): Initial script.
  *                      November 12, 2022 (Yuk Yee Wong): Assign the inventoryIncrementAction
+ *                      Novemner 13th, 2022 (Liam Nelski): Remove dependence on InventorySystem
  */
 
 using System.Collections;
 using UnityEngine;
 
-public class ScoreCounter : AnimatedDigitGroup
+public class ScoreCounter : AnimatedDigitGroup<Inventory>
 {
     public int CurrentScore { get { return CurrentNumber; } }
 
-    void Awake()
+    void Start()
     {
-        StartCoroutine(WaitForManagerInstance());
-    }
-
-    private IEnumerator WaitForManagerInstance()
-    {
-        if (InventoryManager.Instance == null || InventoryManager.Instance.Inventories.Count == 0)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
-        InventoryManager.Instance.Inventories[0].inventoryIncrementAction += IncreaseItemScore;
+        GetTargetScript();
+        _targetScript.inventoryIncrementAction += IncreaseItemScore;
     }
 
     private void IncreaseItemScore(ItemData itemData)

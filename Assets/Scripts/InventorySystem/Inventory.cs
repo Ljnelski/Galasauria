@@ -23,8 +23,6 @@ public class Inventory : MonoBehaviour
     {
         inventory = new List<Item>();
         itemDictionary = new Dictionary<ItemData, Item>();
-
-        InventoryManager.Instance.AssignInventory(Id, GetComponent<Inventory>());
     }
 
     public void AddItem(ItemData referenceData)
