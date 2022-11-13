@@ -1,38 +1,45 @@
+﻿/*  Filename:           ActionTimer.cs
+ *  Author:             Liam Nelski (301064116)
+ *  Last Update:        November 12th, 2022
+ *  Description:        Timer that has a Callback for a void 
+ *  Revision History:   November 12th (Liam Nelski): Inital Script.
+ *                      
+ */
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class ActionTimer
 {
-    public bool Paused;
-    public Action OnTimerComplete;
-
-    private float _timerDuration;
+    private Action _timerCallback;
+    private Action<ActionTimer> _OnDestroy;
     private float _timerTime;
 
-    public ActionTimer()
+    public ActionTimer(Action<ActionTimer> onDestroy)
     {
-        Paused = true;
+        _OnDestroy = onDestroy;
     }
 
-    public void StartTimer(float timer)
+    public void StartTimer(float timer, Action callback)
     {
-        Paused = false;
-        _timerDuration = timer;
+        _timerTime = timer;
+        _timerCallback += callback;
     }
 
-    public void TickTimer(float timeAmount)
+    public void Tick(float deltaTime)
     {
-        if(Paused)
+        _timerTime -= deltaTime;
+        if (_timerTime < 0)
         {
-            return;
+            Complete();
         }
-
-        _timerTime += timeAmount;
-
-        if(_timerTime >= _timerDuration) { }
-
     }
 
+    public void Complete()
+    {
+        _timerCallback.Invoke();
+        _timerCallback = null;
+        _OnDestroy.Invoke(this);
+
+    }
 }
+
