@@ -19,7 +19,9 @@ public class PlayerController : BaseController<PlayerController>
     private Camera mainCamera;
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
-    public HealthSystem HealthSystem { get; private set; }    
+    public HealthSystem Health { get; private set; }    
+
+    public TimerPool Timers { get; private set; }
 
     // States
     public PlayerIdleState idleState;
@@ -43,22 +45,18 @@ public class PlayerController : BaseController<PlayerController>
     public float BaseSpeed { get => playerContext._baseSpeed; }
     public float TurnSpeed { get => playerContext._turnSpeed; }
     public float Acceleration { get => playerContext._acceleration; }
-    public float dashSpeed { get => playerContext._dashSpeed; }
-    public float dashDurationMiliseconds { get => playerContext._dashDurationMiliseconds; }
-    public float dashCoolDownMiliseconds { get => playerContext._dashCoolDownMiliseconds; }
+    public float DashSpeed { get => playerContext._dashSpeed; }
+    public float DashDurationMiliseconds { get => playerContext._dashDurationMiliseconds; }
+    public float DashCoolDownMiliseconds { get => playerContext._dashCoolDownMiliseconds; }
 
-    // Stored Outside of playerContext
-    public float DashCoolDownTimer
-    {
-        get { return dashCoolDownTimer; }
-        set { dashCoolDownTimer = value; }
-    }
+    public bool CanDash { get; set; } = true;
+    
+   
 
     // private varibles
     private int equipablesIndex = -1;
 
-    // TODO => Move functionality to Timer
-    public float dashCoolDownTimer = 0f;
+
 
 
 
@@ -74,6 +72,7 @@ public class PlayerController : BaseController<PlayerController>
         Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         EquipedItem = GetComponentInChildren<EquipSlot>();
+        Timers = GetComponent<TimerPool>();
 
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5069461504538144184}
   - component: {fileID: 5069461504538144176}
   - component: {fileID: 5069461504538144177}
+  - component: {fileID: 3567150591900579573}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -135,7 +136,6 @@ MonoBehaviour:
   equipables:
   - {fileID: 5894126535628105377, guid: 0f42f0ec8237a014d8a21247bc495665, type: 3}
   - {fileID: 901567424666014213, guid: e533f35f24404304aa999a45c3abbd94, type: 3}
-  dashCoolDownTimer: 0
 --- !u!114 &5069461504538144176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +160,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59deb3e7de434674c99db8986d3554a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3567150591900579573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069461504538144185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c22635b2a2b1fe41b72da563dbdc159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5515509413781746664
