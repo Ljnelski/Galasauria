@@ -3,6 +3,7 @@
  *  Last Update:        November 8, 2022
  *  Description:        Used by score counter to animate score increment by resizing the text
  *  Revision History:   November 8, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 13, 2022 (Yuk Yee Wong): Use unscaledDeltaTime.
  */
 
 using UnityEngine;
@@ -37,7 +38,7 @@ public class AnimatedDigit : MonoBehaviour
         {
             if (timePassed < duration)
             {
-                timePassed += Time.deltaTime;
+                timePassed += Time.unscaledDeltaTime;
                 label.fontSize = Mathf.Lerp(minSize, maxSize, timePassed / duration);
             }
             else
