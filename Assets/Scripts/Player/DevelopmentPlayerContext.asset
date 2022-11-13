@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109ea723abf358e418536361a941b017, type: 3}
   m_Name: DevelopmentPlayerContext
   m_EditorClassIdentifier: 
-  _baseSpeed: 0
-  _turnSpeed: 0
-  _acceleration: 0
+  _maxHealth: 100
+  _currentHealth: 100
+  _baseSpeed: 15
+  _turnSpeed: 30
+  _acceleration: 0.2
+  _dashSpeed: 60
+  _dashDurationMiliseconds: 250
+  _dashCoolDownMiliseconds: 5000

@@ -3,29 +3,36 @@
  *  Last Update:        October 12, 2022
  *  Description:        Control and show notification in gameplay
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 12, 2022 (Yuk Yee Wong): Remove instance (singleton), assign inventoryIncrementAction
  */
 
+using System.Collections;
 using UnityEngine;
 
 public class NotificationController : MonoBehaviour
 {
-    public static NotificationController Instance;
-
     [SerializeField] private ItemReceivedNotification itemReceivedNotificationPrefab;
     [SerializeField] private Transform notificationContainer;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        StartCoroutine(WaitForManagerInstance());
     }
 
-    public void Notify(Sprite itemIcon, string itemName, int itemCount)
+    private IEnumerator WaitForManagerInstance()
+    {
+        if (InventoryManager.Instance == null || InventoryManager.Instance.Inventories.Count == 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        InventoryManager.Instance.Inventories[0].inventoryIncrementAction += Notify;
+    }
+
+    private void Notify(ItemData itemData)
     {
         // TODO, recycle
         ItemReceivedNotification notification = Instantiate(itemReceivedNotificationPrefab, notificationContainer);
-        notification.Init(itemIcon, itemName, itemCount);
+        notification.Init(itemData.icon, itemData.itemName, 1);
     }
 }
