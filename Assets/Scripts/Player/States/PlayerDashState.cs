@@ -1,8 +1,9 @@
 ﻿/*  Filename:           PlayerController.cs
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        November th, 2022
- *  Description:        Controls the player
- *  Revision History:   October 10th (Liam Nelski): Moved to its own File.
+ *  Description:        DashState
+ *  Revision History:   November 3rd (Liam Nelski): Moved to its own File.
+ *                      November 12th (Liam Nelski): Implemented Timers using cooldown 
  */
 using UnityEngine;
 

@@ -3,7 +3,7 @@
  *  Last Update:        November 12th, 2022
  *  Description:        Timer that has a Callback for a void 
  *  Revision History:   November 12th (Liam Nelski): Inital Script.
- *                      Novmeber 13th (Liam Nelski): Added Option Callback for onTick
+ *                      November 13th (Liam Nelski): Added Option Callback for onTick
  *                      
  */
 

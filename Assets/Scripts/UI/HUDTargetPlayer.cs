@@ -1,7 +1,7 @@
 ﻿/*  Filename:           HUDTargetPlayer.cs
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        November 13th, 2022
- *  Description:        Timer that has a Callback for a void 
+ *  Description:        Provides a central location for UI Elements to read from the GameObject the UI is Attached to
  *  Revision History:   November 13th (Liam Nelski): Inital Script.
  *                      
  */

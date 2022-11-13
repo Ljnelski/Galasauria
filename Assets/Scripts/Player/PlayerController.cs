@@ -128,7 +128,6 @@ public class PlayerController : BaseController<PlayerController>
 
     public void OnSwapWeaponInput(InputAction.CallbackContext context)
     {
-        Debug.Log("equipable.Count: " + equipables.Count);
         if (equipables.Count == 0)
         {
             equipablesIndex = -1;

@@ -1,3 +1,10 @@
+/*  Filename:           HUDTargetPlayer.cs
+ *  Author:             Liam Nelski (301064116)
+ *  Last Update:        November 13th, 2022
+ *  Description:        Gets DashCoolDown value to UI
+ *  Revision History:   November 13th (Liam Nelski): Inital Script.
+ *                      
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

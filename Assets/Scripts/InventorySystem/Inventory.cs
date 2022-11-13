@@ -67,7 +67,7 @@ public class Inventory : MonoBehaviour
         // Check if the inventory has the required number of item for the recipe
         foreach (Recipe recipeItem in recipe.inputItems)
         {
-            itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);  
+            itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);
             if (inventoryItem == null || inventoryItem.stackSize < recipeItem.itemCount)
             {
                 Debug.Log("Does not have the required number of " + recipeItem.data.itemName);
@@ -76,12 +76,12 @@ public class Inventory : MonoBehaviour
         }
 
         // Create the outputItems
-        foreach(Recipe recipeItem in recipe.outputItems)
+        foreach (Recipe recipeItem in recipe.outputItems)
         {
             for (int i = 0; i < recipeItem.itemCount; i++)
             {
                 AddItem(recipeItem.data);
-            }            
+            }
         }
 
         // Remove the items the the recipe intakes
@@ -92,7 +92,5 @@ public class Inventory : MonoBehaviour
                 RemoveItem(recipeItem.data);
             }
         }
-
-
     }
 }
