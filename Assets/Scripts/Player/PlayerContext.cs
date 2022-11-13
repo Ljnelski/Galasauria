@@ -16,7 +16,9 @@ public class PlayerContext : ScriptableObject
     public float _currentHealth;
 
     [Header("Movement")]
+    public float _currentSpeed;
     public float _baseSpeed;
+    public float _boostSpeedMultiplier;
     public float _turnSpeed;
     public float _acceleration;
 
@@ -24,4 +26,5 @@ public class PlayerContext : ScriptableObject
     public float _dashSpeed;
     public float _dashDurationMiliseconds;
     public float _dashCoolDownMiliseconds;
+    public bool _canDash;
 }

@@ -40,8 +40,8 @@ public class PlayerController : BaseController<PlayerController>
     public bool DashInput { get; private set; }
 
     // Values that control player behviour
+    // ReadOnly
     public float MaxHealth { get => playerContext._maxHealth; }
-    public float CurrentHealth { get => playerContext._currentHealth; }
     public float BaseSpeed { get => playerContext._baseSpeed; }
     public float TurnSpeed { get => playerContext._turnSpeed; }
     public float Acceleration { get => playerContext._acceleration; }
@@ -49,7 +49,10 @@ public class PlayerController : BaseController<PlayerController>
     public float DashDurationMiliseconds { get => playerContext._dashDurationMiliseconds; }
     public float DashCoolDownMiliseconds { get => playerContext._dashCoolDownMiliseconds; }
 
-    public bool CanDash { get; set; } = true;
+    // Writable
+    public float CurrentHealth { get => playerContext._maxHealth; set => playerContext._currentHealth = value; }
+    public float CurrentSpeed { get => playerContext._currentSpeed; set => playerContext._currentSpeed= value; }
+    public bool CanDash { get => playerContext._canDash; set => playerContext._canDash = value; }
     
    
 
