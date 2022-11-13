@@ -25,23 +25,19 @@ public class PlayerHealthBar : MonoBehaviour
         if(playerData.ValidTarget)
         {
             _targetPlayerController = playerData.TargetPlayer.GetComponent<PlayerController>();
-            _targetPlayerController.OnHealthUpdated += UpdateHealth;
+            _targetPlayerController.OnHealthUpdated += UpdateHealthBar;
             _healthBarSlider = GetComponent<Slider>();
 
-            UpdateHealth();
+            UpdateHealthBar();
         } else
         {
             Debug.LogError("PlayerHealthBar ERROR: HUDTargetPlayer Script does not have a valid Target");
         }
         
     }
-    private void UpdateHealth()
+    private void UpdateHealthBar()
     {
         float newHealth = _targetPlayerController.CurrentHealth / _targetPlayerController.MaxHealth;
-        Debug.Log("CurrentHealth: " + _targetPlayerController.CurrentHealth);
-        Debug.Log("MaxHealth: " + _targetPlayerController.MaxHealth);
-        Debug.Log("Updating Health Bar, Value: " + newHealth);
-
         _healthBarSlider.value = _targetPlayerController.CurrentHealth / _targetPlayerController.MaxHealth;
     }
 

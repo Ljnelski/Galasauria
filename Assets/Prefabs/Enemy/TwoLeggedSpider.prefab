@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6017499578783133743
 MeshFilter:
@@ -111,8 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d69d917ff3d7042928555ec855aa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  detectionRange: 8
+  spiderContext: {fileID: 11400000, guid: 23a6d06d7f22dd547884321e22d4e27e, type: 2}
 --- !u!195 &6017499578783133729
 NavMeshAgent:
   m_ObjectHideFlags: 0

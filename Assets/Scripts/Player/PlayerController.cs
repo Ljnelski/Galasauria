@@ -65,7 +65,7 @@ public class PlayerController : BaseController<PlayerController>
         get => playerContext._currentDashCoolDown;
         set
         {
-            playerContext._currentDashCoolDown = value;
+            playerContext._currentDashCoolDown = Mathf.Max(value, 0f);
             OnDashCoolDownUpdated?.Invoke();
         }
     }

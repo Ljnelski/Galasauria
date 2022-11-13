@@ -26,7 +26,9 @@ public class PlayerDashState : PlayerState
     {
         context.Rb.velocity = Vector3.zero;
         context.CanDash = false;
-        context.Timers.CreateTimer(context.DashCoolDownMiliseconds / 1000f, () => { context.CanDash = true; });
+        context.Timers.CreateTimer(context.DashCoolDownMiliseconds / 1000f,
+            () => { context.CanDash = true; },
+            (float timeRemaining) => { context.CurrentDashCoolDown = timeRemaining; });
     }
 
     public override void OnStateRun()

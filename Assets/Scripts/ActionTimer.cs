@@ -30,7 +30,7 @@ public class ActionTimer
     public void Tick(float deltaTime)
     {
         _timerTime -= deltaTime;
-        _onTickCallback.Invoke(_timerTime);
+        _onTickCallback?.Invoke(_timerTime);
 
         if (_timerTime < 0)
         {

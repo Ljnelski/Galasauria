@@ -10,7 +10,7 @@ using UnityEngine;
 public class HUDTargetPlayer : MonoBehaviour
 {
     public GameObject TargetPlayer { get; private set; }
-    public bool ValidTarget { get; private set; }
+    public bool ValidTarget { get; private set; } = true;
 
     private void Awake()
     {

@@ -36,6 +36,7 @@ public class PlayerIdleState : PlayerState
 
         if(context.DashInput && context.CanDash)
         {
+            Debug.Log("Dashing");
             context.ChangeState(context.dashState);
         }
 
