@@ -34,7 +34,7 @@ public class PlayerIdleState : PlayerState
             context.ChangeState(context.useItemState);
         }
 
-        if(context.DashInput && context.DashCoolDownTimer <= 0)
+        if(context.DashInput && context.CanDash)
         {
             context.ChangeState(context.dashState);
         }

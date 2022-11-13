@@ -1,4 +1,4 @@
-/*  Filename:           ActionTimer.cs
+/*  Filename:           TimerPool.cs
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        November 12th, 2022
  *  Description:        Script that can contain n number of Action Timers that can be placed on objects
@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerScript : MonoBehaviour
+public class TimerPool : MonoBehaviour
 {
     Queue<ActionTimer> _pooledTimers;
     List<ActionTimer> _activeTimers;
