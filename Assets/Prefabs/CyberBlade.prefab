@@ -196,10 +196,9 @@ GameObject:
   - component: {fileID: 8724911761544461186}
   - component: {fileID: 6705100129015394310}
   - component: {fileID: 6705100129015394311}
-  - component: {fileID: 8757200520002180205}
   m_Layer: 0
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,21 +253,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8757200520002180205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3547328723331971546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd0e11856275494dadda2137d756eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagedTag: Enemy
-  healthSystem: {fileID: 0}
-  damage: 10
 --- !u!1 &4371002337989093071
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +298,6 @@ GameObject:
   - component: {fileID: 6705100129686002678}
   - component: {fileID: 3429643937613590957}
   - component: {fileID: 6571477982797512164}
-  - component: {fileID: -3875628161638946286}
   m_Layer: 0
   m_Name: CyberBlade
   m_TagString: Equipable
@@ -401,21 +384,6 @@ CapsuleCollider:
   m_Height: 1.2530882
   m_Direction: 2
   m_Center: {x: 0.006664008, y: 0, z: 1.3453397}
---- !u!114 &-3875628161638946286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5894126535628105377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd0e11856275494dadda2137d756eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagedTag: Enemy
-  healthSystem: {fileID: 0}
-  damage: 10
 --- !u!1 &6525626086551490467
 GameObject:
   m_ObjectHideFlags: 0

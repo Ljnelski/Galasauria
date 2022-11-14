@@ -49,6 +49,8 @@ public class SpiderController : BaseController<SpiderController>
 
         FindPlayer();
 
+        SpiderHealth.damaged += Suicide;
+
         activeState = IdleState;
         activeState.OnStateEnter();
     }   
@@ -72,6 +74,13 @@ public class SpiderController : BaseController<SpiderController>
             ChaseTarget = player.transform;
         }
     }
+
+    private void Suicide(float damage)
+    {
+        SpiderHealth.damaged -= Suicide;
+        Destroy(gameObject);
+    }
+
     private void OnDrawGizmos()
     {
         // Target
@@ -84,4 +93,6 @@ public class SpiderController : BaseController<SpiderController>
         Gizmos.color = Color.gray;
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
     }
+
+
 }
