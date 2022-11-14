@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 8724911761544461186}
   - component: {fileID: 6705100129015394310}
   - component: {fileID: 6705100129015394311}
+  - component: {fileID: 2198015979137629736}
   m_Layer: 0
   m_Name: Blade
   m_TagString: Weapon
@@ -227,7 +228,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3547328723331971546}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.08
   m_Height: 1.0371262
@@ -253,6 +254,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2198015979137629736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3547328723331971546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49f0d023666f1047bfea4a0addcd561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4371002337989093071
 GameObject:
   m_ObjectHideFlags: 0

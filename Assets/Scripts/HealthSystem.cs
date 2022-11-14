@@ -28,6 +28,7 @@ public class HealthSystem : MonoBehaviour
             }
             else
             {
+                Debug.Log("Collision");
                 damaged?.Invoke(other.GetComponent<IDamagingObject>().Damage);
             }
         }

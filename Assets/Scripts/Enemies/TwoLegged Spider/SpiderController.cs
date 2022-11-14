@@ -43,6 +43,7 @@ public class SpiderController : BaseController<SpiderController>
         Agent.angularSpeed = TurnSpeed;
         Agent.acceleration = Acceleration;
 
+        SpiderHealth = GetComponent<HealthSystem>();
         // Init States
         ChaseState = new SpiderChaseState(this);
         IdleState = new SpiderIdleState(this);
@@ -77,6 +78,7 @@ public class SpiderController : BaseController<SpiderController>
 
     private void Suicide(float damage)
     {
+        Debug.Log("Suidcide");
         SpiderHealth.damaged -= Suicide;
         Destroy(gameObject);
     }
