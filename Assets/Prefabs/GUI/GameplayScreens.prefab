@@ -14752,6 +14752,7 @@ GameObject:
   - component: {fileID: 28094839867152062}
   - component: {fileID: 4610305803060462182}
   - component: {fileID: 1092891879593747554}
+  - component: {fileID: 1737741263}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -14874,6 +14875,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1737741263}
+        m_TargetAssemblyTypeName: CraftingButton, Assembly-CSharp
+        m_MethodName: CraftRecipe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4610305803060462182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14907,6 +14920,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &1737741263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569585970990688855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97aa23859cf6104baa0ba4a5d150c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recipe: {fileID: 11400000, guid: 99d59cf0f76efd043896a3a355e2a693, type: 2}
 --- !u!1 &6974932310983737627
 GameObject:
   m_ObjectHideFlags: 0
@@ -15482,7 +15508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7947689376441062114
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15918,6 +15944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7947689376577236068}
+  - component: {fileID: 1728139323}
   m_Layer: 5
   m_Name: AmmoBar
   m_TagString: Untagged
@@ -15947,6 +15974,19 @@ RectTransform:
   m_AnchoredPosition: {x: 38, y: 70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1728139323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947689376577236071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fad9118e14fa445bec7c0f5fcb0006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _plasmaCartridge: {fileID: 11400000, guid: 30dfc2f2606a1ea4d90c6b7982c310b1, type: 2}
 --- !u!1 &7947689376579578341
 GameObject:
   m_ObjectHideFlags: 0
@@ -17481,7 +17521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7947689377109465251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18058,7 +18098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7947689377321005323
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18327,7 +18367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7947689377393103610
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19298,7 +19338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7947689377880846674
 RectTransform:
   m_ObjectHideFlags: 0
