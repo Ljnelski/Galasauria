@@ -27,9 +27,6 @@ public class PlayerUseItemState : PlayerState
 
     public override void OnStateRun()
     {
-        Debug.Log("USEITEM STATE");
-
-
         MovePlayer();
         RotatePlayer();
 

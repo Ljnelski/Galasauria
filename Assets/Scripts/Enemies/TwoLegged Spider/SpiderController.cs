@@ -13,9 +13,9 @@ using UnityEngine.AI;
 public class SpiderController : BaseController<SpiderController>
 {
     // Scripts
-    
-    // States
     public NavMeshAgent Agent { get; private set; }
+    public HealthSystem SpiderHealth { get; private set; }
+    // States
     public SpiderChaseState ChaseState { get; private set; }
     public SpiderIdleState IdleState { get; private set; }
 

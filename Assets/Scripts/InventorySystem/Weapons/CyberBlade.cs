@@ -32,7 +32,6 @@ public class CyberBlade : MonoBehaviour, IEquipable
         hitBox = blade.GetComponent<CapsuleCollider>();
 
         InUse = false;
-        Debug.Log(InUse);
     }
 
     public void BeginUse(GameEnums.EquipableInput attack)
