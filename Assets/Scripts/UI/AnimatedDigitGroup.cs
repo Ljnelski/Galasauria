@@ -3,12 +3,13 @@
  *  Last Update:        November 13, 2022
  *  Description:        Manage a group of animated digits
  *  Revision History:   November 13, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 13, 2022 (Liam Nelski): Renamed Increment => DrawNumber and made it so the new number is the draw number, not added onto the existing value
  */
 
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatedDigitGroup : MonoBehaviour
+public class AnimatedDigitGroup<TTargetScript> : UIPlayerDataReader<TTargetScript> where TTargetScript : MonoBehaviour
 {
     [SerializeField] private List<AnimatedDigit> animatedDigits;
     [SerializeField] private float intialDigitDuration;
@@ -21,18 +22,11 @@ public class AnimatedDigitGroup : MonoBehaviour
     private int maxNumber;
     private bool initied;
 
-    void Start()
+    protected virtual void Start()
     {
+        GetTargetScript();
         Initiate();
-
-        // InvokeRepeating("Test", 1, 3);
     }
-
-    /*
-    private void Test()
-    {
-        IncreaseScore(1000);
-    }*/
 
     private void Initiate()
     {
@@ -75,7 +69,7 @@ public class AnimatedDigitGroup : MonoBehaviour
         CurrentNumber = 0;
     }
 
-    protected void Increase(int increment)
+    protected void DrawNumber(int newNumber)
     {
         Initiate();
 
@@ -84,13 +78,11 @@ public class AnimatedDigitGroup : MonoBehaviour
             return;
         }
 
-        int newNumber = CurrentNumber + increment;
-
         if (newNumber > maxNumber)
         {
             newNumber = maxNumber;
 
-            Debug.LogWarning($"full increment {increment} cannot be displayed because it exceeds the digits provided (p.s. max {maxNumber}");
+            Debug.LogWarning($"full increment {newNumber} cannot be displayed because it exceeds the digits provided (p.s. max {maxNumber}");
         }
 
         if (newNumber - CurrentNumber > 0)

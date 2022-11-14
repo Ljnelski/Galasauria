@@ -1,30 +1,27 @@
 /*  Filename:           InventoryManager.cs
  *  Author:             Liam Nelski (301064116)
- *  Last Update:        October 14, 2022
+ *  Last Update:        November 13th, 2022
  *  Description:        Attaches a inventory to the gameobject
  *  Revision History:   October 12, 2022 (Liam Nelski): Initial script.
  *                      November 12, 2022 (Yuk Yee Wong): Replace the notification call with inventoryIncrementAction
+ *                      November 13th, 2022 (Liam Nelski): Rename Action and added two more
  */
-
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
     public int Id;
     public Dictionary<ItemData, Item> itemDictionary;
     public List<Item> inventory;
-    public Action<ItemData> inventoryIncrementAction;
+    public Action<ItemData> OnAddItem;
+    public Action OnInventoryUpdate;
 
     public void Start()
     {
         inventory = new List<Item>();
         itemDictionary = new Dictionary<ItemData, Item>();
-
-        InventoryManager.Instance.AssignInventory(Id, GetComponent<Inventory>());
     }
 
     public void AddItem(ItemData referenceData)
@@ -39,7 +36,8 @@ public class Inventory : MonoBehaviour
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
-        inventoryIncrementAction?.Invoke(referenceData);
+        OnAddItem?.Invoke(referenceData);
+        OnInventoryUpdate?.Invoke();
     }
 
     public void RemoveItem(ItemData referenceData)
@@ -54,12 +52,14 @@ public class Inventory : MonoBehaviour
                 itemDictionary.Remove(referenceData);
             }
         }
+        OnInventoryUpdate?.Invoke();
     }
 
     public void ClearInventory()
     {
         inventory.Clear();
         itemDictionary.Clear();
+        OnInventoryUpdate?.Invoke();
     }
 
     public void CraftItem(RecipeData recipe)

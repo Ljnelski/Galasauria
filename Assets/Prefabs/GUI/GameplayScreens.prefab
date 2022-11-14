@@ -15937,6 +15937,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7947689376799196755}
   - {fileID: 7947689377873535262}
   m_Father: {fileID: 7947689377908707849}
   m_RootOrder: 2
@@ -16708,12 +16709,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7947689377873535262}
-  m_RootOrder: 6
+  m_Father: {fileID: 7947689376577236068}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 11.7, y: 0}
+  m_AnchoredPosition: {x: 85.7, y: 0}
   m_SizeDelta: {x: 0, y: 46}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7947689376799196767
@@ -18009,7 +18010,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7947689377273046515}
-  - component: {fileID: 5450726881882832937}
   m_Layer: 5
   m_Name: GameplayScreens
   m_TagString: Untagged
@@ -18041,18 +18041,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5450726881882832937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7947689377273046514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f55c988e650004988855b30b30f28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7947689377321005322
 GameObject:
   m_ObjectHideFlags: 0
@@ -19245,9 +19233,8 @@ RectTransform:
   - {fileID: 7947689377746821559}
   - {fileID: 7947689376141975178}
   - {fileID: 7947689376557987473}
-  - {fileID: 7947689376799196755}
   m_Father: {fileID: 7947689376577236068}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

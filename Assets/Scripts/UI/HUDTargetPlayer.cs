@@ -15,7 +15,6 @@ public class HUDTargetPlayer : MonoBehaviour
     private void Awake()
     {
         TargetPlayer = GameObject.FindGameObjectWithTag("Player");
-
         if (TargetPlayer == null)
         {
             Debug.LogError("HUDTargetPlayer ERROR: Cannot find player, HUD will not update");
