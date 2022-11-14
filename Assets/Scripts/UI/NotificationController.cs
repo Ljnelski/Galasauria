@@ -10,7 +10,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class NotificationController : UIPlayerReader<Inventory>
+public class NotificationController : UIPlayerDataReader<Inventory>
 {
     [SerializeField] private ItemReceivedNotification itemReceivedNotificationPrefab;
     [SerializeField] private Transform notificationContainer;

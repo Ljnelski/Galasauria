@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar : UIPlayerReader<PlayerController>
+public class PlayerHealthBar : UIPlayerDataReader<PlayerController>
 {
     private Slider _healthBarSlider;
     private void Start()

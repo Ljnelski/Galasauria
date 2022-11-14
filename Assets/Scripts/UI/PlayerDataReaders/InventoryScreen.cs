@@ -3,12 +3,13 @@
  *  Last Update:        October 12, 2022
  *  Description:        Displays inventory on hand using data from inventory manager and item manager
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 13 2022 (Liam Nelski): Removed Dependency on InventoryManager
  */
 
 using System.Collections;
 using UnityEngine;
 
-public class InventoryScreen : UIPlayerReader<Inventory>
+public class InventoryScreen : UIPlayerDataReader<Inventory>
 {
     [SerializeField] private Transform inventoryContainer;
     [SerializeField] private InventoryItemDisplay inventoryItemPrefab;

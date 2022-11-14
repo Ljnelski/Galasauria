@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerDashBar : UIPlayerReader<PlayerController>
+public class PlayerDashBar : UIPlayerDataReader<PlayerController>
 {
     private Slider _dashCoolDownBarSlider;
     // Start is called before the first frame update

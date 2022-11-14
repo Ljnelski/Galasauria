@@ -7,10 +7,9 @@
  */
 
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class AnimatedDigitGroup<TTargetScript> : UIPlayerReader<TTargetScript> where TTargetScript : MonoBehaviour
+public class AnimatedDigitGroup<TTargetScript> : UIPlayerDataReader<TTargetScript> where TTargetScript : MonoBehaviour
 {
     [SerializeField] private List<AnimatedDigit> animatedDigits;
     [SerializeField] private float intialDigitDuration;
