@@ -38,7 +38,7 @@ public class ActionTimerPool : MonoBehaviour
         }
     }
 
-    public ActionTimer CreateNamedTimer(string name, float duration, Action onCallback, Action<float> onTick)
+    public ActionTimer CreateNamedTimer(string name, float duration, Action onComplete, Action<float> onTick)
     {
         ActionTimer newTimer;
         if (_activeNamedTimers.TryGetValue(name, out newTimer))
@@ -50,35 +50,35 @@ public class ActionTimerPool : MonoBehaviour
         if (_pooledTimers.Count > 0)
         {
             newTimer = _pooledTimers.Dequeue();
-            newTimer.StartTimer(duration, onCallback, onTick);
+            newTimer.StartTimer(duration, onComplete, onTick);
         }
         else
         {
             newTimer = new ActionTimer(ReturnTimerToPool);
-            newTimer.StartTimer(duration, onCallback, onTick);
+            newTimer.StartTimer(duration, onComplete, onTick);
         }
 
         _activeNamedTimers.Add(name, newTimer);
         return newTimer;
     }
 
-    public ActionTimer CreateNamedTimer(string name, float duration, Action onCallback)
+    public ActionTimer CreateNamedTimer(string name, float duration, Action onComplete)
     {
-        return CreateNamedTimer(name, duration, onCallback, null);
+        return CreateNamedTimer(name, duration, onComplete, null);
     }
 
-    public ActionTimer CreateTimer(float duration, Action onCallback, Action<float> onTick)
+    public ActionTimer CreateTimer(float duration, Action onComplete, Action<float> onTick)
     {
         ActionTimer newTimer;
         if (_pooledTimers.Count > 0)
         {
             newTimer = _pooledTimers.Dequeue();
-            newTimer.StartTimer(duration, onCallback, onTick);
+            newTimer.StartTimer(duration, onComplete, onTick);
         }
         else
         {
             newTimer = new ActionTimer(ReturnTimerToPool);
-            newTimer.StartTimer(duration, onCallback, onTick);
+            newTimer.StartTimer(duration, onComplete, onTick);
         }
 
         _activeTimers.Add(newTimer);
