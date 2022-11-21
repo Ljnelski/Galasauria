@@ -1,11 +1,11 @@
 /*  Filename:           InventoryManager.cs
  *  Author:             Liam Nelski (301064116)
- *  Last Update:        October 14, 2022
+ *  Last Update:        November 13th, 2022
  *  Description:        Attaches a inventory to the gameobject
- *  Revision History:   October 12, 2022 (Liam Nelski): Initial script. *                     
+ *  Revision History:   October 12, 2022 (Liam Nelski): Initial script.
+ *                      November 12, 2022 (Yuk Yee Wong): Replace the notification call with inventoryIncrementAction
+ *                      November 13th, 2022 (Liam Nelski): Rename Action and added two more
  */
-
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -15,13 +15,13 @@ public class Inventory : MonoBehaviour
     public int Id;
     public Dictionary<ItemData, Item> itemDictionary;
     public List<Item> inventory;
+    public Action<ItemData> OnAddItem;
+    public Action OnInventoryUpdate;
 
     public void Start()
     {
         inventory = new List<Item>();
         itemDictionary = new Dictionary<ItemData, Item>();
-
-        InventoryManager.Instance.AssignInventory(Id, GetComponent<Inventory>());
     }
 
     public void AddItem(ItemData referenceData)
@@ -36,7 +36,8 @@ public class Inventory : MonoBehaviour
             inventory.Add(newItem);
             itemDictionary.Add(referenceData, newItem);
         }
-        NotificationController.Instance.Notify(referenceData.icon, referenceData.itemName, 1);
+        OnAddItem?.Invoke(referenceData);
+        OnInventoryUpdate?.Invoke();
     }
 
     public void RemoveItem(ItemData referenceData)
@@ -51,12 +52,14 @@ public class Inventory : MonoBehaviour
                 itemDictionary.Remove(referenceData);
             }
         }
+        OnInventoryUpdate?.Invoke();
     }
 
     public void ClearInventory()
     {
         inventory.Clear();
         itemDictionary.Clear();
+        OnInventoryUpdate?.Invoke();
     }
 
     public void CraftItem(RecipeData recipe)
@@ -64,7 +67,7 @@ public class Inventory : MonoBehaviour
         // Check if the inventory has the required number of item for the recipe
         foreach (Recipe recipeItem in recipe.inputItems)
         {
-            itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);  
+            itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);
             if (inventoryItem == null || inventoryItem.stackSize < recipeItem.itemCount)
             {
                 Debug.Log("Does not have the required number of " + recipeItem.data.itemName);
@@ -73,12 +76,12 @@ public class Inventory : MonoBehaviour
         }
 
         // Create the outputItems
-        foreach(Recipe recipeItem in recipe.outputItems)
+        foreach (Recipe recipeItem in recipe.outputItems)
         {
             for (int i = 0; i < recipeItem.itemCount; i++)
             {
                 AddItem(recipeItem.data);
-            }            
+            }
         }
 
         // Remove the items the the recipe intakes
@@ -89,7 +92,5 @@ public class Inventory : MonoBehaviour
                 RemoveItem(recipeItem.data);
             }
         }
-
-
     }
 }

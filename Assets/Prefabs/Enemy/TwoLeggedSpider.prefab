@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6017499578783133741}
   - component: {fileID: 6017499578783133738}
   - component: {fileID: 6017499578783133729}
+  - component: {fileID: 1572035596500781559}
   m_Layer: 0
   m_Name: TwoLeggedSpider
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6017499578783133743
 MeshFilter:
@@ -97,8 +98,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 6.8349166, z: 1}
+  m_Center: {x: 0, y: 2.9174583, z: 0}
 --- !u!114 &6017499578783133738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,8 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d69d917ff3d7042928555ec855aa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  detectionRange: 8
+  spiderContext: {fileID: 11400000, guid: 23a6d06d7f22dd547884321e22d4e27e, type: 2}
 --- !u!195 &6017499578783133729
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -135,3 +135,16 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1572035596500781559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6017499578783133739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d19c5731f076e54b9069dc05e0bfa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageTag: Weapon

@@ -12,10 +12,11 @@ using UnityEngine;
 
 
 
-public class CyberBlade : MonoBehaviour, IEquipable
+public class CyberBlade : MonoBehaviour, IEquipable, IDamagingObject
 {
     public bool InUse { get; private set; }
-    
+    public float Damage { get; set; }
+
     private Transform blade;
     private Transform hilt;
     private Transform handle;
@@ -32,7 +33,7 @@ public class CyberBlade : MonoBehaviour, IEquipable
         hitBox = blade.GetComponent<CapsuleCollider>();
 
         InUse = false;
-        Debug.Log(InUse);
+        Damage = 100;
     }
 
     public void BeginUse(GameEnums.EquipableInput attack)

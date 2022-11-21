@@ -1,15 +1,16 @@
 ﻿/*  Filename:           PlayerController.cs
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        November th, 2022
- *  Description:        Controls the player
- *  Revision History:   October 10th (Liam Nelski): Moved to its own File.
+ *  Description:        DashState
+ *  Revision History:   November 3rd (Liam Nelski): Moved to its own File.
+ *                      November 12th (Liam Nelski): Implemented Timers using cooldown 
  */
 using UnityEngine;
 
 public class PlayerDashState : PlayerState
 {
-    private float currentTime = 0f;
-    private Vector3 dashDirection;
+    private bool _dashComplete;
+    private Vector3 _dashDirection;
 
     public PlayerDashState(PlayerController playerController) : base(playerController)
     {
@@ -17,25 +18,29 @@ public class PlayerDashState : PlayerState
 
     public override void OnStateEnter()
     {
-        dashDirection = new Vector3(context.MovementInput.x, 0.0f, context.MovementInput.y);
-        currentTime = 0f;
+        _dashDirection = new Vector3(context.MovementInput.x, 0.0f, context.MovementInput.y);
+        _dashComplete = false;
+        context.Timers.CreateTimer(context.DashDurationMiliseconds / 1000f, () => { _dashComplete= true; });
     }
 
     public override void OnStateExit()
     {
         context.Rb.velocity = Vector3.zero;
+        context.CanDash = false;
+        context.Timers.CreateTimer(context.DashCoolDownMiliseconds / 1000f,
+            () => { context.CanDash = true; },
+            (float timeRemaining) => { context.CurrentDashCoolDown = timeRemaining; });
     }
 
     public override void OnStateRun()
     {
-        currentTime += Time.fixedDeltaTime * 1000;
-        if (currentTime >= context.dashDurationMiliseconds)
+        if (_dashComplete)
         {
             context.ChangeState(context.idleState);
         }
         else
         {
-            context.Rb.velocity = dashDirection * context.dashSpeed;
+            context.Rb.velocity = _dashDirection * context.DashSpeed;
         }
     }
 }

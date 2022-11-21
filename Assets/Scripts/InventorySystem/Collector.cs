@@ -24,8 +24,6 @@ public class Collector : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(collision.tag);
-        Debug.Log(tag);
         if(collision.CompareTag("Collectable"))
         {            
             ICollectable collectable = collision.GetComponent<ICollectable>();

@@ -13,9 +13,9 @@ using UnityEngine.AI;
 public class SpiderController : BaseController<SpiderController>
 {
     // Scripts
-    
-    // States
     public NavMeshAgent Agent { get; private set; }
+    public HealthSystem SpiderHealth { get; private set; }
+    // States
     public SpiderChaseState ChaseState { get; private set; }
     public SpiderIdleState IdleState { get; private set; }
 
@@ -43,11 +43,14 @@ public class SpiderController : BaseController<SpiderController>
         Agent.angularSpeed = TurnSpeed;
         Agent.acceleration = Acceleration;
 
+        SpiderHealth = GetComponent<HealthSystem>();
         // Init States
         ChaseState = new SpiderChaseState(this);
         IdleState = new SpiderIdleState(this);
 
         FindPlayer();
+
+        SpiderHealth.damaged += Suicide;
 
         activeState = IdleState;
         activeState.OnStateEnter();
@@ -72,6 +75,14 @@ public class SpiderController : BaseController<SpiderController>
             ChaseTarget = player.transform;
         }
     }
+
+    private void Suicide(float damage)
+    {
+        Debug.Log("Suidcide");
+        SpiderHealth.damaged -= Suicide;
+        Destroy(gameObject);
+    }
+
     private void OnDrawGizmos()
     {
         // Target
@@ -84,4 +95,6 @@ public class SpiderController : BaseController<SpiderController>
         Gizmos.color = Color.gray;
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
     }
+
+
 }
