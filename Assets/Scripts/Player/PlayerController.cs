@@ -22,7 +22,7 @@ public class PlayerController : BaseController<PlayerController>
     public Rigidbody Rb { get; private set; }
     public HealthSystem Health { get; private set; }
     public Inventory Inventory { get; private set; }
-    public TimerPool Timers { get; private set; }
+    public ActionTimerPool Timers { get; private set; }
 
     // States
     public PlayerIdleState idleState;
@@ -104,7 +104,7 @@ public class PlayerController : BaseController<PlayerController>
         Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         EquipedItem = GetComponentInChildren<EquipSlot>();
-        Timers = GetComponent<TimerPool>();
+        Timers = GetComponent<ActionTimerPool>();
         Inventory = GetComponent<Inventory>();
 
         Input.Player.Movement.started += OnMovementInput;

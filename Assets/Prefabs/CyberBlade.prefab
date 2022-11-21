@@ -310,7 +310,6 @@ GameObject:
   - component: {fileID: 6705100129686002676}
   - component: {fileID: 6705100129686002678}
   - component: {fileID: 3429643937613590957}
-  - component: {fileID: 6571477982797512164}
   m_Layer: 0
   m_Name: CyberBlade
   m_TagString: Equipable
@@ -383,20 +382,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6571477982797512164
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5894126535628105377}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.09244588
-  m_Height: 1.2530882
-  m_Direction: 2
-  m_Center: {x: 0.006664008, y: 0, z: 1.3453397}
 --- !u!1 &6525626086551490467
 GameObject:
   m_ObjectHideFlags: 0
