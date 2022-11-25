@@ -8,21 +8,27 @@
  *                      November 3th (Liam Nelski): Made Player Point to the mouse.
  *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
  *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
+ *                      November 14th (Liam Nelski): Added IK for arms to Weapon, and Serialized Script Properties to show in Editor
  */
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : BaseController<PlayerController>
 {
     // Scripts
-    private Camera mainCamera;
-    public EquipSlot EquipedItem { get; private set; }
-    public Rigidbody Rb { get; private set; }
-    public HealthSystem Health { get; private set; }
-    public Inventory Inventory { get; private set; }
-    public ActionTimerPool Timers { get; private set; }
+    [field:SerializeField] private Camera mainCamera;
+    [field:SerializeField] public  Animator Animator { get; private set; }
+    [field: SerializeField] public EquipSlot EquipedItem { get; private set; }
+    [field: SerializeField] public Rigidbody Rb { get; private set; }
+    [field: SerializeField] public HealthSystem Health { get; private set; }
+    [field: SerializeField] public Inventory Inventory { get; private set; }
+    [field: SerializeField] public ActionTimerPool Timers { get; private set; }
+
+    public Transform seat;
 
     // States
     public PlayerIdleState idleState;
@@ -60,7 +66,6 @@ public class PlayerController : BaseController<PlayerController>
             OnHealthUpdated?.Invoke();
         }
     }
-
     public float CurrentDashCoolDown
     {
         get => playerContext._currentDashCoolDown;
@@ -70,7 +75,6 @@ public class PlayerController : BaseController<PlayerController>
             OnDashCoolDownUpdated?.Invoke();
         }
     }
-
     public int CurrentScore
     {
         get => playerContext._score;
@@ -80,7 +84,6 @@ public class PlayerController : BaseController<PlayerController>
             OnScoreIncremented?.Invoke(value);
         }
     }
-
     public float CurrentSpeed { get => playerContext._currentSpeed; set => playerContext._currentSpeed = value; }
     public bool CanDash { get => playerContext._canDash; set => playerContext._canDash = value; }
 
@@ -101,11 +104,11 @@ public class PlayerController : BaseController<PlayerController>
         useItemState = new PlayerUseItemState(this);
         dashState = new PlayerDashState(this);
 
-        Rb = GetComponent<Rigidbody>();
+        //Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        EquipedItem = GetComponentInChildren<EquipSlot>();
-        Timers = GetComponent<ActionTimerPool>();
-        Inventory = GetComponent<Inventory>();
+        //EquipedItem = GetComponentInChildren<EquipSlot>();
+        //Timers = GetComponent<ActionTimerPool>();
+        //Inventory = GetComponent<Inventory>();
 
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;
@@ -173,18 +176,7 @@ public class PlayerController : BaseController<PlayerController>
 
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
-        {
-            if (hit.transform)
-            {
-                Vector3 worldPos = hit.point;
-                Vector3 rawLookAtPosition = Vector3.ClampMagnitude(worldPos - transform.position, 5f);
-                rawLookAtPosition.y = 0;
-                LookAtPosition = rawLookAtPosition;
-            }
-        }
 
-        /*
         Vector3 cameraAtPlayerheight = mainCamera.transform.position;
         cameraAtPlayerheight.y = transform.position.y;
 
@@ -205,12 +197,18 @@ public class PlayerController : BaseController<PlayerController>
 
         // Set Y pos
         LookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
-        */
+
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
     {
         DashInput = context.ReadValue<float>() > 0.5f;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 movementInputTo3DSpace = new Vector3(MovementInput.x, 0, MovementInput.y);
+        Gizmos.DrawWireSphere(transform.position + Rb.velocity.normalized, 1f);
     }
 }
 

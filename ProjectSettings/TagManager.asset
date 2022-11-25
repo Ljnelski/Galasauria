@@ -8,6 +8,8 @@ TagManager:
   - Equipable
   - Enemy
   - Weapon
+  - LeftHandTarget
+  - RightHandTarget
   layers:
   - Default
   - TransparentFX

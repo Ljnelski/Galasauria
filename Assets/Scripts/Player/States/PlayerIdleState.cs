@@ -41,6 +41,12 @@ public class PlayerIdleState : PlayerState
 
         // Look At Mouse Position
         RotatePlayer();
+
+        float moveSpeedClamped = context.Rb.velocity.magnitude / context.BaseSpeed;
+        if (moveSpeedClamped < 0.01f)
+            moveSpeedClamped = 0f;
+        
+        context.Animator.SetFloat("speed", moveSpeedClamped);
     }
 }
 

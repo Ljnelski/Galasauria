@@ -21,6 +21,7 @@ public class PlayerDashState : PlayerState
         _dashDirection = new Vector3(context.MovementInput.x, 0.0f, context.MovementInput.y);
         _dashComplete = false;
         context.Timers.CreateTimer(context.DashDurationMiliseconds / 1000f, () => { _dashComplete= true; });
+        context.Animator.SetTrigger("startDash");
     }
 
     public override void OnStateExit()
@@ -30,6 +31,8 @@ public class PlayerDashState : PlayerState
         context.Timers.CreateTimer(context.DashCoolDownMiliseconds / 1000f,
             () => { context.CanDash = true; },
             (float timeRemaining) => { context.CurrentDashCoolDown = timeRemaining; });
+        context.Animator.SetTrigger("endDash");
+
     }
 
     public override void OnStateRun()

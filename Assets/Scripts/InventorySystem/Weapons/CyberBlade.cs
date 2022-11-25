@@ -12,9 +12,8 @@ using UnityEngine;
 
 
 
-public class CyberBlade : MonoBehaviour, IEquipable, IDamagingObject
+public class CyberBlade :  EquipableItem, IDamagingObject
 {
-    public bool InUse { get; private set; }
     public float Damage { get; set; }
 
     private Transform blade;
@@ -36,7 +35,7 @@ public class CyberBlade : MonoBehaviour, IEquipable, IDamagingObject
         Damage = 100;
     }
 
-    public void BeginUse(GameEnums.EquipableInput attack)
+    public override void BeginUse(GameEnums.EquipableInput attack)
     {
         switch(attack)
         {
@@ -71,7 +70,7 @@ public class CyberBlade : MonoBehaviour, IEquipable, IDamagingObject
         throw new NotImplementedException();
     }
 
-    public void EndUse()
+    public override void EndUse()
     {
         throw new NotImplementedException();
     }

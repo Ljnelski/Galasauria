@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Dash
-      takeName: Armature|Dash
+      name: DashEnd
+      takeName: Armature|DashEnd
       internalID: -2246502780319343731
       firstFrame: 0
-      lastFrame: 4
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -67,18 +67,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: DashEnd
-      takeName: Armature|DashEnd
+      name: Dash
+      takeName: Armature|Dash
       internalID: 8241643633467416520
       firstFrame: 0
-      lastFrame: 10
+      lastFrame: 4
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -128,15 +128,15 @@ ModelImporter:
       name: Idle
       takeName: Armature|Idle
       internalID: -8945691123924629249
-      firstFrame: 1
-      lastFrame: 19
+      firstFrame: 0
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -157,8 +157,8 @@ ModelImporter:
       name: Walk
       takeName: Armature|Walk
       internalID: 8349542763059015795
-      firstFrame: 1
-      lastFrame: 19
+      firstFrame: 0
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
