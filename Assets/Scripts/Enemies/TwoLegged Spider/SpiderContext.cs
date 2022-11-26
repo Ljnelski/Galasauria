@@ -3,7 +3,7 @@
  *  Last Update:        November 25th, 2022
  *  Description:        Scriptable Object to hold spiderData
  *  Revision History:   November 13th (Liam Nelski): Inital Script.
- *                      November 25th (Yuk Yee Wong): Added player offset distance.
+ *                      November 25th (Yuk Yee Wong): Added player offset distance and attack cool down miliseconds.
  */
 
 using System.Collections;
@@ -22,6 +22,9 @@ public class SpiderContext : ScriptableObject
     public float _turnSpeed;
     public float _acceleration;
     public float _playerOffsetDistance;
+
+    [Header("Attack")]
+    public float _attackCoolDownMiliseconds;
 
     [Header("Damage")]
     public float _baseDamage;

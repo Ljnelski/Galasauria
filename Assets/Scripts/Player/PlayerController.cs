@@ -8,7 +8,7 @@
  *                      November 3th (Liam Nelski): Made Player Point to the mouse.
  *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
  *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
- *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod and passed as an argument in LoadWeapon
+ *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
  */
 using System;
 using System.Collections.Generic;
@@ -127,8 +127,36 @@ public class PlayerController : BaseController<PlayerController>
         // Hopefully temporary
         Inventory.OnAddItem += (ItemData data) => { CurrentScore += data.score; };
 
+        // SetUp Health
+        Health = GetComponent<HealthSystem>();
+        Health.ReceiveDamage += ReceiveDamage;
+
+        // Reset current health
+        CurrentHealth = MaxHealth;
+
+        // Reset score
+        CurrentScore = 0;
+
         activeState = idleState;
         activeState.OnStateEnter();
+    }
+
+    private void ReceiveDamage(float damage)
+    {
+        // Debug.Log($"{CurrentHealth} - {damage}");
+        if (CurrentHealth > 0)
+        {
+            if (CurrentHealth - damage > 0)
+            {
+                CurrentHealth -= damage;
+            }
+            else
+            {
+                Health.ReceiveDamage -= ReceiveDamage;
+                CurrentHealth = 0;
+                FindObjectOfType<GameEndScreen>(true).Open(false);
+            }
+        }
     }
 
     public void OnMovementInput(InputAction.CallbackContext context)

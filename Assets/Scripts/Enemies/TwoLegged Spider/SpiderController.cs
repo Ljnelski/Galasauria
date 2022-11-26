@@ -5,7 +5,7 @@
  *  Revision History:   November 9th, 2022 (Liam Nelski): Initial script.
  *                      November 10th 2022 (Liam Nelski): Added Chase and Idle State
  *                      November 12th 2022 (Liam Nelski): Added SpiderContext to store Stats
- *                      November 25th, 2022 (Yuk Yee Wong): Fixed bugs. Not direcly use context health for CurrentHealth. Added attack state, reach player method; replaced suicide method to receive damage.
+ *                      November 25th, 2022 (Yuk Yee Wong): Fixed bugs. Not direcly use context health for CurrentHealth. Added attack state, reach player method; replaced suicide method to receive damage; added animator, destroy set up, animation methods.
  */
 using System;
 using UnityEngine;
@@ -16,6 +16,8 @@ public class SpiderController : BaseController<SpiderController>
     // Scripts
     public NavMeshAgent Agent { get; private set; }
     public HealthSystem SpiderHealth { get; private set; }
+    public TimerPool Timers { get; private set; }
+
     // States
     public SpiderChaseState ChaseState { get; private set; }
     public SpiderIdleState IdleState { get; private set; }
@@ -43,14 +45,23 @@ public class SpiderController : BaseController<SpiderController>
     public float TurnSpeed { get => spiderContext._turnSpeed; }
     public float Acceleration { get => spiderContext._acceleration; }
     public float PlayerOffsetDistance { get => spiderContext._playerOffsetDistance; }
+    public float AttackInterval { get => spiderContext._attackCoolDownMiliseconds; }
     public float BaseDamage { get => spiderContext._baseDamage; }  
     public float DetectionRange { get => spiderContext._detectionRange; }
+
+    private Animator animator;
 
     // Start is called before the first frame update
     void Awake()
     {
         // Assign max health to current health
         CurrentHealth = spiderContext._maxHealth;
+
+        // SetUp Timers
+        Timers = GetComponent<TimerPool>();
+
+        // SetUp Animator
+        animator = GetComponent<Animator>();
 
         // SetUp Agent
         Agent = GetComponent<NavMeshAgent>();
@@ -62,6 +73,13 @@ public class SpiderController : BaseController<SpiderController>
         SpiderHealth = GetComponent<HealthSystem>();
         SpiderHealth.ReceiveDamage += ReceiveDamage;
 
+        // SetUp Destroyer
+        Destroyer destroyer = GetComponentInChildren<Destroyer>();
+        if (destroyer != null)
+        {
+            destroyer.Damage = BaseDamage;
+        }
+
         // Init States
         ChaseState = new SpiderChaseState(this);
         IdleState = new SpiderIdleState(this);
@@ -72,6 +90,37 @@ public class SpiderController : BaseController<SpiderController>
         activeState = IdleState;
         activeState.OnStateEnter();
     }   
+
+    public void FaceTarget()
+    {
+        Vector3 direction = (ChaseTarget.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * TurnSpeed);
+    }
+
+    public void Attack()
+    {
+        if (animator)
+        {
+            animator.SetTrigger("attack");
+        }
+    }
+
+    public void Walk()
+    {
+        if (animator)
+        {
+            animator.SetFloat("velocity", 1f);
+        }
+    }
+
+    public void Idle()
+    {
+        if (animator)
+        {
+            animator.SetFloat("velocity", 0f);
+        }
+    }
 
     public bool ReachedPlayer()
     {
