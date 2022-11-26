@@ -18,7 +18,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : BaseController<PlayerController>
 {
     // Scripts
-    private Camera mainCamera;
+    //private Camera mainCamera;
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
     public HealthSystem Health { get; private set; }
@@ -103,7 +103,7 @@ public class PlayerController : BaseController<PlayerController>
         dashState = new PlayerDashState(this);
 
         Rb = GetComponent<Rigidbody>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         EquipedItem = GetComponentInChildren<EquipSlot>();
         Timers = GetComponent<TimerPool>();
         Inventory = GetComponent<Inventory>();
@@ -139,6 +139,27 @@ public class PlayerController : BaseController<PlayerController>
 
         activeState = idleState;
         activeState.OnStateEnter();
+    }
+
+    private void OnDestroy()
+    {
+        // avoid null reference upon stopping the game or return to the start scene which results from OnAimInput
+
+        Input.Player.Movement.started -= OnMovementInput;
+        Input.Player.Movement.performed -= OnMovementInput;
+        Input.Player.Movement.canceled -= OnMovementInput;
+
+        Input.Player.Attack.started -= OnAttackInput;
+        Input.Player.Attack.canceled -= OnAttackInput;
+
+        Input.Player.SwapWeapon.performed -= OnSwapWeaponInput;
+
+        Input.Player.Aim.started -= OnAimInput;
+        Input.Player.Aim.performed -= OnAimInput;
+        Input.Player.Aim.canceled -= OnAimInput;
+
+        Input.Player.Dash.started -= OnDashInput;
+        Input.Player.Dash.canceled -= OnDashInput;
     }
 
     private void ReceiveDamage(float damage)
@@ -205,7 +226,7 @@ public class PlayerController : BaseController<PlayerController>
     {
         Vector3 mousePos = Input.Player.Aim.ReadValue<Vector2>();
 
-        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
