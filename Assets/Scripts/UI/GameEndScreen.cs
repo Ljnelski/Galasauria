@@ -6,16 +6,20 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameEndScreen : BaseScreen
 {
     [SerializeField] private GameObject winLabel;
     [SerializeField] private GameObject loseLabel;
+    [SerializeField] private Button nextDifficultyButton;
 
     public void Open(bool win)
     {
         gameObject.SetActive(true);
         winLabel.SetActive(win);
         loseLabel.SetActive(!win);
+
+        nextDifficultyButton.gameObject.SetActive(win);
     }
 }

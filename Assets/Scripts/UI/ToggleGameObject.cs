@@ -11,7 +11,7 @@ public class ToggleGameObject : ToggleBase
 {
     [SerializeField] private GameObject affectedGameObject;
 
-    protected override void onToggleValueChanged(bool value)
+    protected override void OnToggleValueChanged(bool value)
     {
         if (affectedGameObject != null)
             affectedGameObject.SetActive(value);

@@ -5,13 +5,20 @@
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
  */
 
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ToggleGameDifficulty : ToggleBase
 {
     [SerializeField] private GameEnums.GameDifficulty difficulty;
 
-    protected override void onToggleValueChanged(bool value)
+    protected override void BeforeAddingListener()
+    {        
+        toggle.isOn = difficulty.Equals(GameDifficultyManager.Instance.Difficulty);
+    }
+
+    protected override void OnToggleValueChanged(bool value)
     {
         if (value)
         {
