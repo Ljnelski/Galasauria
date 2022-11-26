@@ -90,6 +90,9 @@ public class PlayerController : BaseController<PlayerController>
     public Action OnDashCoolDownUpdated;
     public Action<int> OnScoreIncremented;
 
+    public Action<Inventory> OnCrateInteracted;
+    public Action<Inventory, int> OnCrateQuestAnswered;
+
     // private varibles
     private int equipablesIndex = -1;
 
@@ -108,21 +111,7 @@ public class PlayerController : BaseController<PlayerController>
         Timers = GetComponent<TimerPool>();
         Inventory = GetComponent<Inventory>();
 
-        Input.Player.Movement.started += OnMovementInput;
-        Input.Player.Movement.performed += OnMovementInput;
-        Input.Player.Movement.canceled += OnMovementInput;
-
-        Input.Player.Attack.started += OnAttackInput;
-        Input.Player.Attack.canceled += OnAttackInput;
-
-        Input.Player.SwapWeapon.performed += OnSwapWeaponInput;
-
-        Input.Player.Aim.started += OnAimInput;
-        Input.Player.Aim.performed += OnAimInput;
-        Input.Player.Aim.canceled += OnAimInput;
-
-        Input.Player.Dash.started += OnDashInput;
-        Input.Player.Dash.canceled += OnDashInput;
+        AddInputActions();
 
         // Hopefully temporary
         Inventory.OnAddItem += (ItemData data) => { CurrentScore += data.score; };
@@ -144,7 +133,37 @@ public class PlayerController : BaseController<PlayerController>
     private void OnDestroy()
     {
         // avoid null reference upon stopping the game or return to the start scene which results from OnAimInput
+        RemoveInputActions();
+    }
 
+    private void AddInputActions()
+    {
+        Input.Player.Movement.started += OnMovementInput;
+        Input.Player.Movement.performed += OnMovementInput;
+        Input.Player.Movement.canceled += OnMovementInput;
+
+        Input.Player.Attack.started += OnAttackInput;
+        Input.Player.Attack.canceled += OnAttackInput;
+
+        Input.Player.SwapWeapon.performed += OnSwapWeaponInput;
+
+        Input.Player.Aim.started += OnAimInput;
+        Input.Player.Aim.performed += OnAimInput;
+        Input.Player.Aim.canceled += OnAimInput;
+
+        Input.Player.Dash.started += OnDashInput;
+        Input.Player.Dash.canceled += OnDashInput;
+
+        Input.Player.Interact.started += OnInteractInput;
+
+        Input.Player.One.started += OnInputOne;
+        Input.Player.Two.started += OnInputTwo;
+        Input.Player.Three.started += OnInputThree;
+        Input.Player.Four.started += OnInputFour;
+    }
+
+    private void RemoveInputActions()
+    {
         Input.Player.Movement.started -= OnMovementInput;
         Input.Player.Movement.performed -= OnMovementInput;
         Input.Player.Movement.canceled -= OnMovementInput;
@@ -160,6 +179,8 @@ public class PlayerController : BaseController<PlayerController>
 
         Input.Player.Dash.started -= OnDashInput;
         Input.Player.Dash.canceled -= OnDashInput;
+
+        Input.Player.Interact.started -= OnInteractInput;
     }
 
     private void ReceiveDamage(float damage)
@@ -266,6 +287,31 @@ public class PlayerController : BaseController<PlayerController>
     public void OnDashInput(InputAction.CallbackContext context)
     {
         DashInput = context.ReadValue<float>() > 0.5f;
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        OnCrateInteracted?.Invoke(Inventory);
+    }
+
+    public void OnInputOne(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 1);
+    }
+
+    public void OnInputTwo(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 2);
+    }
+
+    public void OnInputThree(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 3);
+    }
+
+    public void OnInputFour(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 4);
     }
 }
 
