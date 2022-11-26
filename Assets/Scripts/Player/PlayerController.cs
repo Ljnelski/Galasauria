@@ -1,5 +1,5 @@
 /*  Filename:           PlayerController.cs
- *  Author:             Liam Nelski (301064116)
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
  *  Last Update:        October 10th, 2022
  *  Description:        Controls the player
  *  Revision History:   October 10th (Liam Nelski): Inital Script.
@@ -8,6 +8,7 @@
  *                      November 3th (Liam Nelski): Made Player Point to the mouse.
  *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
  *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
+ *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod and passed as an argument in LoadWeapon
  */
 using System;
 using System.Collections.Generic;
@@ -159,12 +160,17 @@ public class PlayerController : BaseController<PlayerController>
         // No weapon avalible, Clear Weapon (Should Not Happen In Gameplay)
         if (equipablesIndex == -1)
         {
-            EquipedItem.LoadWeapon(null);
+            EquipedItem.LoadWeapon(null, null);
         }
         else
         {
-            EquipedItem.LoadWeapon(equipables[equipablesIndex]);
+            EquipedItem.LoadWeapon(equipables[equipablesIndex], OnEnemyDestroyed);
         }
+    }
+
+    private void OnEnemyDestroyed(int scoreIncrement)
+    {
+        CurrentScore += scoreIncrement;
     }
 
     public void OnAimInput(InputAction.CallbackContext context)

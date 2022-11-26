@@ -1,10 +1,12 @@
 /*  Filename:           EquipSlot.cs
- *  Author:             Liam Nelski (301064116)
- *  Last Update:        November 2, 2022
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
+ *  Last Update:        November 25, 2022
  *  Description:        Creates and Deletes Weapons, and Acts as a wrapper to the IEquipable Equiped Item
  *  Revision History:   November 2, 2022 (Liam Nelski): Initial script.
  *                      November 4, 2022 (Liam Nelski): Renamed To EquipSlot 
+ *                      November 25, 2022 (Yuk Yee Wong): Added an action argument in LoadWeapons and passed the argument to destroyer
  */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,10 +37,17 @@ public class EquipSlot : MonoBehaviour
     {
         equipedItem = GetComponentInChildren<IEquipable>();
     }
-    public void LoadWeapon(GameObject weaponPrefab)
+    public void LoadWeapon(GameObject weaponPrefab, Action<int> onDestoryEnemyScore)
     {
         Destroy(currentObject);
         currentObject = Instantiate(weaponPrefab, transform);
+
+        Destroyer destroyer = currentObject.GetComponentInChildren<Destroyer>();
+        if (destroyer != null)
+        {
+            destroyer.OnTargetDestroyedAction += onDestoryEnemyScore;
+        }
+
         equipedItem = currentObject.GetComponent<IEquipable>();
     }
 

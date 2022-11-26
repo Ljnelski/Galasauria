@@ -17,5 +17,7 @@ MonoBehaviour:
   _baseSpeed: 6
   _turnSpeed: 180
   _acceleration: 20
+  _playerOffsetDistance: 2
   _baseDamage: 5
   _detectionRange: 8
+  _score: 100
