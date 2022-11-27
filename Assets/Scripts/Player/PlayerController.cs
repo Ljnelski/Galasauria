@@ -9,6 +9,7 @@
  *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
  *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
  *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
+ *                      November 26th (Yuk Yee Wong): Added input actions for crate answer and interaction
  */
 using System;
 using System.Collections.Generic;
