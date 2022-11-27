@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YukiLevel1.unity
     guid: 295f70bca907c4849b979cf2bc025b62
+  - enabled: 1
+    path: Assets/Scenes/YukiLevel2.unity
+    guid: d710a4962e42df5419620ba0e07bd23c
+  - enabled: 1
+    path: Assets/Scenes/YukiLevel3.unity
+    guid: ac82b51e05bf68a448a85d01d671d567
   m_configObjects: {}

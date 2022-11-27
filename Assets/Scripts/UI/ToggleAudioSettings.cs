@@ -11,7 +11,7 @@ public class ToggleAudioSettings : ToggleBase
 {
     [SerializeField] private GameEnums.SoundType soundType;
 
-    protected override void onToggleValueChanged(bool value)
+    protected override void OnToggleValueChanged(bool value)
     {
         SoundManager.Instance.SetUnmuted(soundType, value);
     }

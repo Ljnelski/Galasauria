@@ -1,21 +1,18 @@
 /*  Filename:           CyberBlade.cs
- *  Author:             Liam Nelski (301064116)
- *  Last Update:        October 16, 2022
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
+ *  Last Update:        November 25, 2022
  *  Description:        Controls CyberBlade
- *  Revision History:   October 16, 2022 (Liam Nelski): Initial script. *  =
+ *  Revision History:   October 16, 2022 (Liam Nelski): Initial script.
+ *                      November 25, 2022 (Yuk Yee Wong): Remove IDamagingObject which causes bug when attach to the blade. The blade will use Destroyer script instead.
  */
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
-public class CyberBlade : MonoBehaviour, IEquipable, IDamagingObject
+public class CyberBlade : MonoBehaviour, IEquipable
 {
     public bool InUse { get; private set; }
-    public float Damage { get; set; }
 
     private Transform blade;
     private Transform hilt;
@@ -33,7 +30,6 @@ public class CyberBlade : MonoBehaviour, IEquipable, IDamagingObject
         hitBox = blade.GetComponent<CapsuleCollider>();
 
         InUse = false;
-        Damage = 100;
     }
 
     public void BeginUse(GameEnums.EquipableInput attack)

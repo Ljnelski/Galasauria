@@ -1,5 +1,5 @@
 /*  Filename:           PlayerController.cs
- *  Author:             Liam Nelski (301064116)
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
  *  Last Update:        October 10th, 2022
  *  Description:        Controls the player
  *  Revision History:   October 10th (Liam Nelski): Inital Script.
@@ -8,6 +8,8 @@
  *                      November 3th (Liam Nelski): Made Player Point to the mouse.
  *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
  *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
+ *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
+ *                      November 26th (Yuk Yee Wong): Added input actions for crate answer and interaction
  */
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : BaseController<PlayerController>
 {
     // Scripts
-    private Camera mainCamera;
+    //private Camera mainCamera;
     public EquipSlot EquipedItem { get; private set; }
     public Rigidbody Rb { get; private set; }
     public HealthSystem Health { get; private set; }
@@ -89,6 +91,9 @@ public class PlayerController : BaseController<PlayerController>
     public Action OnDashCoolDownUpdated;
     public Action<int> OnScoreIncremented;
 
+    public Action<Inventory> OnCrateInteracted;
+    public Action<Inventory, int> OnCrateQuestAnswered;
+
     // private varibles
     private int equipablesIndex = -1;
 
@@ -102,11 +107,38 @@ public class PlayerController : BaseController<PlayerController>
         dashState = new PlayerDashState(this);
 
         Rb = GetComponent<Rigidbody>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         EquipedItem = GetComponentInChildren<EquipSlot>();
         Timers = GetComponent<TimerPool>();
         Inventory = GetComponent<Inventory>();
 
+        AddInputActions();
+
+        // Hopefully temporary
+        Inventory.OnAddItem += (ItemData data) => { CurrentScore += data.score; };
+
+        // SetUp Health
+        Health = GetComponent<HealthSystem>();
+        Health.ReceiveDamage += ReceiveDamage;
+
+        // Reset current health
+        CurrentHealth = MaxHealth;
+
+        // Reset score
+        CurrentScore = 0;
+
+        activeState = idleState;
+        activeState.OnStateEnter();
+    }
+
+    private void OnDestroy()
+    {
+        // avoid null reference upon stopping the game or return to the start scene which results from OnAimInput
+        RemoveInputActions();
+    }
+
+    private void AddInputActions()
+    {
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;
         Input.Player.Movement.canceled += OnMovementInput;
@@ -123,11 +155,51 @@ public class PlayerController : BaseController<PlayerController>
         Input.Player.Dash.started += OnDashInput;
         Input.Player.Dash.canceled += OnDashInput;
 
-        // Hopefully temporary
-        Inventory.OnAddItem += (ItemData data) => { CurrentScore += data.score; };
+        Input.Player.Interact.started += OnInteractInput;
 
-        activeState = idleState;
-        activeState.OnStateEnter();
+        Input.Player.One.started += OnInputOne;
+        Input.Player.Two.started += OnInputTwo;
+        Input.Player.Three.started += OnInputThree;
+        Input.Player.Four.started += OnInputFour;
+    }
+
+    private void RemoveInputActions()
+    {
+        Input.Player.Movement.started -= OnMovementInput;
+        Input.Player.Movement.performed -= OnMovementInput;
+        Input.Player.Movement.canceled -= OnMovementInput;
+
+        Input.Player.Attack.started -= OnAttackInput;
+        Input.Player.Attack.canceled -= OnAttackInput;
+
+        Input.Player.SwapWeapon.performed -= OnSwapWeaponInput;
+
+        Input.Player.Aim.started -= OnAimInput;
+        Input.Player.Aim.performed -= OnAimInput;
+        Input.Player.Aim.canceled -= OnAimInput;
+
+        Input.Player.Dash.started -= OnDashInput;
+        Input.Player.Dash.canceled -= OnDashInput;
+
+        Input.Player.Interact.started -= OnInteractInput;
+    }
+
+    private void ReceiveDamage(float damage)
+    {
+        // Debug.Log($"{CurrentHealth} - {damage}");
+        if (CurrentHealth > 0)
+        {
+            if (CurrentHealth - damage > 0)
+            {
+                CurrentHealth -= damage;
+            }
+            else
+            {
+                Health.ReceiveDamage -= ReceiveDamage;
+                CurrentHealth = 0;
+                FindObjectOfType<GameEndScreen>(true).Open(false);
+            }
+        }
     }
 
     public void OnMovementInput(InputAction.CallbackContext context)
@@ -159,19 +231,24 @@ public class PlayerController : BaseController<PlayerController>
         // No weapon avalible, Clear Weapon (Should Not Happen In Gameplay)
         if (equipablesIndex == -1)
         {
-            EquipedItem.LoadWeapon(null);
+            EquipedItem.LoadWeapon(null, null);
         }
         else
         {
-            EquipedItem.LoadWeapon(equipables[equipablesIndex]);
+            EquipedItem.LoadWeapon(equipables[equipablesIndex], OnEnemyDestroyed);
         }
+    }
+
+    private void OnEnemyDestroyed(int scoreIncrement)
+    {
+        CurrentScore += scoreIncrement;
     }
 
     public void OnAimInput(InputAction.CallbackContext context)
     {
         Vector3 mousePos = Input.Player.Aim.ReadValue<Vector2>();
 
-        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
@@ -211,6 +288,31 @@ public class PlayerController : BaseController<PlayerController>
     public void OnDashInput(InputAction.CallbackContext context)
     {
         DashInput = context.ReadValue<float>() > 0.5f;
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        OnCrateInteracted?.Invoke(Inventory);
+    }
+
+    public void OnInputOne(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 1);
+    }
+
+    public void OnInputTwo(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 2);
+    }
+
+    public void OnInputThree(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 3);
+    }
+
+    public void OnInputFour(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 4);
     }
 }
 
