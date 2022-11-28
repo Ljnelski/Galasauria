@@ -133,7 +133,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
     {
         if (animator)
         {
-            animator.SetTrigger("Die");
+            animator.SetTrigger("die");
         }
     }
 
