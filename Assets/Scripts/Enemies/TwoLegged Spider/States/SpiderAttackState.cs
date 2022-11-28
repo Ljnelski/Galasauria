@@ -24,8 +24,6 @@ public class SpiderAttackState : SpiderState
 
         // Stop walking animation
         context.Idle();
-
-        Attack();
     }
 
     private void Attack()
