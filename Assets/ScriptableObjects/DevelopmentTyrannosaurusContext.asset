@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43048d26391c824ab42cda47d197c30, type: 3}
   m_Name: DevelopmentTyrannosaurusContext
   m_EditorClassIdentifier: 
-  _maxHealth: 500
-  _currentHealth: 500
-  _baseSpeed: 300
-  _turnSpeed: 6
+  _maxHealth: 200
+  _currentHealth: 200
+  _baseSpeed: 200
+  _turnSpeed: 3
   _acceleration: 30
   _playerOffsetDistance: 1.5
   _chargeMiliseconds: 4000
   _attackCoolDownMiliseconds: 4000
-  _dieMiliseconds: 3
+  _dieMiliseconds: 2000
   _baseDamage: 15
   _detectionRange: 20
   _score: 300
