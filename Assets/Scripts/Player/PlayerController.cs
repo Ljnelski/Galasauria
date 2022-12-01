@@ -28,8 +28,6 @@ public class PlayerController : BaseController<PlayerController>
     [field: SerializeField] public Inventory Inventory { get; private set; }
     [field: SerializeField] public ActionTimerPool Timers { get; private set; }
 
-    public Transform seat;
-
     // States
     public PlayerIdleState idleState;
     public PlayerUseItemState useItemState;

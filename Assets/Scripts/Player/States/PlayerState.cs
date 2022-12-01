@@ -23,9 +23,9 @@ public abstract class PlayerState : BaseState<PlayerController>
     {
         Vector3 movementInputTo3DSpace = new Vector3(context.MovementInput.x, 0, context.MovementInput.y);
 
-        // Rotate Legs
-        Quaternion rotation = Quaternion.LookRotation(context.Rb.velocity.normalized);
-        context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, 360));
+        //// Rotate Legs
+        //Quaternion rotation = Quaternion.LookRotation(context.Rb.velocity.normalized);
+        //context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, 360));
 
         // Move Character
         Vector3 movementVector = Vector3.Lerp(context.Rb.velocity, movementInputTo3DSpace * context.BaseSpeed, context.Acceleration);
@@ -37,7 +37,7 @@ public abstract class PlayerState : BaseState<PlayerController>
     {
         // Rotate Top half
         Quaternion rotation = Quaternion.LookRotation(context.LookAtPosition) ;
-        context.seat.rotation = Quaternion.RotateTowards(context.seat.rotation, rotation, context.TurnSpeed);        
+        //context.seat.rotation = Quaternion.RotateTowards(context.seat.rotation, rotation, context.TurnSpeed);        
     }
 }
 
