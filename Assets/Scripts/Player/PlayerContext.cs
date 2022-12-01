@@ -1,5 +1,5 @@
 ﻿/*  Filename:           PlayerController.cs
- *  Author:             Liam Nelski (301064116)
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
  *  Last Update:        November 13th, 2022
  *  Description:        Scriptable Object to hold playerData
  *  Revision History:   November 12th (Liam Nelski): Inital Script.

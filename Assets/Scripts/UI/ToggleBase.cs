@@ -13,20 +13,24 @@ public abstract class ToggleBase : MonoBehaviour
 {
     protected Toggle toggle;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         if (toggle == null)
         {
             toggle = GetComponent<Toggle>();
         }
 
-        toggle.onValueChanged.AddListener(onToggleValueChanged);
+        BeforeAddingListener();
+
+        toggle.onValueChanged.AddListener(OnToggleValueChanged);
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
-        toggle.onValueChanged.RemoveListener(onToggleValueChanged);
+        toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
     }
 
-    protected abstract void onToggleValueChanged(bool value);
+    protected virtual void BeforeAddingListener() { }
+
+    protected abstract void OnToggleValueChanged(bool value);
 }

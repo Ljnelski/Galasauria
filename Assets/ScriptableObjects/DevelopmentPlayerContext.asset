@@ -24,4 +24,4 @@ MonoBehaviour:
   _dashCoolDownMiliseconds: 6000
   _currentDashCoolDown: 0
   _canDash: 1
-  _score: 435
+  _score: 0
