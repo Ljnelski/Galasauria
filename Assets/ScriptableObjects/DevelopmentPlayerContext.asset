@@ -17,8 +17,8 @@ MonoBehaviour:
   _currentSpeed: 0
   _baseSpeed: 10
   _boostSpeedMultiplier: 0
-  _turnSpeed: 90
-  _acceleration: 0.1
+  _turnSpeed: 0.1
+  _acceleration: 0.08
   _dashSpeed: 15
   _dashDurationMiliseconds: 1000
   _dashCoolDownMiliseconds: 1000

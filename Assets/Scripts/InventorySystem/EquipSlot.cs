@@ -38,15 +38,22 @@ public class EquipSlot : MonoBehaviour
     {
         _equipedItem = GetComponentInChildren<EquipableItem>();
     }
+
+    private void Update()
+    {
+        if(_equipedItem != null )
+        {
+            _leftHandIKTarget.transform.SetPositionAndRotation(_equipedItem.LeftHandIKTransform.position, _equipedItem.LeftHandIKTransform.rotation);
+            _rightHandIKTarget.transform.SetPositionAndRotation(_equipedItem.RightHandIKTransform.position, _equipedItem.RightHandIKTransform.rotation);
+        }
+    }
+
     public void LoadWeapon(GameObject weaponPrefab)
     {
         if(_equipedItem != null)        
             Destroy(_equipedItem.gameObject);
         
         _equipedItem = Instantiate(weaponPrefab, transform).GetComponent<EquipableItem>();
-
-        _leftHandIKTarget.SetParent(_equipedItem.LeftHandIKTransform, false);
-        _rightHandIKTarget.SetParent(_equipedItem.RightHandIKTransform, false);
     }
 
     public void UseItem(GameEnums.EquipableInput inputValue)

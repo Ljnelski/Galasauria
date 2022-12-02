@@ -20,15 +20,14 @@ public class CyberBlade :  EquipableItem, IDamagingObject
     private Transform hilt;
     private Transform handle;
     private CapsuleCollider hitBox;
-    private Animator animator;
+    [SerializeField]private Animator animator;
 
-    private void Awake()
+    private void Start()
     {
         handle = transform.GetChild(0).GetChild(0).GetChild(0);
         hilt = handle.GetChild(0);
         blade = hilt.GetChild(0);
 
-        animator = GetComponent<Animator>();
         hitBox = blade.GetComponent<CapsuleCollider>();
 
         InUse = false;
@@ -37,6 +36,7 @@ public class CyberBlade :  EquipableItem, IDamagingObject
 
     public override void BeginUse(GameEnums.EquipableInput attack)
     {
+        Debug.Log("Beginning Attack");
         switch(attack)
         {
             case GameEnums.EquipableInput.PRIMARY:

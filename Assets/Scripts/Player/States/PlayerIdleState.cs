@@ -39,13 +39,17 @@ public class PlayerIdleState : PlayerState
             context.ChangeState(context.dashState);
         }
 
-        // Look At Mouse Position
-        RotatePlayer();
-
+        
         float moveSpeedClamped = context.Rb.velocity.magnitude / context.BaseSpeed;
         if (moveSpeedClamped < 0.01f)
             moveSpeedClamped = 0f;
-        
+
+        //Debug.Log("CurrentSpeed: " + context.Rb.velocity.magnitude);
+        //Debug.Log("Base Speed: " + context.BaseSpeed);
+        //Debug.Log("to animator: " + moveSpeedClamped);
+
+
+
         context.Animator.SetFloat("speed", moveSpeedClamped);
     }
 }

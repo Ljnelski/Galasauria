@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : BaseController<PlayerController>
 {
@@ -27,6 +26,12 @@ public class PlayerController : BaseController<PlayerController>
     [field: SerializeField] public HealthSystem Health { get; private set; }
     [field: SerializeField] public Inventory Inventory { get; private set; }
     [field: SerializeField] public ActionTimerPool Timers { get; private set; }
+
+    [Header("Animation Constraints")]
+    [field: SerializeField] private Transform LookLocation;
+    public Vector3 lastDirectionFaced;
+    [field: SerializeField] public Transform FacingLocation;
+
 
     // States
     public PlayerIdleState idleState;
@@ -40,7 +45,6 @@ public class PlayerController : BaseController<PlayerController>
     // Player Input
     public PlayerInputActions Input { get; private set; }
     public GameEnums.EquipableInput AttackInput { get; private set; }
-    public Vector3 LookAtPosition { get; private set; }
     public Vector2 MovementInput { get; private set; }
     public bool DashInput { get; private set; }
 
@@ -134,6 +138,12 @@ public class PlayerController : BaseController<PlayerController>
     public void OnMovementInput(InputAction.CallbackContext context)
     {
         MovementInput = context.ReadValue<Vector2>();
+        if(MovementInput.magnitude < 0.01f)
+        {
+            return;
+        }
+
+        
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
@@ -193,9 +203,8 @@ public class PlayerController : BaseController<PlayerController>
         float zPos = mainCamera.transform.position.z + (Mathf.Tan(zAngle) * yheight);
         float xPos = mainCamera.transform.position.x + (Mathf.Tan(xAngle) * yheight);
 
-        // Set Y pos
-        LookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
-
+        // Set the Target for the AimConstrant
+        LookLocation.position = transform.position + Vector3.Normalize(new Vector3(xPos, transform.position.y, zPos) - transform.position);
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
@@ -205,8 +214,10 @@ public class PlayerController : BaseController<PlayerController>
 
     private void OnDrawGizmos()
     {
-        Vector3 movementInputTo3DSpace = new Vector3(MovementInput.x, 0, MovementInput.y);
-        Gizmos.DrawWireSphere(transform.position + Rb.velocity.normalized, 1f);
+        Gizmos.DrawWireSphere(FacingLocation.localPosition, 1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Rb.velocity.normalized, 1f);
+        Gizmos.color = Color.blue;    
+
     }
 }
-
