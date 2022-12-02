@@ -298,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LeftHandIKTransform>k__BackingField: {fileID: 3763593391389621638}
   <RightHandIKTransform>k__BackingField: {fileID: 600166044719632099}
+  hitBox: {fileID: 28096637656296055}
   animator: {fileID: 6705100129686002676}
 --- !u!1 &6231593824237499136
 GameObject:
