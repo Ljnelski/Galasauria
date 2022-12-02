@@ -10,14 +10,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class EquipSlot : MonoBehaviour
 {
-    GameObject currentObject;
+    [SerializeField] private Transform _leftHandIKTarget;
+    [SerializeField] private Transform _rightHandIKTarget;
+
     public bool InUse { 
         get
         {
-            if (equipedItem == null || !equipedItem.InUse)
+            if (_equipedItem == null || !_equipedItem.InUse)
                 return false;
             return true;
         } 
@@ -27,33 +30,42 @@ public class EquipSlot : MonoBehaviour
     {
         get
         {
-            return equipedItem != null;
+            return _equipedItem != null;
         }
     }
 
-    private IEquipable equipedItem;
+    private EquipableItem _equipedItem;
 
     private void Awake()
     {
-        equipedItem = GetComponentInChildren<IEquipable>();
+        _equipedItem = GetComponentInChildren<EquipableItem>();
     }
-    public void LoadWeapon(GameObject weaponPrefab, Action<int> onDestoryEnemyScore)
-    {
-        Destroy(currentObject);
-        currentObject = Instantiate(weaponPrefab, transform);
 
-        Destroyer destroyer = currentObject.GetComponentInChildren<Destroyer>();
+    private void Update()
+    {
+        if(_equipedItem != null )
+        {
+            _leftHandIKTarget.transform.SetPositionAndRotation(_equipedItem.LeftHandIKTransform.position, _equipedItem.LeftHandIKTransform.rotation);
+            _rightHandIKTarget.transform.SetPositionAndRotation(_equipedItem.RightHandIKTransform.position, _equipedItem.RightHandIKTransform.rotation);
+        }
+    }
+
+    public void LoadWeapon(GameObject weaponPrefab, Action<int> onDestroyEnemyScore)
+    {
+        if(_equipedItem != null)        
+            Destroy(_equipedItem.gameObject);
+        
+        _equipedItem = Instantiate(weaponPrefab, transform).GetComponent<EquipableItem>();
+        Destroyer destroyer = _equipedItem.GetComponentInChildren<Destroyer>();
         if (destroyer != null)
         {
-            destroyer.OnTargetDestroyedAction += onDestoryEnemyScore;
+            destroyer.OnTargetDestroyedAction += onDestroyEnemyScore;
         }
-
-        equipedItem = currentObject.GetComponent<IEquipable>();
     }
 
     public void UseItem(GameEnums.EquipableInput inputValue)
     {
-        equipedItem.BeginUse(inputValue);
+        _equipedItem.BeginUse(inputValue);
     }
 
 }

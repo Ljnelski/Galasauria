@@ -18,9 +18,10 @@ public class PlayerDashState : PlayerState
 
     public override void OnStateEnter()
     {
-        _dashDirection = new Vector3(context.MovementInput.x, 0.0f, context.MovementInput.y);
+        _dashDirection = context.FacingLocation.position - context.transform.position;
         _dashComplete = false;
         context.Timers.CreateTimer(context.DashDurationMiliseconds / 1000f, () => { _dashComplete= true; });
+        context.Animator.SetTrigger("startDash");
     }
 
     public override void OnStateExit()
@@ -30,6 +31,8 @@ public class PlayerDashState : PlayerState
         context.Timers.CreateTimer(context.DashCoolDownMiliseconds / 1000f,
             () => { context.CanDash = true; },
             (float timeRemaining) => { context.CurrentDashCoolDown = timeRemaining; });
+        context.Animator.SetTrigger("endDash");
+
     }
 
     public override void OnStateRun()

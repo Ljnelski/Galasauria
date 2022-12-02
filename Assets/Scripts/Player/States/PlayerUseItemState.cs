@@ -28,7 +28,6 @@ public class PlayerUseItemState : PlayerState
     public override void OnStateRun()
     {
         MovePlayer();
-        RotatePlayer();
 
         if(!context.EquipedItem.InUse)
         {

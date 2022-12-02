@@ -21,13 +21,25 @@ public abstract class PlayerState : BaseState<PlayerController>
 
     protected void MovePlayer()
     {
-        context.Rb.velocity = Vector3.Lerp(context.Rb.velocity, new Vector3(context.MovementInput.x, 0, context.MovementInput.y) * context.BaseSpeed, context.Acceleration);
-    }
+        Vector3 movementInputTo3DSpace = new Vector3(context.MovementInput.x, 0, context.MovementInput.y);
 
-    protected void RotatePlayer()
-    {
-        Quaternion rotation = Quaternion.LookRotation(context.LookAtPosition);
-        context.Rb.MoveRotation(Quaternion.RotateTowards(context.transform.rotation, rotation, context.TurnSpeed));
+        // Move Character
+        Vector3 movementVector = Vector3.Lerp(context.Rb.velocity, movementInputTo3DSpace * (context.BaseSpeed + 1 - context.Acceleration), context.Acceleration);
+        context.Rb.velocity = movementVector;
+
+
+        // Capture the direction to which the legs have to face
+        if (movementInputTo3DSpace.magnitude > 0.01f)
+        {
+            context.lastDirectionFaced = context.Rb.velocity.normalized;
+        }
+
+        // Rotate The legs to the last DirectionFaced
+        context.FacingLocation.localPosition = Vector3.Slerp(
+                context.FacingLocation.localPosition,
+                context.lastDirectionFaced,
+                context.TurnSpeed).normalized;
+
     }
 }
 

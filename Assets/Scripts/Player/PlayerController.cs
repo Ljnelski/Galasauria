@@ -8,23 +8,32 @@
  *                      November 3th (Liam Nelski): Made Player Point to the mouse.
  *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
  *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
+ *                      November 14th (Liam Nelski): Added IK for arms to Weapon, and Serialized Script Properties to show in Editor
  *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
  *                      November 26th (Yuk Yee Wong): Added input actions for crate answer and interaction
  */
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class PlayerController : BaseController<PlayerController>
 {
     // Scripts
-    //private Camera mainCamera;
-    public EquipSlot EquipedItem { get; private set; }
-    public Rigidbody Rb { get; private set; }
-    public HealthSystem Health { get; private set; }
-    public Inventory Inventory { get; private set; }
-    public ActionTimerPool Timers { get; private set; }
+    [field:SerializeField] private Camera mainCamera;
+    [field:SerializeField] public  Animator Animator { get; private set; }
+    [field: SerializeField] public EquipSlot EquipedItem { get; private set; }
+    [field: SerializeField] public Rigidbody Rb { get; private set; }
+    [field: SerializeField] public HealthSystem Health { get; private set; }
+    [field: SerializeField] public Inventory Inventory { get; private set; }
+    [field: SerializeField] public ActionTimerPool Timers { get; private set; }
+
+    [Header("Animation Constraints")]
+    [field: SerializeField] private Transform LookLocation;
+    public Vector3 lastDirectionFaced;
+    [field: SerializeField] public Transform FacingLocation;
+
 
     // States
     public PlayerIdleState idleState;
@@ -38,7 +47,6 @@ public class PlayerController : BaseController<PlayerController>
     // Player Input
     public PlayerInputActions Input { get; private set; }
     public GameEnums.EquipableInput AttackInput { get; private set; }
-    public Vector3 LookAtPosition { get; private set; }
     public Vector2 MovementInput { get; private set; }
     public bool DashInput { get; private set; }
 
@@ -62,7 +70,6 @@ public class PlayerController : BaseController<PlayerController>
             OnHealthUpdated?.Invoke();
         }
     }
-
     public float CurrentDashCoolDown
     {
         get => playerContext._currentDashCoolDown;
@@ -72,7 +79,6 @@ public class PlayerController : BaseController<PlayerController>
             OnDashCoolDownUpdated?.Invoke();
         }
     }
-
     public int CurrentScore
     {
         get => playerContext._score;
@@ -82,7 +88,6 @@ public class PlayerController : BaseController<PlayerController>
             OnScoreIncremented?.Invoke(value);
         }
     }
-
     public float CurrentSpeed { get => playerContext._currentSpeed; set => playerContext._currentSpeed = value; }
     public bool CanDash { get => playerContext._canDash; set => playerContext._canDash = value; }
 
@@ -106,11 +111,11 @@ public class PlayerController : BaseController<PlayerController>
         useItemState = new PlayerUseItemState(this);
         dashState = new PlayerDashState(this);
 
-        Rb = GetComponent<Rigidbody>();
-        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        EquipedItem = GetComponentInChildren<EquipSlot>();
-        Timers = GetComponent<ActionTimerPool>();
-        Inventory = GetComponent<Inventory>();
+        //Rb = GetComponent<Rigidbody>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //EquipedItem = GetComponentInChildren<EquipSlot>();
+        //Timers = GetComponent<ActionTimerPool>();
+        //Inventory = GetComponent<Inventory>();
 
         AddInputActions();
 
@@ -205,6 +210,12 @@ public class PlayerController : BaseController<PlayerController>
     public void OnMovementInput(InputAction.CallbackContext context)
     {
         MovementInput = context.ReadValue<Vector2>();
+        if(MovementInput.magnitude < 0.01f)
+        {
+            return;
+        }
+
+        
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
@@ -250,18 +261,7 @@ public class PlayerController : BaseController<PlayerController>
 
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
-        {
-            if (hit.transform)
-            {
-                Vector3 worldPos = hit.point;
-                Vector3 rawLookAtPosition = Vector3.ClampMagnitude(worldPos - transform.position, 5f);
-                rawLookAtPosition.y = 0;
-                LookAtPosition = rawLookAtPosition;
-            }
-        }
 
-        /*
         Vector3 cameraAtPlayerheight = mainCamera.transform.position;
         cameraAtPlayerheight.y = transform.position.y;
 
@@ -280,9 +280,8 @@ public class PlayerController : BaseController<PlayerController>
         float zPos = mainCamera.transform.position.z + (Mathf.Tan(zAngle) * yheight);
         float xPos = mainCamera.transform.position.x + (Mathf.Tan(xAngle) * yheight);
 
-        // Set Y pos
-        LookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
-        */
+        // Set the Target for the AimConstrant
+        LookLocation.position = transform.position + Vector3.Normalize(new Vector3(xPos, transform.position.y, zPos) - transform.position);
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
@@ -314,5 +313,11 @@ public class PlayerController : BaseController<PlayerController>
     {
         OnCrateQuestAnswered?.Invoke(Inventory, 4);
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(FacingLocation.localPosition, 1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Rb.velocity.normalized, 1f);
+        Gizmos.color = Color.blue;    
+    }
 }
-
