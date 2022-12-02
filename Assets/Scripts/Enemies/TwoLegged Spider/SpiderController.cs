@@ -16,7 +16,7 @@ public class SpiderController : BaseController<SpiderController>
     // Scripts
     public NavMeshAgent Agent { get; private set; }
     public HealthSystem SpiderHealth { get; private set; }
-    public TimerPool Timers { get; private set; }
+    public ActionTimerPool Timers { get; private set; }
 
     // States
     public SpiderChaseState ChaseState { get; private set; }
@@ -58,7 +58,7 @@ public class SpiderController : BaseController<SpiderController>
         CurrentHealth = spiderContext._maxHealth;
 
         // SetUp Timers
-        Timers = GetComponent<TimerPool>();
+        Timers = GetComponent<ActionTimerPool>();
 
         // SetUp Animator
         animator = GetComponent<Animator>();

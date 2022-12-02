@@ -13,7 +13,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
 {
     // Scripts
     public NavMeshAgent Agent { get; private set; }
-    public TimerPool Timers { get; private set; }
+    public ActionTimerPool Timers { get; private set; }
 
     // States
     public TyrannosaurusChargeState ChargeState { get; private set; }
@@ -61,7 +61,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
         CurrentHealth = tyrannosaurusContext._maxHealth;
 
         // SetUp Timers
-        Timers = GetComponent<TimerPool>();
+        Timers = GetComponent<ActionTimerPool>();
 
         // SetUp Animator
         animator = GetComponentInChildren<Animator>();

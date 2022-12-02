@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 6705100129686002678}
   - component: {fileID: 3429643937613590957}
   - component: {fileID: 3767708936334301856}
+  - component: {fileID: 7172206842689882379}
   m_Layer: 0
   m_Name: CyberBlade
   m_TagString: Equipable
@@ -222,8 +223,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6705100129015394310
-CapsuleCollider:
 --- !u!95 &6705100129686002676
 Animator:
   serializedVersion: 4
@@ -257,10 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
---- !u!1 &4371002337989093071
-  <LeftHandIKTransform>k__BackingField: {fileID: 3763593391389621638}
-  <RightHandIKTransform>k__BackingField: {fileID: 600166044719632099}
-  animator: {fileID: 6705100129686002676}
 --- !u!54 &3429643937613590957
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -289,6 +284,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7172206842689882379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894126535628105377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49f0d023666f1047bfea4a0addcd561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LeftHandIKTransform>k__BackingField: {fileID: 3763593391389621638}
+  <RightHandIKTransform>k__BackingField: {fileID: 600166044719632099}
+  animator: {fileID: 6705100129686002676}
 --- !u!1 &6231593824237499136
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class RaptorController : BaseController<RaptorController>
     // Scripts
     public NavMeshAgent Agent { get; private set; }
     public HealthSystem RaptorHealth { get; private set; }
-    public TimerPool Timers { get; private set; }
+    public ActionTimerPool Timers { get; private set; }
 
     // States
     public RaptorChaseState ChaseState { get; private set; }
@@ -66,7 +66,7 @@ public class RaptorController : BaseController<RaptorController>
         CurrentHealth = raptorContext._maxHealth;
 
         // SetUp Timers
-        Timers = GetComponent<TimerPool>();
+        Timers = GetComponent<ActionTimerPool>();
 
         // SetUp Animator
         animator = GetComponentInChildren<Animator>();
