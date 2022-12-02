@@ -19,16 +19,14 @@ public class CyberBlade :  EquipableItem
     private Transform blade;
     private Transform hilt;
     private Transform handle;
-    private CapsuleCollider hitBox;
-    [SerializeField]private Animator animator;
+    [SerializeField] private CapsuleCollider hitBox;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
         handle = transform.GetChild(0).GetChild(0).GetChild(0);
         hilt = handle.GetChild(0);
         blade = hilt.GetChild(0);
-
-        hitBox = blade.GetComponent<CapsuleCollider>();
 
         InUse = false;
     }

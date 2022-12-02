@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryItemDetailsDisplay : MonoBehaviour
+public class InventoryItemDetailsDisplay : UIPlayerDataReader<PlayerController>
 {
     [SerializeField] private Image itemIcon;
     [SerializeField] private Text itemNameLabel;
@@ -13,6 +13,7 @@ public class InventoryItemDetailsDisplay : MonoBehaviour
 
     void OnEnable()
     {
+        GetTargetScript();
         ResetDisplay();
     }
 
@@ -32,10 +33,13 @@ public class InventoryItemDetailsDisplay : MonoBehaviour
 
         itemIcon.gameObject.SetActive(itemIcon.sprite != null);
 
-        useItemButton.gameObject.SetActive(
-            itemData.type.Equals(GameEnums.ItemType.HEALTHPOWERUP)
-            || itemData.type.Equals(GameEnums.ItemType.SPEEDPOWERUP));
-
-        // TODO, wire up the power up function
-    }
+        // If the item is usable then add item effect to button listener
+        if (itemData.prefab.TryGetComponent(out UseableItem useableItem))
+        {
+            useableItem.InitEffect(_targetScript, itemData);
+            useItemButton.gameObject.SetActive(true);            
+            useItemButton.onClick.AddListener(useableItem.GetItemEffect());
+            useItemButton.onClick.AddListener(() => { useItemButton.onClick.RemoveAllListeners(); });
+        }       
+    }        
 }

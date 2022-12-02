@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 243996721981528658}
   - component: {fileID: 243996721981528669}
   - component: {fileID: 243996721981528668}
+  - component: {fileID: -3589260580182745698}
   m_Layer: 0
   m_Name: HealthPowerUp
   m_TagString: Collectable
@@ -60,6 +61,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 70746136e73920c4795c0e3067a3414c, type: 2}
+--- !u!114 &-3589260580182745698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243996721981528659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0bd94551ea7bd4abd5e73de74b6123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmount: 25
 --- !u!1001 &243996720749331123
 PrefabInstance:
   m_ObjectHideFlags: 0

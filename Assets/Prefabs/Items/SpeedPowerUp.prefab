@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 17720013874351661}
   - component: {fileID: 17720013874351662}
   - component: {fileID: 6279135956791123669}
+  - component: {fileID: -4139971947086666018}
   m_Layer: 0
   m_Name: SpeedPowerUp
   m_TagString: Collectable
@@ -60,6 +61,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: d46e82979fe8db2438c5bf65db218902, type: 2}
+--- !u!114 &-4139971947086666018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17720013874351660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd59caf9044199840928911ce5fded1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMultiplier: 3
+  boostTime: 5
 --- !u!1001 &17720014997887658
 PrefabInstance:
   m_ObjectHideFlags: 0
