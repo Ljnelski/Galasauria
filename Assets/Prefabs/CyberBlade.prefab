@@ -193,13 +193,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6523451379554548763}
   - component: {fileID: 6705100129686002676}
-  - component: {fileID: 6705100129686002678}
   - component: {fileID: 3429643937613590957}
   - component: {fileID: 3767708936334301856}
   - component: {fileID: 7172206842689882379}
   m_Layer: 0
   m_Name: CyberBlade
-  m_TagString: Equipable
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,19 +242,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6705100129686002678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5894126535628105377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dae86a53ede246e4c980a2ca595dac60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 100
 --- !u!54 &3429643937613590957
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -405,9 +391,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3282316563324606784}
   - component: {fileID: 28096637656296055}
+  - component: {fileID: 8472699456897302189}
   m_Layer: 0
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,6 +429,19 @@ CapsuleCollider:
   m_Height: 1.0371262
   m_Direction: 1
   m_Center: {x: -8.198501e-15, y: 0.50835305, z: -0.00000003037456}
+--- !u!114 &8472699456897302189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7323583270507633432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae86a53ede246e4c980a2ca595dac60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1 &7507738024383988749
 GameObject:
   m_ObjectHideFlags: 0
