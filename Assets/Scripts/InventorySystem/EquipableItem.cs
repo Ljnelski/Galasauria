@@ -13,6 +13,7 @@ public abstract class EquipableItem : MonoBehaviour
     [field:SerializeField] public Transform LeftHandIKTransform { get; protected set; }
     [field:SerializeField] public Transform RightHandIKTransform { get; protected set; }
 
+    public Inventory ItemOwnerInventory { get; set; }
     public bool InUse { get; protected set; }
     public abstract void BeginUse(GameEnums.EquipableInput attack);
     public abstract void EndUse();

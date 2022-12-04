@@ -50,17 +50,24 @@ public class EquipSlot : MonoBehaviour
         }
     }
 
-    public void LoadWeapon(GameObject weaponPrefab, Action<int> onDestroyEnemyScore)
+    public void LoadWeapon(GameObject weaponPrefab, Action<int> onDestroyEnemyScore, Inventory itemOwnerInventory)
     {
+        // Destroy Previous Item
         if(_equipedItem != null)        
             Destroy(_equipedItem.gameObject);
         
+        // Create new Item
         _equipedItem = Instantiate(weaponPrefab, transform).GetComponent<EquipableItem>();
+        
+        // Link Destroyer
         Destroyer destroyer = _equipedItem.GetComponentInChildren<Destroyer>();
         if (destroyer != null)
         {
             destroyer.OnTargetDestroyedAction += onDestroyEnemyScore;
         }
+
+        // inject reference to inventory
+        _equipedItem.ItemOwnerInventory = itemOwnerInventory;
     }
 
     public void UseItem(GameEnums.EquipableInput inputValue)

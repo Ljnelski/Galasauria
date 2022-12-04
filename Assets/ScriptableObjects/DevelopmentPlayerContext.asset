@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: DevelopmentPlayerContext
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _currentHealth: 100
+  _currentHealth: 70
   _currentSpeed: 10
   _baseSpeed: 10
   _boostSpeedMultiplier: 0
-  _turnSpeed: 0.1
+  _turnSpeed: 0.15
   _acceleration: 0.08
-  _dashSpeed: 15
-  _dashDurationMiliseconds: 1000
+  _dashSpeed: 60
+  _dashDurationMiliseconds: 300
   _dashCoolDownMiliseconds: 1000
   _currentDashCoolDown: 0
   _canDash: 1
-  _score: 5
+  _score: 710
