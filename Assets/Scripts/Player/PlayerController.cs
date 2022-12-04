@@ -111,11 +111,7 @@ public class PlayerController : BaseController<PlayerController>
         useItemState = new PlayerUseItemState(this);
         dashState = new PlayerDashState(this);
 
-        //Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        //EquipedItem = GetComponentInChildren<EquipSlot>();
-        //Timers = GetComponent<ActionTimerPool>();
-        //Inventory = GetComponent<Inventory>();
 
         AddInputActions();
 
@@ -134,13 +130,7 @@ public class PlayerController : BaseController<PlayerController>
 
         activeState = idleState;
         activeState.OnStateEnter();
-    }
-
-    private void OnDestroy()
-    {
-        // avoid null reference upon stopping the game or return to the start scene which results from OnAimInput
-        RemoveInputActions();
-    }
+    }  
 
     private void AddInputActions()
     {
@@ -191,7 +181,6 @@ public class PlayerController : BaseController<PlayerController>
 
     private void ReceiveDamage(float damage)
     {
-        // Debug.Log($"{CurrentHealth} - {damage}");
         if (CurrentHealth > 0)
         {
             if (CurrentHealth - damage > 0)
@@ -213,9 +202,7 @@ public class PlayerController : BaseController<PlayerController>
         if(MovementInput.magnitude < 0.01f)
         {
             return;
-        }
-
-        
+        }        
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
@@ -242,11 +229,11 @@ public class PlayerController : BaseController<PlayerController>
         // No weapon avalible, Clear Weapon (Should Not Happen In Gameplay)
         if (equipablesIndex == -1)
         {
-            EquipedItem.LoadWeapon(null, null);
+            EquipedItem.LoadWeapon(null, null, null);
         }
         else
         {
-            EquipedItem.LoadWeapon(equipables[equipablesIndex], OnEnemyDestroyed);
+            EquipedItem.LoadWeapon(equipables[equipablesIndex], OnEnemyDestroyed, Inventory);
         }
     }
 
@@ -320,4 +307,10 @@ public class PlayerController : BaseController<PlayerController>
         Gizmos.DrawWireSphere(Rb.velocity.normalized, 1f);
         Gizmos.color = Color.blue;    
     }
+    private void OnDestroy()
+    {
+        // avoid null reference upon stopping the game or return to the start scene which results from OnAimInput
+        RemoveInputActions();
+    }
+
 }

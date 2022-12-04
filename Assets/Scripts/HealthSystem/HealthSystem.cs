@@ -18,7 +18,6 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HEALTH SYSTEM HIT: " + other.tag);
         if (other.gameObject.CompareTag(DamageTag))
         {
             IDestroyer iDestroyer = other.GetComponent<IDestroyer>();

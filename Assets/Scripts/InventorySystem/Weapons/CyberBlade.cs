@@ -6,13 +6,7 @@
  *                      November 25, 2022 (Yuk Yee Wong): Remove IDamagingObject which causes bug when attach to the blade. The blade will use Destroyer script instead.
  */
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
-
-
 public class CyberBlade :  EquipableItem
 {
     public float Damage { get; set; }
@@ -24,7 +18,7 @@ public class CyberBlade :  EquipableItem
 
     private void Start()
     {
-        handle = transform.GetChild(0).GetChild(0).GetChild(0);
+        handle = transform.GetChild(2).GetChild(0).GetChild(0);
         hilt = handle.GetChild(0);
         blade = hilt.GetChild(0);
 
@@ -33,7 +27,6 @@ public class CyberBlade :  EquipableItem
 
     public override void BeginUse(GameEnums.EquipableInput attack)
     {
-        Debug.Log("Beginning Attack");
         switch(attack)
         {
             case GameEnums.EquipableInput.PRIMARY:
@@ -45,11 +38,6 @@ public class CyberBlade :  EquipableItem
                 break;
         }
         InUse = true;
-    }
-
-    public void FinishAttack()
-    {
-        InUse = false;
     }
 
     public void ActivateHitBox()
@@ -69,7 +57,7 @@ public class CyberBlade :  EquipableItem
 
     public override void EndUse()
     {
-        throw new NotImplementedException();
+        InUse = false;
     }
 
     private void ScaleHandle(float factor)

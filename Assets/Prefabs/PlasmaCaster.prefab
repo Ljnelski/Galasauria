@@ -129,7 +129,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 391026931969376776}
+  - component: {fileID: 8085217347448634708}
   - component: {fileID: 6335829543635808438}
+  - component: {fileID: 3155882176639546797}
+  - component: {fileID: 6962622877909663810}
   m_Layer: 0
   m_Name: PlasmaCaster
   m_TagString: Untagged
@@ -156,6 +159,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8085217347448634708
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019753332850628786}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65d81b57babad01479f173abbfe45135, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6335829543635808438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +193,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LeftHandIKTransform>k__BackingField: {fileID: 2350936831777350174}
   <RightHandIKTransform>k__BackingField: {fileID: 6055564821873524946}
+  _plasmaCartridgeitemData: {fileID: 11400000, guid: 30dfc2f2606a1ea4d90c6b7982c310b1, type: 2}
+  _plasmaboltSpeed: 10
+  _plasmaboltLifetime: 10
+  _plasmaboltSpawn: {fileID: 6852883344193608628}
+  _barrel: {fileID: 3888543801297242471}
+  _plasmaboltPool: {fileID: 3155882176639546797}
+  _timers: {fileID: 6962622877909663810}
+  _animator: {fileID: 8085217347448634708}
+--- !u!114 &3155882176639546797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019753332850628786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2b2bb8b48369145a7f6868f1f8ee98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2993699535301232572, guid: 38c4f0770613e7c4798dbfb7416a9667, type: 3}
+  poolSize: 0
+  totalPooledObject: 0
+--- !u!114 &6962622877909663810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019753332850628786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c22635b2a2b1fe41b72da563dbdc159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2388593158229079713
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +290,37 @@ Transform:
   m_Father: {fileID: 391026931969376776}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &3455349267421791108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6852883344193608628}
+  m_Layer: 0
+  m_Name: PlasmaboltSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6852883344193608628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455349267421791108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.332, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3888543801297242471}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5674907531500198428
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +348,8 @@ Transform:
   m_LocalPosition: {x: 5.3842314e-10, y: 0.6230782, z: 0.000000048408875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6852883344193608628}
   m_Father: {fileID: 3790990875024043176}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

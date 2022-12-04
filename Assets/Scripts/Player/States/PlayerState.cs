@@ -39,6 +39,13 @@ public abstract class PlayerState : BaseState<PlayerController>
                 context.FacingLocation.localPosition,
                 context.lastDirectionFaced,
                 context.TurnSpeed).normalized;
+        
+        // Set animator Values
+        float moveSpeedClamped = context.Rb.velocity.magnitude / context.BaseSpeed;
+        if (moveSpeedClamped < 0.01f)
+            moveSpeedClamped = 0f;
+
+        context.Animator.SetFloat("speed", moveSpeedClamped);
 
     }
 }
