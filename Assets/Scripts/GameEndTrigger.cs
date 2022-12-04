@@ -6,6 +6,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider))]
 public class GameEndTrigger : MonoBehaviour
@@ -17,6 +18,21 @@ public class GameEndTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             screen.Open(true);
+            switch (GameDifficultyManager.Instance.Difficulty)
+            {
+                case GameEnums.GameDifficulty.EASY:
+                    WinStatTracker.isLv1Complete = true;
+                    break;
+                case GameEnums.GameDifficulty.MEDIUM:
+                    WinStatTracker.isLv1Complete = true;
+                    break;
+                case GameEnums.GameDifficulty.HARD:
+                    WinStatTracker.isLv1Complete = true;
+                    break;
+                default:
+                    Debug.LogError($"GameEndTrigger ERROR: {GameDifficultyManager.Instance.Difficulty} does not have a respective scene index");
+                    break;
+            }
         }
     }
 }
