@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43048d26391c824ab42cda47d197c30, type: 3}
+  m_Name: DevelopmentTyrannosaurusContext
+  m_EditorClassIdentifier: 
+  _maxHealth: 200
+  _currentHealth: 200
+  _baseSpeed: 200
+  _turnSpeed: 3
+  _acceleration: 30
+  _playerOffsetDistance: 1.5
+  _chargeMiliseconds: 4000
+  _attackCoolDownMiliseconds: 4000
+  _dieMiliseconds: 2000
+  _baseDamage: 15
+  _detectionRange: 20
+  _score: 300

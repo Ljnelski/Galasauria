@@ -8,24 +8,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlasmaCaster : MonoBehaviour, IEquipable
+public class PlasmaCaster : EquipableItem
 {
-    public bool InUse { get; private set; }
-
     private Transform barrel;
-
 
     private void Awake()
     {       
         barrel = transform.GetChild(0);
     }
 
-    public void BeginUse(GameEnums.EquipableInput attack)
+    public override void BeginUse(GameEnums.EquipableInput attack)
     {
         throw new System.NotImplementedException();
     }
 
-    public void EndUse()
+    public override void EndUse()
     {
         throw new System.NotImplementedException();
     

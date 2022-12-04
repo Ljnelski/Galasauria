@@ -1,8 +1,10 @@
 /*  Filename:           SoundManager.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        October 12, 2022
+ *  Last Update:        November 26, 2022
  *  Description:        Contains functions to mute and unmute sfx and music; stores audio clips for different screens and scenes to play sfx and music
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 8, 2022 (Yuk Yee Wong): Added score audio.
+ *                      November 26, 2022 (Yuk Yee Wong): Fixed a null reference when the game stops.
  */
 
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource changeSceneAudio;
     [SerializeField] private AudioSource toggleAudio;
     [SerializeField] private AudioSource checkboxAudio;
+    [SerializeField] private AudioSource scoreAudio;
 
     [Header("Music")]
     [SerializeField] private AudioSource musicAudio;
@@ -88,6 +91,9 @@ public class SoundManager : MonoBehaviour
             case GameEnums.GeneralAudio.CHECKBOX:
                 checkboxAudio.Play();
                 break;
+            case GameEnums.GeneralAudio.SCORE:
+                scoreAudio.Play();
+                break;
             default:
                 Debug.LogError("Please assign the general audio type before playing audio");
                 break;
@@ -115,38 +121,41 @@ public class SoundManager : MonoBehaviour
 
     private void UpdateMusic()
     {
-        switch (screens.Peek())
+        if (musicAudio != null)
         {
-            case GameEnums.Screen.GAMEEND:
-                musicAudio.clip = gameEndClip;
-                goto playMusic;
-            case GameEnums.Screen.GAMEPLAY:
-                musicAudio.clip = gameplayClip;
-                goto playMusic;
-            case GameEnums.Screen.INSTRUCTIONS:
-                musicAudio.clip = instructionsClip;
-                goto playMusic;
-            case GameEnums.Screen.INVENTORY:
-                musicAudio.clip = inventoryClip;
-                goto playMusic;
-            case GameEnums.Screen.OPTIONS:
-                musicAudio.clip = optionsClip;
-                goto playMusic;
-            case GameEnums.Screen.START:
-                musicAudio.clip = startClip;
-                goto playMusic;
-            case GameEnums.Screen.UPGRADE:
-                musicAudio.clip = upgradeClip;
-                goto playMusic;
-            playMusic:
-                if (musicAudio.clip != null)
-                {
-                    musicAudio.Play();
-                }
-                break;
-            default:
-                Debug.LogError("Please assign the screen before update music");
-                break;
+            switch (screens.Peek())
+            {
+                case GameEnums.Screen.GAMEEND:
+                    musicAudio.clip = gameEndClip;
+                    goto playMusic;
+                case GameEnums.Screen.GAMEPLAY:
+                    musicAudio.clip = gameplayClip;
+                    goto playMusic;
+                case GameEnums.Screen.INSTRUCTIONS:
+                    musicAudio.clip = instructionsClip;
+                    goto playMusic;
+                case GameEnums.Screen.INVENTORY:
+                    musicAudio.clip = inventoryClip;
+                    goto playMusic;
+                case GameEnums.Screen.OPTIONS:
+                    musicAudio.clip = optionsClip;
+                    goto playMusic;
+                case GameEnums.Screen.START:
+                    musicAudio.clip = startClip;
+                    goto playMusic;
+                case GameEnums.Screen.UPGRADE:
+                    musicAudio.clip = upgradeClip;
+                    goto playMusic;
+                playMusic:
+                    if (musicAudio.clip != null)
+                    {
+                        musicAudio.Play();
+                    }
+                    break;
+                default:
+                    Debug.LogError("Please assign the screen before update music");
+                    break;
+            }
         }
     }
 }

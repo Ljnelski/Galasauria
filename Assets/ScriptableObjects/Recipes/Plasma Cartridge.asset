@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbbcf9fecc0d21409944c9532606777, type: 3}
+  m_Name: Plasma Cartridge
+  m_EditorClassIdentifier: 
+  recipeName: Plasma Cartridge
+  inputItems:
+  - data: {fileID: 11400000, guid: fc2ceedb7f0940948a9f6089e10bd5b4, type: 2}
+    itemCount: 2
+  - data: {fileID: 11400000, guid: 63ac52ae79751f64f82fe79a6a9417bc, type: 2}
+    itemCount: 1
+  outputItems:
+  - data: {fileID: 11400000, guid: 30dfc2f2606a1ea4d90c6b7982c310b1, type: 2}
+    itemCount: 3

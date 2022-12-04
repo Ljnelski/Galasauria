@@ -1,8 +1,9 @@
 /*  Filename:           CyberBlade.cs
- *  Author:             Liam Nelski (301064116)
- *  Last Update:        October 16, 2022
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
+ *  Last Update:        November 25, 2022
  *  Description:        Controls CyberBlade
- *  Revision History:   October 16, 2022 (Liam Nelski): Initial script. *  =
+ *  Revision History:   October 16, 2022 (Liam Nelski): Initial script.
+ *                      November 25, 2022 (Yuk Yee Wong): Remove IDamagingObject which causes bug when attach to the blade. The blade will use Destroyer script instead.
  */
 using System;
 using System.Collections;
@@ -12,31 +13,27 @@ using UnityEngine;
 
 
 
-public class CyberBlade : MonoBehaviour, IEquipable
+public class CyberBlade :  EquipableItem
 {
-    public bool InUse { get; private set; }
-    
+    public float Damage { get; set; }
     private Transform blade;
     private Transform hilt;
     private Transform handle;
-    private CapsuleCollider hitBox;
-    private Animator animator;
+    [SerializeField] private CapsuleCollider hitBox;
+    [SerializeField] private Animator animator;
 
-    private void Awake()
+    private void Start()
     {
         handle = transform.GetChild(0).GetChild(0).GetChild(0);
         hilt = handle.GetChild(0);
         blade = hilt.GetChild(0);
 
-        animator = GetComponent<Animator>();
-        hitBox = blade.GetComponent<CapsuleCollider>();
-
         InUse = false;
-        Debug.Log(InUse);
     }
 
-    public void BeginUse(GameEnums.EquipableInput attack)
+    public override void BeginUse(GameEnums.EquipableInput attack)
     {
+        Debug.Log("Beginning Attack");
         switch(attack)
         {
             case GameEnums.EquipableInput.PRIMARY:
@@ -70,7 +67,7 @@ public class CyberBlade : MonoBehaviour, IEquipable
         throw new NotImplementedException();
     }
 
-    public void EndUse()
+    public override void EndUse()
     {
         throw new NotImplementedException();
     }

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Collectable
+  - Equipable
+  - Enemy
+  - Weapon
+  - LeftHandTarget
+  - RightHandTarget
   layers:
   - Default
   - TransparentFX

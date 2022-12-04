@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Pipe
   m_EditorClassIdentifier: 
   id: 1
-  name: pipe
-  description: 
-  type: 0
+  itemName: Pipe
+  description: Used for upgrades
+  type: 1
   maxStack: 0
-  itemWeight: 0
+  itemWeight: 4
   prefab: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: eea5c54e0e2abad48b0e12107e4b35ef, type: 3}
+  score: 10

@@ -1,51 +1,149 @@
 /*  Filename:           PlayerController.cs
- *  Author:             Liam Nelski (301064116)
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
  *  Last Update:        October 10th, 2022
  *  Description:        Controls the player
  *  Revision History:   October 10th (Liam Nelski): Inital Script.
  *                      October 16th (Liam Nelski): Added Use of Equipable Items
  *                      November 3th (Liam Nelski): Moved Equipable from interface to script
- *                      November 3th (Liam Nelski): Made Player Point to the mouse
+ *                      November 3th (Liam Nelski): Made Player Point to the mouse.
+ *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
+ *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
+ *                      November 14th (Liam Nelski): Added IK for arms to Weapon, and Serialized Script Properties to show in Editor
+ *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
+ *                      November 26th (Yuk Yee Wong): Added input actions for crate answer and interaction
  */
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseController<PlayerController>
 {
-    public PlayerInputActions Input { get; private set; }
-    public EquipedItem EquipedItem { get; private set; }
-    public Rigidbody Rb { get; private set; }
-        
-    private PlayerState activeState;
-    private int equipablesIndex = -1;
-    private Camera mainCamera;
+    // Scripts
+    [field:SerializeField] private Camera mainCamera;
+    [field:SerializeField] public  Animator Animator { get; private set; }
+    [field: SerializeField] public EquipSlot EquipedItem { get; private set; }
+    [field: SerializeField] public Rigidbody Rb { get; private set; }
+    [field: SerializeField] public HealthSystem Health { get; private set; }
+    [field: SerializeField] public Inventory Inventory { get; private set; }
+    [field: SerializeField] public ActionTimerPool Timers { get; private set; }
+
+    [Header("Animation Constraints")]
+    [field: SerializeField] private Transform LookLocation;
+    public Vector3 lastDirectionFaced;
+    [field: SerializeField] public Transform FacingLocation;
+
 
     // States
     public PlayerIdleState idleState;
+    public PlayerUseItemState useItemState;
+    public PlayerDashState dashState;
 
-
-    // TODO => Move to Scriptable Object to be able to move across levels
-    // Player Values
-    public Transform weaponSlot;
-    public GameEnums.EquipableInput attackInput;
-    public Vector3 lookAtPosition;
-    public Vector2 movementInput;
-    public float speed = 5f;
-    public float turnSpeed = 90f;
+    // Editor Accessable
+    public PlayerContext playerContext;
     public List<GameObject> equipables;
+
+    // Player Input
+    public PlayerInputActions Input { get; private set; }
+    public GameEnums.EquipableInput AttackInput { get; private set; }
+    public Vector2 MovementInput { get; private set; }
+    public bool DashInput { get; private set; }
+
+    // Values that control player behviour
+    // ReadOnly
+    public float MaxHealth { get => playerContext._maxHealth; }
+    public float BaseSpeed { get => playerContext._baseSpeed; }
+    public float TurnSpeed { get => playerContext._turnSpeed; }
+    public float Acceleration { get => playerContext._acceleration; }
+    public float DashSpeed { get => playerContext._dashSpeed; }
+    public float DashDurationMiliseconds { get => playerContext._dashDurationMiliseconds; }
+    public float DashCoolDownMiliseconds { get => playerContext._dashCoolDownMiliseconds; }
+
+    // Writable
+    public float CurrentHealth
+    {
+        get => playerContext._currentHealth;
+        set
+        {
+            playerContext._currentHealth = value;
+            OnHealthUpdated?.Invoke();
+        }
+    }
+    public float CurrentDashCoolDown
+    {
+        get => playerContext._currentDashCoolDown;
+        set
+        {
+            playerContext._currentDashCoolDown = Mathf.Max(value, 0f);
+            OnDashCoolDownUpdated?.Invoke();
+        }
+    }
+    public int CurrentScore
+    {
+        get => playerContext._score;
+        set
+        {
+            playerContext._score = value;
+            OnScoreIncremented?.Invoke(value);
+        }
+    }
+    public float CurrentSpeed { get => playerContext._currentSpeed; set => playerContext._currentSpeed = value; }
+    public bool CanDash { get => playerContext._canDash; set => playerContext._canDash = value; }
+
+    // Events
+    public Action OnHealthUpdated;
+    public Action OnDashCoolDownUpdated;
+    public Action<int> OnScoreIncremented;
+
+    public Action<Inventory> OnCrateInteracted;
+    public Action<Inventory, int> OnCrateQuestAnswered;
+
+    // private varibles
+    private int equipablesIndex = -1;
 
     private void Awake()
     {
         Input = new PlayerInputActions();
         Input.Player.Enable();
 
-        idleState = new PlayerIdleState(this);       
+        idleState = new PlayerIdleState(this);
+        useItemState = new PlayerUseItemState(this);
+        dashState = new PlayerDashState(this);
 
-        Rb = GetComponent<Rigidbody>();
+        //Rb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        EquipedItem = weaponSlot.GetComponentInChildren<EquipedItem>();
+        //EquipedItem = GetComponentInChildren<EquipSlot>();
+        //Timers = GetComponent<ActionTimerPool>();
+        //Inventory = GetComponent<Inventory>();
 
+        AddInputActions();
+
+        // Hopefully temporary
+        Inventory.OnAddItem += (ItemData data) => { CurrentScore += data.score; };
+
+        // SetUp Health
+        Health = GetComponent<HealthSystem>();
+        Health.ReceiveDamage += ReceiveDamage;
+
+        // Reset current health
+        CurrentHealth = MaxHealth;
+
+        // Reset score
+        CurrentScore = 0;
+
+        activeState = idleState;
+        activeState.OnStateEnter();
+    }
+
+    private void OnDestroy()
+    {
+        // avoid null reference upon stopping the game or return to the start scene which results from OnAimInput
+        RemoveInputActions();
+    }
+
+    private void AddInputActions()
+    {
         Input.Player.Movement.started += OnMovementInput;
         Input.Player.Movement.performed += OnMovementInput;
         Input.Player.Movement.canceled += OnMovementInput;
@@ -53,35 +151,81 @@ public class PlayerController : MonoBehaviour
         Input.Player.Attack.started += OnAttackInput;
         Input.Player.Attack.canceled += OnAttackInput;
 
-        Input.Player.SwapWeapon.performed += OnSwapWeapon;
+        Input.Player.SwapWeapon.performed += OnSwapWeaponInput;
 
-        Input.Player.Aim.started += OnAim;
-        Input.Player.Aim.performed += OnAim;
-        Input.Player.Aim.canceled += OnAim;
+        Input.Player.Aim.started += OnAimInput;
+        Input.Player.Aim.performed += OnAimInput;
+        Input.Player.Aim.canceled += OnAimInput;
 
-        activeState = idleState;
-        activeState.OnStateEnter();
+        Input.Player.Dash.started += OnDashInput;
+        Input.Player.Dash.canceled += OnDashInput;
+
+        Input.Player.Interact.started += OnInteractInput;
+
+        Input.Player.One.started += OnInputOne;
+        Input.Player.Two.started += OnInputTwo;
+        Input.Player.Three.started += OnInputThree;
+        Input.Player.Four.started += OnInputFour;
     }
 
-    private void FixedUpdate()
+    private void RemoveInputActions()
     {
-        activeState.OnStateRun();
+        Input.Player.Movement.started -= OnMovementInput;
+        Input.Player.Movement.performed -= OnMovementInput;
+        Input.Player.Movement.canceled -= OnMovementInput;
+
+        Input.Player.Attack.started -= OnAttackInput;
+        Input.Player.Attack.canceled -= OnAttackInput;
+
+        Input.Player.SwapWeapon.performed -= OnSwapWeaponInput;
+
+        Input.Player.Aim.started -= OnAimInput;
+        Input.Player.Aim.performed -= OnAimInput;
+        Input.Player.Aim.canceled -= OnAimInput;
+
+        Input.Player.Dash.started -= OnDashInput;
+        Input.Player.Dash.canceled -= OnDashInput;
+
+        Input.Player.Interact.started -= OnInteractInput;
+    }
+
+    private void ReceiveDamage(float damage)
+    {
+        // Debug.Log($"{CurrentHealth} - {damage}");
+        if (CurrentHealth > 0)
+        {
+            if (CurrentHealth - damage > 0)
+            {
+                CurrentHealth -= damage;
+            }
+            else
+            {
+                Health.ReceiveDamage -= ReceiveDamage;
+                CurrentHealth = 0;
+                FindObjectOfType<GameEndScreen>(true).Open(false);
+            }
+        }
     }
 
     public void OnMovementInput(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
-    }    
+        MovementInput = context.ReadValue<Vector2>();
+        if(MovementInput.magnitude < 0.01f)
+        {
+            return;
+        }
+
+        
+    }
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         GameEnums.EquipableInput attackValue = (GameEnums.EquipableInput)(int)context.ReadValue<float>();
-        attackInput = attackValue;
+        AttackInput = attackValue;
     }
 
-    public void OnSwapWeapon(InputAction.CallbackContext context)
+    public void OnSwapWeaponInput(InputAction.CallbackContext context)
     {
-        Debug.Log("equipable.Count: " + equipables.Count);
         if (equipables.Count == 0)
         {
             equipablesIndex = -1;
@@ -96,21 +240,27 @@ public class PlayerController : MonoBehaviour
         }
 
         // No weapon avalible, Clear Weapon (Should Not Happen In Gameplay)
-        if(equipablesIndex == -1)
+        if (equipablesIndex == -1)
         {
-            EquipedItem.LoadWeapon(null);
+            EquipedItem.LoadWeapon(null, null);
         }
         else
         {
-            EquipedItem.LoadWeapon(equipables[equipablesIndex]);
+            EquipedItem.LoadWeapon(equipables[equipablesIndex], OnEnemyDestroyed);
         }
     }
 
-    public void OnAim(InputAction.CallbackContext context) 
+    private void OnEnemyDestroyed(int scoreIncrement)
+    {
+        CurrentScore += scoreIncrement;
+    }
+
+    public void OnAimInput(InputAction.CallbackContext context)
     {
         Vector3 mousePos = Input.Player.Aim.ReadValue<Vector2>();
 
-        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+
 
         Vector3 cameraAtPlayerheight = mainCamera.transform.position;
         cameraAtPlayerheight.y = transform.position.y;
@@ -130,62 +280,44 @@ public class PlayerController : MonoBehaviour
         float zPos = mainCamera.transform.position.z + (Mathf.Tan(zAngle) * yheight);
         float xPos = mainCamera.transform.position.x + (Mathf.Tan(xAngle) * yheight);
 
-        // Set Y pos
-        lookAtPosition = Vector3.ClampMagnitude(new Vector3(xPos, transform.position.y, zPos) - transform.position, 5f);
-
+        // Set the Target for the AimConstrant
+        LookLocation.position = transform.position + Vector3.Normalize(new Vector3(xPos, transform.position.y, zPos) - transform.position);
     }
 
-    public void ChangeState(PlayerState newState)
-    { 
-        activeState.OnStateExit();
+    public void OnDashInput(InputAction.CallbackContext context)
+    {
+        DashInput = context.ReadValue<float>() > 0.5f;
+    }
 
-        activeState = newState;
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        OnCrateInteracted?.Invoke(Inventory);
+    }
 
-        activeState.OnStateEnter();
+    public void OnInputOne(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 1);
+    }
+
+    public void OnInputTwo(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 2);
+    }
+
+    public void OnInputThree(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 3);
+    }
+
+    public void OnInputFour(InputAction.CallbackContext context)
+    {
+        OnCrateQuestAnswered?.Invoke(Inventory, 4);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(FacingLocation.localPosition, 1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Rb.velocity.normalized, 1f);
+        Gizmos.color = Color.blue;    
     }
 }
-
-/*  Author:             Liam Nelski (301064116)
- *  Last Update:        October 10th, 2022
- *  Description:        Basic playerState that all other can inherit from to reducee duplicate code
- */
-public abstract class PlayerState : BaseState<PlayerController>
-{
-    public PlayerState(PlayerController playerController) : base(playerController)
-    {
-        ;
-    }
-}
-
-
-public class PlayerIdleState : PlayerState
-{
-    public PlayerIdleState(PlayerController playerController) : base(playerController)
-    {
-
-    }
-    public override void OnStateEnter()
-    {
-
-    }
-
-    public override void OnStateExit()
-    {
-        ;
-    }
-
-    public override void OnStateRun()
-    {
-        controller.Rb.AddForce(new Vector3(controller.movementInput.x, 0, controller.movementInput.y) * controller.speed, ForceMode.Force);
-  
-        if(controller.EquipedItem != null && controller.attackInput != GameEnums.EquipableInput.NONE && !controller.EquipedItem.InUse)
-        {
-            controller.EquipedItem.UseItem(controller.attackInput);
-        }
-
-        // Look At Mouse Position
-        Quaternion rotation = Quaternion.LookRotation(controller.lookAtPosition);
-        controller.Rb.MoveRotation(Quaternion.RotateTowards(controller.transform.rotation, rotation, controller.turnSpeed));
-    }
-}
-

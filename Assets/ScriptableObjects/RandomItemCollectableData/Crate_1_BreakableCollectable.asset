@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419237336f4feba4d87f0a91ca51ad40, type: 3}
+  m_Name: Crate_1_BreakableCollectable
+  m_EditorClassIdentifier: 
+  randomItemCountData:
+  - chance: 0.8
+    itemAmount:
+      itemData: {fileID: 11400000, guid: a53f44f24381a704b8add3bb08b612c0, type: 2}
+      amount: 1
+  - chance: 0.5
+    itemAmount:
+      itemData: {fileID: 11400000, guid: d46e82979fe8db2438c5bf65db218902, type: 2}
+      amount: 1

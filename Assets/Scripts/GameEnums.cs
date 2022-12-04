@@ -1,8 +1,9 @@
 /*  Filename:           GameEnums.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        October 12, 2022
+ *  Last Update:        November 8, 2022
  *  Description:        A collection of enums used in the game, data, and scriptable objects
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
+ *                      November 8, 2022 (Yuk Yee Wong): Add score audio enum.
  */
 
 using System.Collections;
@@ -25,6 +26,12 @@ public class GameEnums
         CYBERBLADE = 1001,
         PLASMACASTER = 1002,
         POWERSUIT = 1003,
+
+        // health recovery items
+        HEALTHPOWERUP = 2001,
+
+        // speed increment items
+        SPEEDPOWERUP = 3001,
     }
 
     public enum Screen
@@ -62,6 +69,7 @@ public class GameEnums
         CHANGESCENE = 2,
         TOGGLE = 3,
         CHECKBOX = 4,
+        SCORE = 5,
     }
 
     public enum EquipableInput
