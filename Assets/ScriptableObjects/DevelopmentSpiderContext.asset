@@ -19,6 +19,8 @@ MonoBehaviour:
   _acceleration: 20
   _playerOffsetDistance: 1.5
   _attackCoolDownMiliseconds: 5000
-  _baseDamage: 5
+  _attackDuration: 200
+  _baseDamage: 3
   _detectionRange: 8
   _score: 100
+  _randomCollectable: {fileID: 11400000, guid: b85dbb64b39678c40bc10fa164ba1d8e, type: 2}

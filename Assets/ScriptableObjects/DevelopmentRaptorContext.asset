@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 200
   _currentHealth: 200
-  _baseSpeed: 6
+  _baseSpeed: 8
   _turnSpeed: 180
-  _acceleration: 20
+  _acceleration: 30
   _destinationOffsetDistance: 1
   _playerOffsetDistance: 2
-  _attackCoolDownMiliseconds: 5000
+  _attackCoolDownMiliseconds: 4000
+  _attackDuration: 200
   _dieMiliseconds: 3000
-  _baseDamage: 10
+  _baseDamage: 5
   _detectionRange: 15
   _score: 200
+  _randomCollectable: {fileID: 11400000, guid: a2012c0677f3ea84abb5fad4394c3166, type: 2}

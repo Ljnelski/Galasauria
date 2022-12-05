@@ -1,14 +1,16 @@
 /*  Filename:           TyrannosaurusAttackState.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 26, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        State for attacking player.
  *  Revision History:   November 26, 2022 (Yuk Yee Wong): Initial script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added enable/disable destroyer and used attack duration
  */
 
 public class TyrannosaurusAttackState : TyrannosaurusState
 {
     private bool _attackCoolDown; 
     private bool _attacking;
+    private bool _exited;
 
     public TyrannosaurusAttackState(TyrannosaurusController context) : base(context)
     {
@@ -21,7 +23,7 @@ public class TyrannosaurusAttackState : TyrannosaurusState
 
         // Stop walking animation
         context.Idle();
-
+        context.EnableDestroyer(true);
         Attack();
     }
 
@@ -33,14 +35,21 @@ public class TyrannosaurusAttackState : TyrannosaurusState
 
         if (context.Timers)
         {
-            context.Timers.CreateTimer(context.AttackInterval * 0.5f / 1000f, () => { _attacking = false; });
+            context.Timers.CreateTimer(context.AttackDuration / 1000f, () => { 
+                _attacking = false; 
+                if (!_exited)
+                {
+                    context.EnableDestroyer(false);
+                }
+            });
             context.Timers.CreateTimer(context.AttackInterval / 1000f, () => { _attackCoolDown = false; });
         }
     }
 
     public override void OnStateExit()
     {
-        ;
+        _exited = true;
+        context.EnableDestroyer(false);
     }
 
     public override void OnStateRun()

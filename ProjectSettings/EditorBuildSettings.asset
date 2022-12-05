@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 47cd513b8c4397e4ca272a1ff269d933
   - enabled: 1
-    path: Assets/Scenes/YukiLevel1.unity
+    path: Assets/Scenes/Level1.unity
     guid: 295f70bca907c4849b979cf2bc025b62
   - enabled: 1
-    path: Assets/Scenes/AttaLevel2.unity
+    path: Assets/Scenes/Level2.unity
     guid: 8a75e5034ca3bf247b83aee65703c3cd
   - enabled: 1
-    path: Assets/Scenes/JinkyuLevel3.unity
+    path: Assets/Scenes/Level3.unity
     guid: 8586099a57cca1743802aa49087bdc20
   m_configObjects: {}
