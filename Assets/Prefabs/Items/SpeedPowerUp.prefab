@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 3
-  boostTime: 5
+  boostTime: 5000
 --- !u!1001 &17720014997887658
 PrefabInstance:
   m_ObjectHideFlags: 0
