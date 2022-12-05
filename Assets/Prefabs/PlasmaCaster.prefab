@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LeftHandIKTransform>k__BackingField: {fileID: 2350936831777350174}
   <RightHandIKTransform>k__BackingField: {fileID: 6055564821873524946}
+  plasmaCasterContext: {fileID: 11400000, guid: afdd2115cbf18974baee9b94efd79104, type: 2}
   _plasmaCartridgeitemData: {fileID: 11400000, guid: 30dfc2f2606a1ea4d90c6b7982c310b1, type: 2}
   _plasmaboltSpeed: 10
   _plasmaboltLifetime: 10

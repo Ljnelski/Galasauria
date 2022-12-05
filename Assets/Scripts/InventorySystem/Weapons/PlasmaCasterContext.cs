@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
+[CreateAssetMenu(menuName = "ScriptableObjects/Items/PlasmaCasterContext", fileName = "PlasmaCasterContext")]
 public class PlasmaCasterContext : ScriptableObject
 {
     [SerializeField] public float _baseDamage;

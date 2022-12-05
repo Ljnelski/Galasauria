@@ -196,7 +196,7 @@ public class PlayerController : BaseController<PlayerController>
         }
     }
 
-    public void Upgrade<T>(Upgrade<T> upgrade) where T : Upgrade<ScriptableObject>
+    public void Upgrade<TUpgradeData>(Upgrade<TUpgradeData> upgrade) where TUpgradeData : ScriptableObject
     {
         upgrade.DoUpgrade(this);
     }

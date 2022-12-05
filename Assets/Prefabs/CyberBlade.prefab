@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LeftHandIKTransform>k__BackingField: {fileID: 3763593391389621638}
   <RightHandIKTransform>k__BackingField: {fileID: 600166044719632099}
-  CyberBladeData: {fileID: 0}
+  cyberBladeContext: {fileID: 11400000, guid: 4972cf8480896f146ba4800319a14779, type: 2}
   blade: {fileID: 3282316563324606784}
   hilt: {fileID: 7589509350572580515}
   handle: {fileID: 3148435976093602575}
