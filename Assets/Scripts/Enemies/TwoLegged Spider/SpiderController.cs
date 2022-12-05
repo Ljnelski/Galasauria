@@ -51,6 +51,8 @@ public class SpiderController : BaseController<SpiderController>
     public float BaseDamage { get => spiderContext._baseDamage; }  
     public float DetectionRange { get => spiderContext._detectionRange; }
 
+    public RandomListItemCollectableData RandomRewards { get => spiderContext._randomCollectable; }
+
     private Animator animator;
     private Destroyer destroyer;
     private AudioSource gruntAudio;
@@ -179,8 +181,17 @@ public class SpiderController : BaseController<SpiderController>
                 SpiderHealth.ReceiveDamage -= ReceiveDamage;
                 CurrentHealth = 0;
                 SpiderHealth.Die?.Invoke(spiderContext._score);
+                SpawnRandomRewards();
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void SpawnRandomRewards()
+    {
+        if (RandomRewards != null)
+        {
+            RandomRewards.SpawnRandomItem(transform.position);
         }
     }
 

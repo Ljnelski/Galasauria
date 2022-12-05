@@ -25,3 +25,4 @@ MonoBehaviour:
   _baseDamage: 10
   _detectionRange: 20
   _score: 300
+  _randomCollectable: {fileID: 11400000, guid: 61dd0efe48857374993f6f2567ceada0, type: 2}

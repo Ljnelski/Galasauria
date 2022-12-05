@@ -37,4 +37,7 @@ public class TyrannosaurusContext : ScriptableObject
 
     [Header("Score")]
     public int _score;
+
+    [Header("Random Rewards")]
+    public RandomListItemCollectableData _randomCollectable;
 }

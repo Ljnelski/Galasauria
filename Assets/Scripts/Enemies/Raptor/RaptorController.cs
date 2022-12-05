@@ -53,6 +53,7 @@ public class RaptorController : BaseController<RaptorController>
     public float DieInterval { get => raptorContext._dieMiliseconds; }
     public float BaseDamage { get => raptorContext._baseDamage; }
     public float DetectionRange { get => raptorContext._detectionRange; }
+    public RandomListItemCollectableData RandomRewards { get => raptorContext._randomCollectable; }
 
     public Vector3 Destination { get; private set; }
     private Vector3 destinationBehind;
@@ -199,7 +200,16 @@ public class RaptorController : BaseController<RaptorController>
                 RaptorHealth.ReceiveDamage -= ReceiveDamage;
                 CurrentHealth = 0;
                 RaptorHealth.Die?.Invoke(raptorContext._score);
+                SpawnRandomRewards();
             }
+        }
+    }
+
+    private void SpawnRandomRewards()
+    {
+        if (RandomRewards != null)
+        {
+            RandomRewards.SpawnRandomItem(transform.position);
         }
     }
 

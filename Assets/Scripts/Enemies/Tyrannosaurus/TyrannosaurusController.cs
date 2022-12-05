@@ -55,6 +55,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
     public float DieInterval { get => tyrannosaurusContext._dieMiliseconds; }
     public float BaseDamage { get => tyrannosaurusContext._baseDamage; }
     public float DetectionRange { get => tyrannosaurusContext._detectionRange; }
+    public RandomListItemCollectableData RandomRewards { get => tyrannosaurusContext._randomCollectable; }
 
     private Animator animator;
     private AudioSource growlAudio;
@@ -209,12 +210,21 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
                 }
 
                 CurrentHealth = 0;
+                SpawnRandomRewards();
 
                 foreach (HealthSystem health in tyrannosaurusHealthSystems)
                 {
                     health.Die?.Invoke(tyrannosaurusContext._score);
                 }
             }
+        }
+    }
+
+    private void SpawnRandomRewards()
+    {
+        if (RandomRewards != null)
+        {
+            RandomRewards.SpawnRandomItem(transform.position);
         }
     }
 
