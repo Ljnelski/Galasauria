@@ -1,8 +1,9 @@
 /*  Filename:           SpiderAttackState.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 25, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        State for attacking player.
  *  Revision History:   November 25, 2022 (Yuk Yee Wong): Initial script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added enable/disable destroyer function and added attack duration
  */
 
 using System.Collections;
@@ -12,6 +13,7 @@ using UnityEngine;
 public class SpiderAttackState : SpiderState
 {
     private bool _attackCoolDown;
+    private bool _exited;
 
     public SpiderAttackState(SpiderController context) : base(context)
     {
@@ -32,6 +34,14 @@ public class SpiderAttackState : SpiderState
         {
             _attackCoolDown = true;
             context.Attack();
+            context.EnableDestroyer(true);
+
+            context.Timers.CreateTimer(context.AttackDuration / 1000f, () => {
+                if (!_exited)
+                {
+                    context.EnableDestroyer(false);
+                }
+            });
 
             if (context.Timers)
             {
@@ -42,7 +52,8 @@ public class SpiderAttackState : SpiderState
 
     public override void OnStateExit()
     {
-        ;
+        _exited = true;
+        context.EnableDestroyer(false);
     }
 
     public override void OnStateRun()

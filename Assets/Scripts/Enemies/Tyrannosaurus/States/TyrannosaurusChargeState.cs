@@ -1,8 +1,9 @@
 /*  Filename:           TyrannosaurusChargeState.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 26, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        State for charing player.
  *  Revision History:   November 26, 2022 (Yuk Yee Wong): Initial script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added enable/disable destroyer
  */
 
 using UnityEngine;
@@ -10,6 +11,7 @@ using UnityEngine;
 public class TyrannosaurusChargeState : TyrannosaurusState
 {
     private bool _charging;
+    private bool _exited;
 
     public TyrannosaurusChargeState(TyrannosaurusController context) : base(context)
     {
@@ -20,21 +22,26 @@ public class TyrannosaurusChargeState : TyrannosaurusState
     {
         context.Agent.destination = context.ChargeTarget.position;
         context.Charge();
-
+        context.EnableDestroyer(true);
         _charging = true;
 
         if (context.Timers)
         {
             context.Timers.CreateTimer(context.ChargeInterval / 1000f, () => { 
                 _charging = false;
-                Debug.Log($"{context.ChargeInterval} reached");
+                if (!_exited)
+                {
+                    context.EnableDestroyer(false);
+                }
+                // Debug.Log($"{context.ChargeInterval} reached");
             });
         }
     }
 
     public override void OnStateExit()
     {
-        ;
+        _exited = true;
+        context.EnableDestroyer(false);
     }
 
     public override void OnStateRun()

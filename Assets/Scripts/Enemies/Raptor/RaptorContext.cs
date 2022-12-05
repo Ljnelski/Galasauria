@@ -1,8 +1,9 @@
 /*  Filename:           RaptorContext.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 27, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        Scriptable Object to hold Raptor Data
  *  Revision History:   November 27, 2022 (Yuk Yee Wong): Inital Script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added attack duration
  */
 
 using UnityEngine;
@@ -22,7 +23,8 @@ public class RaptorContext : ScriptableObject
     public float _playerOffsetDistance;
 
     [Header("Attack")]
-    public float _attackCoolDownMiliseconds;
+    public float _attackCoolDownMiliseconds; 
+    public float _attackDuration;
 
     [Header("Die")]
     public float _dieMiliseconds;

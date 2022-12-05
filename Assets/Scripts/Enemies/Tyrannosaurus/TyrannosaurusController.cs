@@ -1,8 +1,9 @@
 /*  Filename:           TyrannosaurusController.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 26, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        Tyrannosaurus Controller
  *  Revision History:   November 26, 2022 (Yuk Yee Wong): Initial script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added enable/disable destroyer function and added attack duration
  */
 
 using System;
@@ -50,6 +51,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
 
     public float ChargeInterval { get => tyrannosaurusContext._chargeMiliseconds; }
     public float AttackInterval { get => tyrannosaurusContext._attackCoolDownMiliseconds; }
+    public float AttackDuration { get => tyrannosaurusContext._attackDuration; }
     public float DieInterval { get => tyrannosaurusContext._dieMiliseconds; }
     public float BaseDamage { get => tyrannosaurusContext._baseDamage; }
     public float DetectionRange { get => tyrannosaurusContext._detectionRange; }
@@ -108,7 +110,15 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
     {
         Vector3 direction = (ChargeTarget.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * TurnSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * TurnSpeed * 0.2f);
+    }
+
+    public void EnableDestroyer(bool enable)
+    {
+        foreach (Destroyer destroyer in destroyers)
+        {
+            destroyer.gameObject.SetActive(enable);
+        }
     }
 
     public void Attack()

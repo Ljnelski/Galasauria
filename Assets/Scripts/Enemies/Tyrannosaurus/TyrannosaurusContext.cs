@@ -1,8 +1,9 @@
 /*  Filename:           TyrannosaurusContext.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 26, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        Scriptable Object to hold Tyrannosaurus Data
  *  Revision History:   November 26, 2022 (Yuk Yee Wong): Inital Script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added attack duration
  */
 
 using UnityEngine;
@@ -23,6 +24,7 @@ public class TyrannosaurusContext : ScriptableObject
     [Header("Attack")]
     public float _chargeMiliseconds;
     public float _attackCoolDownMiliseconds;
+    public float _attackDuration;
 
     [Header("Die")]
     public float _dieMiliseconds;

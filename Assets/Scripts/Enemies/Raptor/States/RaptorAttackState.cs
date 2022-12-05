@@ -1,8 +1,9 @@
 /*  Filename:           RaptorChaseState.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 27, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        State for attacking player.
  *  Revision History:   November 27 (Yuk Yee Wong): Initial script.
+ *                      December 5, 2022 (Yuk Yee Wong): Used attack duration to disable destroyer
  */
 
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine;
 public class RaptorAttackState : RaptorState
 {
     private bool _attackCoolDown;
-    private bool _attacking;
+    private bool _exited;
 
     public RaptorAttackState(RaptorController context) : base(context)
     {
@@ -36,8 +37,11 @@ public class RaptorAttackState : RaptorState
 
         if (context.Timers)
         {
-            context.Timers.CreateTimer(context.AttackInterval * 0.5f / 1000f, () => {
-                context.EnableDestroyer(false); 
+            context.Timers.CreateTimer(context.AttackDuration / 1000f, () => {
+                if (!_exited)
+                {
+                    context.EnableDestroyer(false);
+                }
             });
             context.Timers.CreateTimer(context.AttackInterval / 1000f, () => { _attackCoolDown = false; });
         }
@@ -45,6 +49,7 @@ public class RaptorAttackState : RaptorState
 
     public override void OnStateExit()
     {
+        _exited = true;
         context.EnableDestroyer(false);
     }
 
