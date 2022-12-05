@@ -4,6 +4,7 @@
  *  Description:        A collection of enums used in the game, data, and scriptable objects
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
  *                      November 8, 2022 (Yuk Yee Wong): Add score audio enum.
+ *                      December 4th, 2022 (Liam Nelski): Added Upgrade Enums
  */
 
 using System.Collections;
@@ -77,5 +78,21 @@ public class GameEnums
         PRIMARY = -1,
         NONE = 0,
         SECONDARY = 1,
+    }
+
+    public enum CyberbladeUpgrade
+    {
+        POWER = 0,
+        HANDLE = 1,
+        BLADE = 2,
+        SWING = 3
+    }
+
+    public enum PlasmacasterUpgrade
+    {
+        DAMAGE = 0,
+        FIRE_RATE = 1,
+        RANGE = 2,
+        SHOT_COUNT = 3
     }
 }

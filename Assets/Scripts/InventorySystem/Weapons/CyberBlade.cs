@@ -18,6 +18,7 @@ public class CyberBlade :  EquipableItem
 
     private void Start()
     {
+        Debug.Log("StartCalled");
         handle = transform.GetChild(2).GetChild(0).GetChild(0);
         hilt = handle.GetChild(0);
         blade = hilt.GetChild(0);
