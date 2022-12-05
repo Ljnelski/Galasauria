@@ -64,19 +64,13 @@ public class Inventory : MonoBehaviour
 
     public void CraftItem(RecipeData recipe)
     {
-        // Check if the inventory has the required number of item for the recipe
-        foreach (Recipe recipeItem in recipe.inputItems)
+        if (!HasItems(recipe.inputItems))
         {
-            itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);
-            if (inventoryItem == null || inventoryItem.stackSize < recipeItem.itemCount)
-            {
-                Debug.Log("Does not have the required number of " + recipeItem.data.itemName);
-                return;
-            }
+            return;
         }
 
         // Create the outputItems
-        foreach (Recipe recipeItem in recipe.outputItems)
+        foreach (RecipeIngredient recipeItem in recipe.outputItems)
         {
             for (int i = 0; i < recipeItem.itemCount; i++)
             {
@@ -85,12 +79,27 @@ public class Inventory : MonoBehaviour
         }
 
         // Remove the items the the recipe intakes
-        foreach (Recipe recipeItem in recipe.inputItems)
+        foreach (RecipeIngredient recipeItem in recipe.inputItems)
         {
             for (int i = 0; i < recipeItem.itemCount; i++)
             {
                 RemoveItem(recipeItem.data);
             }
         }
+    }
+    public bool HasItems(List<RecipeIngredient> items)
+    {
+        // Check if the inventory has the required number of item for the recipe
+        foreach (RecipeIngredient recipeItem in items)
+        {
+            itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);
+            if (inventoryItem == null || inventoryItem.stackSize < recipeItem.itemCount)
+            {
+                Debug.Log("Does not have the required number of " + recipeItem.data.itemName);
+                return false;
+            }
+        }
+
+        return true;
     }
 }

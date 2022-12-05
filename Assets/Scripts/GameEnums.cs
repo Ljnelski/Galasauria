@@ -4,6 +4,7 @@
  *  Description:        A collection of enums used in the game, data, and scriptable objects
  *  Revision History:   October 12, 2022 (Yuk Yee Wong): Initial script.
  *                      November 8, 2022 (Yuk Yee Wong): Add score audio enum.
+ *                      December 4th, 2022 (Liam Nelski): Added Upgrade Enums
  */
 
 using System.Collections;

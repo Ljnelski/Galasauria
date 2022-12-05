@@ -14,12 +14,12 @@ using System;
 public class RecipeData : ScriptableObject
 {
     public string recipeName;
-    public List<Recipe> inputItems;
-    public List<Recipe> outputItems;
+    public List<RecipeIngredient> inputItems;
+    public List<RecipeIngredient> outputItems;
 }
 
 [Serializable]
-public struct Recipe
+public struct RecipeIngredient
 {
     [SerializeField]
     public ItemData data;

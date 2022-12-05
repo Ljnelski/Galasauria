@@ -9,22 +9,23 @@ using System;
 using UnityEngine;
 public class CyberBlade :  EquipableItem
 {
-    public float Damage { get; set; }
-    private Transform blade;
-    private Transform hilt;
-    private Transform handle;
+    [Header("CyberBladeContext")]
+    [SerializeField] private CyberBladeContext cyberBladeContext;
+
+    [Header("Transforms")]
+    [SerializeField]private Transform blade;
+    [SerializeField] private Transform hilt;
+    [SerializeField] private Transform handle;
+
+    [Header("Scripts")]
     [SerializeField] private CapsuleCollider hitBox;
     [SerializeField] private Animator animator;
 
     private void Start()
     {
-        handle = transform.GetChild(2).GetChild(0).GetChild(0);
-        hilt = handle.GetChild(0);
-        blade = hilt.GetChild(0);
-
-        InUse = false;
+        ScaleHandle();
+        ScaleBlade();
     }
-
     public override void BeginUse(GameEnums.EquipableInput attack)
     {
         switch(attack)
@@ -50,26 +51,31 @@ public class CyberBlade :  EquipableItem
         hitBox.enabled = false;
     }
 
-    public void Upgrade()
+    public void Upgrade(CyberBladeUpgrade upgrade)
     {
-        throw new NotImplementedException();
+        cyberBladeContext._power += upgrade.PowerChange;
+        cyberBladeContext._handelLength += upgrade.HandelLengthChange;
+        cyberBladeContext._bladeLength += upgrade.BladeLengthChange;
+        cyberBladeContext._swingSpeed += upgrade.SwingSpeedChange;
+
+        ScaleHandle();
+        ScaleBlade();
     }
 
     public override void EndUse()
     {
         InUse = false;
+    }     
+    private void ScaleHandle()
+    {
+        handle.localScale = new Vector3(1, 1 * cyberBladeContext._handelLength, 1);
+        hilt.localScale = new Vector3(1, 1 / cyberBladeContext._handelLength, 1);
+        blade.localScale = new Vector3(1, 1 / cyberBladeContext._handelLength, 1);
     }
 
-    private void ScaleHandle(float factor)
+    private void ScaleBlade()
     {
-        handle.localScale = new Vector3(handle.localScale.x, handle.localScale.y * factor, handle.localScale.z);
-        hilt.localScale = new Vector3(handle.localScale.x, handle.localScale.y / factor, handle.localScale.z);
-        blade.localScale = new Vector3(blade.localScale.x, blade.localScale.y / factor, blade.localScale.z);
-    }
-
-    private void ScaleBlade(float factor)
-    {
-        blade.localScale = new Vector3(blade.localScale.x, blade.localScale.y * factor, blade.localScale.z);
+        blade.localScale = new Vector3(1, 1 * cyberBladeContext._bladeLength, 1);
     }
 
     

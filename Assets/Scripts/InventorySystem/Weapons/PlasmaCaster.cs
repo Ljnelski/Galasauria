@@ -2,7 +2,7 @@
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        October 16, 2022
  *  Description:        Controls Plasma Caster
- *  Revision History:   October 16, 2022 (Liam Nelski): Initial script. *    
+ *  Revision History:   October 16, 2022 (Liam Nelski): Initial script.  
  *                      December 3rd, 2022 (Liam Nelsik): Implemented
  */
 using Assets.Scripts.InventorySystem.Weapons;
@@ -12,6 +12,9 @@ using UnityEngine;
 
 public class PlasmaCaster : EquipableItem
 {
+    [Header("PlasmaCasterContext")]
+    [SerializeField] private PlasmaCasterContext plasmaCasterContext;
+
     [Header("Ammo Itemdata")]
     [SerializeField] private ItemData _plasmaCartridgeitemData;
 
@@ -30,7 +33,6 @@ public class PlasmaCaster : EquipableItem
 
     public override void BeginUse(GameEnums.EquipableInput attack) 
     {
-        Debug.Log("Begin Use");
         ItemOwnerInventory.itemDictionary.TryGetValue(_plasmaCartridgeitemData, out Item plasmaCartridge);
         // Check if there is ammo
         if (plasmaCartridge == null) 
@@ -62,9 +64,11 @@ public class PlasmaCaster : EquipableItem
         Debug.Log("End use");
          InUse = false;
     }
-
-    private void ExtendBarrel(float Distance)
+    public void Upgrade(PlasmaCasterUpgrade upgrade)
     {
-        _barrel.position = new Vector3(_barrel.position.x, _barrel.position.y, Distance);
+        plasmaCasterContext._damage += upgrade.DamageChange;
+        plasmaCasterContext._fireRate+= upgrade.FireRateChange;
+        plasmaCasterContext._range += upgrade.RangeChange;
+        plasmaCasterContext._shotCount += upgrade.ShotCountChange;
     }    
 }

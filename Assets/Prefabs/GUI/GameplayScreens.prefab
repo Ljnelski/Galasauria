@@ -6476,6 +6476,7 @@ GameObject:
   - component: {fileID: 2583820502036049779}
   - component: {fileID: 383015297268088121}
   - component: {fileID: 8667363797136963223}
+  - component: {fileID: 7638060376154194406}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -6598,6 +6599,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7638060376154194406}
+        m_TargetAssemblyTypeName: PlasmaCasterUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &383015297268088121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6631,6 +6644,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &7638060376154194406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263077298524537369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32039cb766a18a740afe94505a5ce955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plasmaCasterUpgrade: {fileID: 11400000, guid: 8223d6d679eedba4880f93dcd3e2c3b1, type: 2}
 --- !u!1 &2263077299029105790
 GameObject:
   m_ObjectHideFlags: 0
@@ -6983,6 +7009,7 @@ GameObject:
   - component: {fileID: 2583820503529625613}
   - component: {fileID: 383015297756400199}
   - component: {fileID: 8667363797819064809}
+  - component: {fileID: 9074059105862566137}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -7105,6 +7132,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 9074059105862566137}
+        m_TargetAssemblyTypeName: PlasmaCasterUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &383015297756400199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7138,6 +7177,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &9074059105862566137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263077300217427303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32039cb766a18a740afe94505a5ce955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plasmaCasterUpgrade: {fileID: 11400000, guid: 8d7794368a9a7924c923b89c3fbeb195, type: 2}
 --- !u!1 &2263077300332175254
 GameObject:
   m_ObjectHideFlags: 0
@@ -7152,6 +7204,7 @@ GameObject:
   - component: {fileID: 2583820503449350908}
   - component: {fileID: 383015297607966902}
   - component: {fileID: 8667363798005263128}
+  - component: {fileID: 187281815426550157}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -7274,6 +7327,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 187281815426550157}
+        m_TargetAssemblyTypeName: PlasmaCasterUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &383015297607966902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7307,6 +7372,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &187281815426550157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263077300332175254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32039cb766a18a740afe94505a5ce955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plasmaCasterUpgrade: {fileID: 11400000, guid: 5696f6534ffa0a34aa1b076832d8eded, type: 2}
 --- !u!1 &2468398048970973358
 GameObject:
   m_ObjectHideFlags: 0
@@ -7822,6 +7900,7 @@ GameObject:
   - component: {fileID: 1095495810700274168}
   - component: {fileID: 3006388931986553778}
   - component: {fileID: 6098087061160521756}
+  - component: {fileID: 1360370778135971902}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -7944,6 +8023,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1360370778135971902}
+        m_TargetAssemblyTypeName: CyberBladeUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3006388931986553778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7977,6 +8068,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &1360370778135971902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711098567583286418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca369c92eea10c4f9d2d45f69f3c7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cyberBladeUpgrade: {fileID: 11400000, guid: 135314da9a1a9e143ac2acfe987c2e27, type: 2}
 --- !u!1 &3711098567670787683
 GameObject:
   m_ObjectHideFlags: 0
@@ -7991,6 +8095,7 @@ GameObject:
   - component: {fileID: 1095495810580136713}
   - component: {fileID: 3006388931798257987}
   - component: {fileID: 6098087061311052525}
+  - component: {fileID: 6452396844122942354}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -8113,6 +8218,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6452396844122942354}
+        m_TargetAssemblyTypeName: CyberBladeUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3006388931798257987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8146,6 +8263,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &6452396844122942354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711098567670787683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca369c92eea10c4f9d2d45f69f3c7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cyberBladeUpgrade: {fileID: 11400000, guid: fd9eab4e4321d15498678c16af8e7942, type: 2}
 --- !u!1 &3711098568317180189
 GameObject:
   m_ObjectHideFlags: 0
@@ -8160,6 +8290,7 @@ GameObject:
   - component: {fileID: 1095495811039835255}
   - component: {fileID: 3006388933400176189}
   - component: {fileID: 6098087063102565779}
+  - component: {fileID: 5797953989011621390}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -8282,6 +8413,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5797953989011621390}
+        m_TargetAssemblyTypeName: CyberBladeUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3006388933400176189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8315,6 +8458,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &5797953989011621390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711098568317180189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca369c92eea10c4f9d2d45f69f3c7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cyberBladeUpgrade: {fileID: 11400000, guid: dcd5c05a62d9ba441938ceefa92b5f96, type: 2}
 --- !u!1 &3914999501194004474
 GameObject:
   m_ObjectHideFlags: 0
@@ -14023,6 +14179,7 @@ GameObject:
   - component: {fileID: 8110987918181398389}
   - component: {fileID: 6204598975335589183}
   - component: {fileID: 3099390188686208657}
+  - component: {fileID: 3048041172486868831}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -14145,6 +14302,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3048041172486868831}
+        m_TargetAssemblyTypeName: PlasmaCasterUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6204598975335589183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14178,6 +14347,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &3048041172486868831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486377579711257119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32039cb766a18a740afe94505a5ce955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plasmaCasterUpgrade: {fileID: 11400000, guid: f6dcf590b8bd988458cdd7deaf6fd5a3, type: 2}
 --- !u!1 &5866790879675442707
 GameObject:
   m_ObjectHideFlags: 0
@@ -14947,6 +15129,7 @@ GameObject:
   - component: {fileID: 6663194558997736561}
   - component: {fileID: 8859496675172859451}
   - component: {fileID: 570644717209335189}
+  - component: {fileID: 7349029843460931647}
   m_Layer: 5
   m_Name: Btn_Upgrade
   m_TagString: Untagged
@@ -15069,6 +15252,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7349029843460931647}
+        m_TargetAssemblyTypeName: CyberBladeUpgradeButton, Assembly-CSharp
+        m_MethodName: Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8859496675172859451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15102,6 +15297,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAudio: 1
+--- !u!114 &7349029843460931647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974932310983737627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca369c92eea10c4f9d2d45f69f3c7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cyberBladeUpgrade: {fileID: 11400000, guid: 3479663634536d746b5e5e22a65443f1, type: 2}
 --- !u!1 &7469176327228472419
 GameObject:
   m_ObjectHideFlags: 0
