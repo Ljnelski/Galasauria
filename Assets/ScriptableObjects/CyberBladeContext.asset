@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5aeb7b075d05a4d94b417225d79ba2, type: 3}
   m_Name: CyberBladeContext
   m_EditorClassIdentifier: 
-  _baseDamage: 0
-  _power: 0
-  _handelLength: 0
-  _bladeLength: 0
-  _swingSpeed: 0
+  _baseDamage: 100
+  _power: 1
+  _handelLength: 1
+  _bladeLength: 1
+  _swingSpeed: 1

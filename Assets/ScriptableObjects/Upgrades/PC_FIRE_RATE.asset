@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: PC_FIRE_RATE
   m_EditorClassIdentifier: 
   _inputItems: []
+  <DamageChange>k__BackingField: 0
+  <FireRateChange>k__BackingField: 0.1
+  <RangeChange>k__BackingField: -0.1
+  <ShotCountChange>k__BackingField: 0

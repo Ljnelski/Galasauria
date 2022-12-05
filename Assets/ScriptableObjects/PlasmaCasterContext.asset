@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c8064e75656ae468e406b8782cf32a, type: 3}
   m_Name: PlasmaCasterContext
   m_EditorClassIdentifier: 
-  _baseDamage: 0
-  _damage: 0
-  _fireRate: 0
-  _range: 0
-  _shotCount: 0
+  _baseDamage: 50
+  _damage: 1
+  _fireRate: 1
+  _range: 1
+  _shotCount: 1

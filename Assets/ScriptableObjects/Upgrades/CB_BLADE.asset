@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: CB_BLADE
   m_EditorClassIdentifier: 
   _inputItems: []
+  <PowerChange>k__BackingField: 0
+  <HandelLengthChange>k__BackingField: 0
+  <BladeLengthChange>k__BackingField: 0.15
+  <SwingSpeedChange>k__BackingField: -0.1

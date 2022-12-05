@@ -33,7 +33,6 @@ public class PlasmaCaster : EquipableItem
 
     public override void BeginUse(GameEnums.EquipableInput attack) 
     {
-        Debug.Log("Begin Use");
         ItemOwnerInventory.itemDictionary.TryGetValue(_plasmaCartridgeitemData, out Item plasmaCartridge);
         // Check if there is ammo
         if (plasmaCartridge == null) 
@@ -71,14 +70,5 @@ public class PlasmaCaster : EquipableItem
         plasmaCasterContext._fireRate+= upgrade.FireRateChange;
         plasmaCasterContext._range += upgrade.RangeChange;
         plasmaCasterContext._shotCount += upgrade.ShotCountChange;
-
-        ScaleBarrel(plasmaCasterContext._range);
-    }
-
-    private void ScaleBarrel(float factor)
-    {
-        _barrel.position = new Vector3(_barrel.position.x, _barrel.position.y, factor);
-    }
-
-    
+    }    
 }
