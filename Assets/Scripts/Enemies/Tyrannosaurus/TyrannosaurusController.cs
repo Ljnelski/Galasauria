@@ -22,9 +22,11 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
     public TyrannosaurusDieState DieState { get; private set; }
 
     // Editor Accessable
-    [SerializeField]
-    private TyrannosaurusContext tyrannosaurusContext;
-    private HealthSystem [] tyrannosaurusHealthSystems;
+    [SerializeField] private TyrannosaurusContext tyrannosaurusContext;
+    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private AudioClip attackClip;
+
+    private HealthSystem[] tyrannosaurusHealthSystems;
     private Destroyer[] destroyers;
 
     // Tyrannosaurus Input
@@ -53,6 +55,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
     public float DetectionRange { get => tyrannosaurusContext._detectionRange; }
 
     private Animator animator;
+    private AudioSource growlAudio;
 
     // Start is called before the first frame update
     void Awake()
@@ -65,6 +68,9 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
 
         // SetUp Animator
         animator = GetComponentInChildren<Animator>();
+
+        // SetUp Audio
+        growlAudio = GetComponent<AudioSource>();
 
         // SetUp Agent
         Agent = GetComponent<NavMeshAgent>();
@@ -110,6 +116,8 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
         if (animator)
         {
             animator.SetTrigger("attack");
+            growlAudio.clip = attackClip;
+            growlAudio.Play();
         }
     }
 
@@ -134,6 +142,8 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
         if (animator)
         {
             animator.SetTrigger("die");
+            growlAudio.clip = deathClip;
+            growlAudio.Play();
         }
     }
 

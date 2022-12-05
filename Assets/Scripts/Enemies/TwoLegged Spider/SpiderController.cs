@@ -50,6 +50,7 @@ public class SpiderController : BaseController<SpiderController>
     public float DetectionRange { get => spiderContext._detectionRange; }
 
     private Animator animator;
+    private AudioSource gruntAudio;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,6 +63,9 @@ public class SpiderController : BaseController<SpiderController>
 
         // SetUp Animator
         animator = GetComponent<Animator>();
+
+        // SetUp Audio
+        gruntAudio = GetComponent<AudioSource>();
 
         // SetUp Agent
         Agent = GetComponent<NavMeshAgent>();
@@ -103,6 +107,7 @@ public class SpiderController : BaseController<SpiderController>
         if (animator)
         {
             animator.SetTrigger("attack");
+            gruntAudio.Play();
         }
     }
 

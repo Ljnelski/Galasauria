@@ -24,8 +24,9 @@ public class RaptorController : BaseController<RaptorController>
     public RaptorDieState DieState { get; private set; }
 
     // Editor Accessable
-    [SerializeField]
-    private RaptorContext raptorContext;
+    [SerializeField] private RaptorContext raptorContext;
+    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private AudioClip attackClip;
 
     // Raptor Input
     public Transform ChaseTarget { get; private set; }
@@ -58,6 +59,7 @@ public class RaptorController : BaseController<RaptorController>
 
     private Animator animator;
     private Destroyer destroyer;
+    private AudioSource growlAudio;
 
     // Start is called before the first frame update
     void Awake()
@@ -70,6 +72,9 @@ public class RaptorController : BaseController<RaptorController>
 
         // SetUp Animator
         animator = GetComponentInChildren<Animator>();
+
+        // SetUp Audio
+        growlAudio = GetComponent<AudioSource>();
 
         // SetUp Agent
         Agent = GetComponent<NavMeshAgent>();
@@ -117,6 +122,8 @@ public class RaptorController : BaseController<RaptorController>
         if (animator)
         {
             animator.SetTrigger("attack");
+            growlAudio.clip = attackClip;
+            growlAudio.Play();
         }
     }
 
@@ -141,6 +148,8 @@ public class RaptorController : BaseController<RaptorController>
         if (animator)
         {
             animator.SetTrigger("die");
+            growlAudio.clip = deathClip;
+            growlAudio.Play();
         }
     }
 
