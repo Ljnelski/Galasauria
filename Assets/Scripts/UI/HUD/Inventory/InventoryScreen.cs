@@ -20,6 +20,20 @@ public class InventoryScreen : UIPlayerDataReaderScreen<Inventory>
     {
         base.OnEnable();
 
+        inventoryItemDetailsDisplay.RefreshInventoryScreen += Refresh;
+
+        Refresh();
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        inventoryItemDetailsDisplay.RefreshInventoryScreen -= Refresh;
+    }
+
+    private void Refresh()
+    {
         // clear the grid
         if (inventoryContainer.childCount > 0)
         {
@@ -42,6 +56,8 @@ public class InventoryScreen : UIPlayerDataReaderScreen<Inventory>
                 display.OnItemClick += inventoryItemDetailsDisplay.Display;
             }
         }
+
+        inventoryItemDetailsDisplay.ResetDisplay();
     }
 }
     
