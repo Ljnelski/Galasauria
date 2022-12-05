@@ -10,6 +10,7 @@ public class InventoryItemDetailsDisplay : UIPlayerDataReader<PlayerController>
     [SerializeField] private Text itemNameLabel;
     [SerializeField] private Text itemDescriptionLabel;
     [SerializeField] private Button useItemButton;
+    public Action RefreshInventoryScreen;
 
     void OnEnable()
     {
@@ -17,7 +18,7 @@ public class InventoryItemDetailsDisplay : UIPlayerDataReader<PlayerController>
         ResetDisplay();
     }
 
-    private void ResetDisplay()
+    public void ResetDisplay()
     {
         itemIcon.gameObject.SetActive(false);
         itemNameLabel.text = "";
@@ -39,7 +40,10 @@ public class InventoryItemDetailsDisplay : UIPlayerDataReader<PlayerController>
             useableItem.InitEffect(_targetScript, itemData);
             useItemButton.gameObject.SetActive(true);            
             useItemButton.onClick.AddListener(useableItem.GetItemEffect());
-            useItemButton.onClick.AddListener(() => { useItemButton.onClick.RemoveAllListeners(); });
+            useItemButton.onClick.AddListener(() => { 
+                useItemButton.onClick.RemoveAllListeners(); 
+                RefreshInventoryScreen?.Invoke();
+            });
         }       
     }        
 }

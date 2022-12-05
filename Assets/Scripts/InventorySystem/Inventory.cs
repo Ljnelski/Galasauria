@@ -1,10 +1,11 @@
 /*  Filename:           InventoryManager.cs
- *  Author:             Liam Nelski (301064116)
+ *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
  *  Last Update:        November 13th, 2022
  *  Description:        Attaches a inventory to the gameobject
  *  Revision History:   October 12, 2022 (Liam Nelski): Initial script.
  *                      November 12, 2022 (Yuk Yee Wong): Replace the notification call with inventoryIncrementAction
  *                      November 13th, 2022 (Liam Nelski): Rename Action and added two more
+ *                      December 5th, 2022 (Yuk Yee Wong): Initiate new dictionary when declare.
  */
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ using System;
 public class Inventory : MonoBehaviour
 {
     public int Id;
-    public Dictionary<ItemData, Item> itemDictionary;
+    public Dictionary<ItemData, Item> itemDictionary = new Dictionary<ItemData, Item>();
     public List<Item> inventory;
     public Action<ItemData> OnAddItem;
     public Action OnInventoryUpdate;
