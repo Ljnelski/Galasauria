@@ -196,6 +196,10 @@ public class PlayerController : BaseController<PlayerController>
         }
     }
 
+    public void Upgrade<T>(Upgrade<T> upgrade) where T : Upgrade<ScriptableObject>
+    {
+        upgrade.DoUpgrade(this);
+    }
     public void OnMovementInput(InputAction.CallbackContext context)
     {
         MovementInput = context.ReadValue<Vector2>();

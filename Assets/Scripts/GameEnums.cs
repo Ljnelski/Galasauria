@@ -79,20 +79,4 @@ public class GameEnums
         NONE = 0,
         SECONDARY = 1,
     }
-
-    public enum CyberbladeUpgrade
-    {
-        POWER = 0,
-        HANDLE = 1,
-        BLADE = 2,
-        SWING = 3
-    }
-
-    public enum PlasmacasterUpgrade
-    {
-        DAMAGE = 0,
-        FIRE_RATE = 1,
-        RANGE = 2,
-        SHOT_COUNT = 3
-    }
 }

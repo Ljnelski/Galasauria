@@ -2,7 +2,7 @@
  *  Author:             Liam Nelski (301064116)
  *  Last Update:        October 16, 2022
  *  Description:        Controls Plasma Caster
- *  Revision History:   October 16, 2022 (Liam Nelski): Initial script. *    
+ *  Revision History:   October 16, 2022 (Liam Nelski): Initial script.  
  *                      December 3rd, 2022 (Liam Nelsik): Implemented
  */
 using Assets.Scripts.InventorySystem.Weapons;
@@ -12,6 +12,9 @@ using UnityEngine;
 
 public class PlasmaCaster : EquipableItem
 {
+    [Header("PlasmaCasterContext")]
+    [SerializeField] private PlasmaCasterContext plasmaCasterContext;
+
     [Header("Ammo Itemdata")]
     [SerializeField] private ItemData _plasmaCartridgeitemData;
 
@@ -62,9 +65,15 @@ public class PlasmaCaster : EquipableItem
         Debug.Log("End use");
          InUse = false;
     }
+    public void Upgrade(PlasmaCasterUpgrade upgrade)
+    {
+        plasmaCasterContext = plasmaCasterContext + upgrade.Data;
+    }
 
     private void ExtendBarrel(float Distance)
     {
         _barrel.position = new Vector3(_barrel.position.x, _barrel.position.y, Distance);
-    }    
+    }
+
+    
 }

@@ -16,7 +16,5 @@ public abstract class EquipableItem : MonoBehaviour
     public Inventory ItemOwnerInventory { get; set; }
     public bool InUse { get; protected set; }
     public abstract void BeginUse(GameEnums.EquipableInput attack);
-    public abstract void EndUse();
-
-    
+    public abstract void EndUse();   
 }

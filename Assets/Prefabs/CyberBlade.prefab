@@ -272,6 +272,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LeftHandIKTransform>k__BackingField: {fileID: 3763593391389621638}
   <RightHandIKTransform>k__BackingField: {fileID: 600166044719632099}
+  CyberBladeData: {fileID: 0}
+  blade: {fileID: 3282316563324606784}
+  hilt: {fileID: 7589509350572580515}
+  handle: {fileID: 3148435976093602575}
   hitBox: {fileID: 28096637656296055}
   animator: {fileID: 6705100129686002676}
 --- !u!114 &3767708936334301856

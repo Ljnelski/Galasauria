@@ -9,22 +9,17 @@ using System;
 using UnityEngine;
 public class CyberBlade :  EquipableItem
 {
-    public float Damage { get; set; }
-    private Transform blade;
-    private Transform hilt;
-    private Transform handle;
+    [Header("CyberBladeContext")]
+    [SerializeField] private CyberBladeContext CyberBladeData;
+
+    [Header("Transforms")]
+    [SerializeField]private Transform blade;
+    [SerializeField] private Transform hilt;
+    [SerializeField] private Transform handle;
+
+    [Header("Scripts")]
     [SerializeField] private CapsuleCollider hitBox;
-    [SerializeField] private Animator animator;
-
-    private void Start()
-    {
-        Debug.Log("StartCalled");
-        handle = transform.GetChild(2).GetChild(0).GetChild(0);
-        hilt = handle.GetChild(0);
-        blade = hilt.GetChild(0);
-
-        InUse = false;
-    }
+    [SerializeField] private Animator animator;   
 
     public override void BeginUse(GameEnums.EquipableInput attack)
     {
@@ -51,9 +46,9 @@ public class CyberBlade :  EquipableItem
         hitBox.enabled = false;
     }
 
-    public void Upgrade()
+    public void Upgrade(CyberBladeUpgrade upgrade)
     {
-        throw new NotImplementedException();
+        CyberBladeData = CyberBladeData + upgrade.Data;
     }
 
     public override void EndUse()
