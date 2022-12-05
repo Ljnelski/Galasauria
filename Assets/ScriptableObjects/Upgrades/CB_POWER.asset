@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd76f407bb4747c43948b026d3c7a765, type: 3}
   m_Name: CB_POWER
   m_EditorClassIdentifier: 
-  _inputItems: []
+  _inputItems:
+  - data: {fileID: 0}
+    itemCount: 0
+  - data: {fileID: 0}
+    itemCount: 0
   <PowerChange>k__BackingField: 0.1
   <HandelLengthChange>k__BackingField: 0
   <BladeLengthChange>k__BackingField: 0
