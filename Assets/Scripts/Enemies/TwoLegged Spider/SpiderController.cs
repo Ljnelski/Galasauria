@@ -1,11 +1,12 @@
 /*  Filename:           TestNavMeshAgent.cs
  *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
- *  Last Update:        November 25th, 2022
+ *  Last Update:        December 5th, 2022
  *  Description:        Spider Controller
  *  Revision History:   November 9th, 2022 (Liam Nelski): Initial script.
  *                      November 10th 2022 (Liam Nelski): Added Chase and Idle State
  *                      November 12th 2022 (Liam Nelski): Added SpiderContext to store Stats
  *                      November 25th, 2022 (Yuk Yee Wong): Fixed bugs. Not direcly use context health for CurrentHealth. Added attack state, reach player method; replaced suicide method to receive damage; added animator, destroy set up, animation methods.
+ *                      December 5th, 2022 (Yuk Yee Wong): Added enable/disable destroyer function and added attack duration
  */
 using System;
 using UnityEngine;
@@ -46,10 +47,14 @@ public class SpiderController : BaseController<SpiderController>
     public float Acceleration { get => spiderContext._acceleration; }
     public float PlayerOffsetDistance { get => spiderContext._playerOffsetDistance; }
     public float AttackInterval { get => spiderContext._attackCoolDownMiliseconds; }
+    public float AttackDuration { get => spiderContext._attackDuration; }
     public float BaseDamage { get => spiderContext._baseDamage; }  
     public float DetectionRange { get => spiderContext._detectionRange; }
 
+    public RandomListItemCollectableData RandomRewards { get => spiderContext._randomCollectable; }
+
     private Animator animator;
+    private Destroyer destroyer;
     private AudioSource gruntAudio;
 
     // Start is called before the first frame update
@@ -78,7 +83,7 @@ public class SpiderController : BaseController<SpiderController>
         SpiderHealth.ReceiveDamage += ReceiveDamage;
 
         // SetUp Destroyer
-        Destroyer destroyer = GetComponentInChildren<Destroyer>();
+        destroyer = GetComponentInChildren<Destroyer>();
         if (destroyer != null)
         {
             destroyer.Damage = BaseDamage;
@@ -91,6 +96,7 @@ public class SpiderController : BaseController<SpiderController>
 
         FindPlayer();
 
+        EnableDestroyer(false);
         activeState = IdleState;
         activeState.OnStateEnter();
     }   
@@ -100,6 +106,11 @@ public class SpiderController : BaseController<SpiderController>
         Vector3 direction = (ChaseTarget.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * TurnSpeed);
+    }
+
+    public void EnableDestroyer(bool enable)
+    {
+        destroyer.gameObject.SetActive(enable);
     }
 
     public void Attack()
@@ -170,8 +181,17 @@ public class SpiderController : BaseController<SpiderController>
                 SpiderHealth.ReceiveDamage -= ReceiveDamage;
                 CurrentHealth = 0;
                 SpiderHealth.Die?.Invoke(spiderContext._score);
+                SpawnRandomRewards();
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void SpawnRandomRewards()
+    {
+        if (RandomRewards != null)
+        {
+            RandomRewards.SpawnRandomItem(transform.position);
         }
     }
 

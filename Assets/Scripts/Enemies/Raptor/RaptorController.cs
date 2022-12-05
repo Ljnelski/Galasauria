@@ -1,8 +1,9 @@
 /*  Filename:           RaptorController.cs
  *  Author:             Yuk Yee Wong (301234795)
- *  Last Update:        November 26, 2022
+ *  Last Update:        December 5, 2022
  *  Description:        Raptor Controller
  *  Revision History:   November 26, 2022 (Yuk Yee Wong): Initial script.
+ *                      December 5, 2022 (Yuk Yee Wong): Added enable/disable destroyer function and added attack duration
  */
 
 using System.Collections;
@@ -48,9 +49,11 @@ public class RaptorController : BaseController<RaptorController>
     public float DestinationOffsetDistance { get => raptorContext._destinationOffsetDistance; }
     public float PlayerOffsetDistance { get => raptorContext._playerOffsetDistance; }
     public float AttackInterval { get => raptorContext._attackCoolDownMiliseconds; }
+    public float AttackDuration { get => raptorContext._attackDuration; }
     public float DieInterval { get => raptorContext._dieMiliseconds; }
     public float BaseDamage { get => raptorContext._baseDamage; }
     public float DetectionRange { get => raptorContext._detectionRange; }
+    public RandomListItemCollectableData RandomRewards { get => raptorContext._randomCollectable; }
 
     public Vector3 Destination { get; private set; }
     private Vector3 destinationBehind;
@@ -100,7 +103,7 @@ public class RaptorController : BaseController<RaptorController>
         DieState = new RaptorDieState(this);
 
         FindPlayer();
-
+        EnableDestroyer(false);
         activeState = IdleState;
         activeState.OnStateEnter();
     }
@@ -197,7 +200,16 @@ public class RaptorController : BaseController<RaptorController>
                 RaptorHealth.ReceiveDamage -= ReceiveDamage;
                 CurrentHealth = 0;
                 RaptorHealth.Die?.Invoke(raptorContext._score);
+                SpawnRandomRewards();
             }
+        }
+    }
+
+    private void SpawnRandomRewards()
+    {
+        if (RandomRewards != null)
+        {
+            RandomRewards.SpawnRandomItem(transform.position);
         }
     }
 

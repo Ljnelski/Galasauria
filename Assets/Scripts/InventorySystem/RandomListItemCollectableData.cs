@@ -18,6 +18,21 @@ public class RandomListItemCollectableData : ScriptableObject, ICollectable
             }
         }
     }
+
+    public void SpawnRandomItem(Vector3 spawnPosition)
+    {
+        foreach (RandomItemAmount randomItemAmount in randomItemCountData)
+        {
+            if (UnityEngine.Random.Range(0f, 1f) <= randomItemAmount.chance)
+            {
+                if (randomItemAmount.itemAmount.itemData.prefab != null)
+                {
+                    GameObject itemObject = Instantiate(randomItemAmount.itemAmount.itemData.prefab);
+                    itemObject.transform.position = spawnPosition;
+                }
+            }
+        }
+    }
 }
 
 [Serializable]
