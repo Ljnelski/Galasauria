@@ -17,31 +17,14 @@ public abstract class Upgrade<TUpgradeData> : ScriptableObject where TUpgradeDat
     protected PlayerController _playerController; 
 
     public void DoUpgrade(PlayerController playerController) {
-        if (!playerController.Inventory.HasItems(_inputItems)) return;
+        if (!playerController.Inventory.HasItems(_inputItems))
+        {
+            Debug.Log("Insuffucent Resources Upgrade");
+            return;
+        }
         _playerController = playerController;
         UpgradeLogic();
     }
 
     protected abstract void UpgradeLogic();
-}
-
-
-[Serializable]
-[CreateAssetMenu(menuName = "Items/Upgrades", fileName = "CyberBladeUpgrade")]
-public class CyberBladeUpgrade : Upgrade<CyberBladeContext>
-{
-    protected override void UpgradeLogic()
-    {
-        _playerController.equipables[0].GetComponent<CyberBlade>().Upgrade(this);
-    }
-}
-
-[Serializable]
-[CreateAssetMenu(menuName = "Items/Upgrades", fileName = "PlasmaCasterUpgrade")]
-public class PlasmaCasterUpgrade : Upgrade<PlasmaCasterContext>
-{
-    protected override void UpgradeLogic()
-    {
-        _playerController.equipables[1].GetComponent<PlasmaCaster>().Upgrade(this);
-    }
 }

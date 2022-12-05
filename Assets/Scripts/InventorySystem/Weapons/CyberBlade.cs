@@ -10,7 +10,7 @@ using UnityEngine;
 public class CyberBlade :  EquipableItem
 {
     [Header("CyberBladeContext")]
-    [SerializeField] private CyberBladeContext CyberBladeData;
+    [SerializeField] private CyberBladeContext cyberBladeContext;
 
     [Header("Transforms")]
     [SerializeField]private Transform blade;
@@ -48,7 +48,13 @@ public class CyberBlade :  EquipableItem
 
     public void Upgrade(CyberBladeUpgrade upgrade)
     {
-        CyberBladeData = CyberBladeData + upgrade.Data;
+        cyberBladeContext._power += upgrade.PowerChange;
+        cyberBladeContext._handelLength += upgrade.HandelLengthChange;
+        cyberBladeContext._bladeLength += upgrade.BladeLengthChange;
+        cyberBladeContext._swingSpeed+= upgrade.SwingSpeedChange;
+
+        ScaleHandle(cyberBladeContext._handelLength);
+        ScaleBlade(cyberBladeContext._bladeLength);
     }
 
     public override void EndUse()

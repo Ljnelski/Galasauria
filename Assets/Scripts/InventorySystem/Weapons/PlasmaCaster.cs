@@ -67,12 +67,17 @@ public class PlasmaCaster : EquipableItem
     }
     public void Upgrade(PlasmaCasterUpgrade upgrade)
     {
-        plasmaCasterContext = plasmaCasterContext + upgrade.Data;
+        plasmaCasterContext._damage += upgrade.DamageChange;
+        plasmaCasterContext._fireRate+= upgrade.FireRateChange;
+        plasmaCasterContext._range += upgrade.RangeChange;
+        plasmaCasterContext._shotCount += upgrade.ShotCountChange;
+
+        ScaleBarrel(plasmaCasterContext._range);
     }
 
-    private void ExtendBarrel(float Distance)
+    private void ScaleBarrel(float factor)
     {
-        _barrel.position = new Vector3(_barrel.position.x, _barrel.position.y, Distance);
+        _barrel.position = new Vector3(_barrel.position.x, _barrel.position.y, factor);
     }
 
     
