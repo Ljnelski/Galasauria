@@ -1,21 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.HealthSystem
 {
     public class HurtBox : MonoBehaviour
     {
+        LayerMask TargetLayer;
 
-        // Use this for initialization
-        void Start()
+        Action OnOnTriggerEnter;
+        Action OnOnTriggerEnterTargetLayer;
+
+        private void OnTriggerEnter(Collider other)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            other.gameObject.layer = TargetLayer;
         }
     }
 }
