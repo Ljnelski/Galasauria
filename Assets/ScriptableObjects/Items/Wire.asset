@@ -18,6 +18,6 @@ MonoBehaviour:
   type: 5
   maxStack: 0
   itemWeight: 1
-  prefab: {fileID: 0}
-  icon: {fileID: 0}
+  prefab: {fileID: 5096157556394659077, guid: 80711cf039c0fa14a80bba1fbd786661, type: 3}
+  icon: {fileID: 21300000, guid: 5eb9c510e458bd040b5a4250fa88dd29, type: 3}
   score: 20
