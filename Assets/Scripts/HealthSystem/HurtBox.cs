@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Assets.Scripts.HealthSystem
+
+public class HurtBox : MonoBehaviour
 {
-    public class HurtBox : MonoBehaviour
+    [SerializeField] private string _targetTag;
+
+    public Action OnOnTriggerEnter;
+    public Action OnOnTriggerEnterTargetLayer;
+
+    private void OnTriggerEnter(Collider other)
     {
-        LayerMask TargetLayer;
-
-        Action OnOnTriggerEnter;
-        Action OnOnTriggerEnterTargetLayer;
-
-        private void OnTriggerEnter(Collider other)
+        Debug.Log("On trigger, Tag: " + other.tag + "\n Target Tag: " + _targetTag);
+        if (other.tag == _targetTag)
         {
-            other.gameObject.layer = TargetLayer;
+            OnOnTriggerEnterTargetLayer?.Invoke();
+            OnOnTriggerEnter?.Invoke();
         }
+        else
+        {
+            OnOnTriggerEnter?.Invoke();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        OnOnTriggerEnterTargetLayer = null;
+        OnOnTriggerEnter = null;
     }
 }
