@@ -16,6 +16,7 @@ public class UIActionTimer : MonoBehaviour
     [SerializeField] private bool entered;
     [SerializeField] private UnityEvent onTriggerEnterEvent;
     [SerializeField] private UnityEvent oCountDownCompleteEvent;
+    [SerializeField] private UnityEvent oCountDownStopEvent;
 
     private bool countingDown;
     private string beforeCountDown;
@@ -24,7 +25,6 @@ public class UIActionTimer : MonoBehaviour
     private void Start()
     {
         beforeCountDown = string.Format("00:{0:D2}", (int)Mathf.Floor(duration));
-        timePassed = duration;
         ResetTimeDisplay();
     }
 
@@ -50,7 +50,6 @@ public class UIActionTimer : MonoBehaviour
             else
             {
                 ResetTimeDisplay();
-                timePassed = duration;
                 countingDown = false;
             }
         }
@@ -68,6 +67,7 @@ public class UIActionTimer : MonoBehaviour
 
     private void ResetTimeDisplay()
     {
+        timePassed = duration;
         timerLabel.text = beforeCountDown;
     }
 
@@ -75,5 +75,8 @@ public class UIActionTimer : MonoBehaviour
     {
         entered = false;
         countingDown = false;
+        ResetTimeDisplay();
+
+        oCountDownStopEvent?.Invoke();
     }
 }
