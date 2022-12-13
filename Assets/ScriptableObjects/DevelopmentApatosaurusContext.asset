@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd01954e358234c46bf85ea39f59b317, type: 3}
+  m_Name: DevelopmentApatosaurusContext
+  m_EditorClassIdentifier: 
+  _maxHealth: 50
+  _currentHealth: 50
+  _baseSpeed: 3
+  _turnSpeed: 90
+  _acceleration: 10
+  _destinationOffsetDistance: 1
+  _playerOffsetDistance: 1
+  _dieMiliseconds: 3000
+  _detectionRange: 4
+  _score: 50
+  _randomCollectable: {fileID: 11400000, guid: f6ffcd190de18464ea9c53becc0132c5, type: 2}
