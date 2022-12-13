@@ -14,6 +14,7 @@ public class CraftingButton : UIPlayerDataReader<Inventory>
 {
     [SerializeField] private RecipeData _recipe;
     [SerializeField] private List<InventoryItemDisplay> inventoryItemDisplays;
+    [SerializeField] private AudioSource successfulCraftSFX;
 
     private Button button;
 
@@ -41,7 +42,6 @@ public class CraftingButton : UIPlayerDataReader<Inventory>
             if (inventoryItemDisplays.Count - 1 >= i)
             {
                 int itemStackSize = _targetScript.GetItemStackSize(_recipe.inputItems[i].data);
-                Debug.Log(itemStackSize);
                 inventoryItemDisplays[i].Init(_recipe.inputItems[i], itemStackSize);
             }
             else
@@ -56,5 +56,10 @@ public class CraftingButton : UIPlayerDataReader<Inventory>
     public void CraftRecipe()
     {
         _targetScript.CraftItem(_recipe);
+
+        if (successfulCraftSFX)
+        {
+            successfulCraftSFX.Play();
+        }
     }
 }

@@ -2144,7 +2144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7550135915859280051, guid: 5938e58969fc16c44aee3129b5a81f8a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7550135915859280051, guid: 5938e58969fc16c44aee3129b5a81f8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3372,7 +3372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114407469536213250, guid: 0cc7c4baca3b8084b844b920915b7e3e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6114407469536213250, guid: 0cc7c4baca3b8084b844b920915b7e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6822,7 +6822,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1cd41ccf085dffd4bbceef2ba22e791a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10139,7 +10139,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1208761111350038176, guid: 56594a80bdebff84fad22a48f2c5e7a5, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1208761111350038176, guid: 56594a80bdebff84fad22a48f2c5e7a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16237,13 +16237,6 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
-    Iso: 200
-    ShutterSpeed: 0.005
-    Aperture: 16
-    BladeCount: 5
-    Curvature: {x: 2, y: 11}
-    BarrelClipping: 0.25
-    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -16491,7 +16484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7550135915859280051, guid: 5938e58969fc16c44aee3129b5a81f8a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7550135915859280051, guid: 5938e58969fc16c44aee3129b5a81f8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18455,7 +18448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5069461504538144190, guid: 2a5b0259ab1de3840ac3cbe933fab517, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5069461504538144190, guid: 2a5b0259ab1de3840ac3cbe933fab517, type: 3}
       propertyPath: m_LocalScale.x
@@ -28770,7 +28763,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8797355853785415688, guid: d7abf7b5d247dfc41a887ccfc6d0b15c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8797355853785415688, guid: d7abf7b5d247dfc41a887ccfc6d0b15c, type: 3}
       propertyPath: m_LocalPosition.x
