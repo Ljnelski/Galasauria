@@ -14,6 +14,9 @@ public class InventoryItemDisplay : MonoBehaviour
     [SerializeField] private string countFormat = "x {0}";
     [SerializeField] private Image itemIcon;
     [SerializeField] private Text itemCountLabel;
+
+    [Header("Optional")]
+    [SerializeField] private Text itemNeededLabel;
     [SerializeField] private Text itemNameLabel; // temp
     [SerializeField] private Button button;
 
@@ -22,15 +25,36 @@ public class InventoryItemDisplay : MonoBehaviour
 
     private void Awake()
     {
-        button.onClick.AddListener(OnButtonClick);
+        if (button)
+        {
+            button.onClick.AddListener(OnButtonClick);
+        }
+    }
+
+    public void Init(RecipeIngredient receiptIngredient, int itemStackSize)
+    {
+        AssignItemData(receiptIngredient.data, itemStackSize);
+        if (itemNeededLabel)
+        {
+            itemNeededLabel.text = string.Format(countFormat, receiptIngredient.itemCount);
+        }
     }
 
     public void Init(ItemData itemData, int itemStackSize)
     {
+        AssignItemData(itemData, itemStackSize);
+
+        if (itemNameLabel)
+        {
+            itemNameLabel.text = itemData.itemName;
+        }
+    }
+
+    private void AssignItemData(ItemData itemData, int itemStackSize)
+    {
         this.itemData = itemData;
         itemIcon.sprite = itemData.icon;
         itemCountLabel.text = string.Format(countFormat, itemStackSize);
-        itemNameLabel.text = itemData.itemName;
     }
 
     private void OnButtonClick()

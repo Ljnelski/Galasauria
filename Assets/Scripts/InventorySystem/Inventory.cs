@@ -88,6 +88,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
     public bool HasItems(List<RecipeIngredient> items)
     {
         // Check if the inventory has the required number of item for the recipe
@@ -102,5 +103,18 @@ public class Inventory : MonoBehaviour
         }
 
         return true;
+    }
+
+    public int GetItemStackSize(ItemData itemData)
+    {
+        itemDictionary.TryGetValue(itemData, out Item inventoryItem);
+        if (inventoryItem == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return inventoryItem.stackSize;
+        }
     }
 }
