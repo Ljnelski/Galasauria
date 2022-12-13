@@ -24,10 +24,10 @@ public class GameEndTrigger : MonoBehaviour
                     WinStatTracker.isLv1Complete = true;
                     break;
                 case GameEnums.GameDifficulty.MEDIUM:
-                    WinStatTracker.isLv1Complete = true;
+                    WinStatTracker.isLv2Complete = true;
                     break;
                 case GameEnums.GameDifficulty.HARD:
-                    WinStatTracker.isLv1Complete = true;
+                    WinStatTracker.isLv3Complete = true;
                     break;
                 default:
                     Debug.LogError($"GameEndTrigger ERROR: {GameDifficultyManager.Instance.Difficulty} does not have a respective scene index");
