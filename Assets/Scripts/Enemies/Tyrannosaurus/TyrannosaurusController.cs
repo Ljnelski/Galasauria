@@ -132,7 +132,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
         }
     }
 
-    public void Charge()
+    public void Run()
     {
         if (animator)
         {

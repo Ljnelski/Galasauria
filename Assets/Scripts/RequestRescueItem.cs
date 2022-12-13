@@ -34,4 +34,9 @@ public class RequestRescueItem : MonoBehaviour
     {
         label.text = Regex.Unescape(string.Format(labelFormat, EnabledRequestRescue));
     }
+
+    private void OnDestroy()
+    {
+        EnabledRequestRescue = 0;
+    }
 }

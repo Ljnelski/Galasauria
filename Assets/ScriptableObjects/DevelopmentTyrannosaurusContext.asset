@@ -15,12 +15,12 @@ MonoBehaviour:
   _maxHealth: 200
   _currentHealth: 200
   _baseSpeed: 200
-  _turnSpeed: 3
+  _turnSpeed: 80
   _acceleration: 30
   _playerOffsetDistance: 1.5
   _chargeMiliseconds: 4000
   _attackCoolDownMiliseconds: 4000
-  _attackDuration: 1000
+  _attackDuration: 1200
   _dieMiliseconds: 2000
   _baseDamage: 10
   _detectionRange: 20

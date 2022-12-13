@@ -21,7 +21,7 @@ public class TyrannosaurusChargeState : TyrannosaurusState
     public override void OnStateEnter()
     {
         context.Agent.destination = context.ChargeTarget.position;
-        context.Charge();
+        context.Run();
         context.EnableDestroyer(true);
         _charging = true;
 
