@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63812847a6afc7a449c15acd6c9241fd, type: 3}
+  m_Name: DevelopmentNetworkSpiderContext
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _currentHealth: 100
+  _baseSpeed: 6
+  _turnSpeed: 180
+  _acceleration: 20
+  _playerOffsetDistance: 1.2
+  _attackCoolDownMiliseconds: 5000
+  _attackDuration: 800
+  _baseDamage: 3
+  _detectionRange: 8
+  _score: 100
+  _randomCollectable: {fileID: 11400000, guid: 8b7f157c391faba408bbfd12ac81ee64, type: 2}
