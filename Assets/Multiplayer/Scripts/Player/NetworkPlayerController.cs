@@ -211,6 +211,8 @@ public class NetworkPlayerController : BaseNetworkController<NetworkPlayerContro
 
             WireUpUI();
         }
+
+        SwapWeapon();
     }
 
     private void WireUpUI()
@@ -415,6 +417,11 @@ public class NetworkPlayerController : BaseNetworkController<NetworkPlayerContro
     }
 
     public void OnSwapWeaponInput(InputAction.CallbackContext context)
+    {
+        SwapWeapon();
+    }
+
+    private void SwapWeapon()
     {
         if (IsOwner)
         {
