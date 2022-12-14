@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource toggleAudio;
     [SerializeField] private AudioSource checkboxAudio;
     [SerializeField] private AudioSource scoreAudio;
+    [SerializeField] private AudioSource doorOpenAudio;
 
     [Header("Music")]
     [SerializeField] private AudioSource musicAudio;
@@ -93,6 +94,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case GameEnums.GeneralAudio.SCORE:
                 scoreAudio.Play();
+                break;
+            case GameEnums.GeneralAudio.DOOROPEN:
+                doorOpenAudio.Play();
                 break;
             default:
                 Debug.LogError("Please assign the general audio type before playing audio");

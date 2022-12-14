@@ -5,14 +5,17 @@ using UnityEngine;
 public class AutomaticDoor : MonoBehaviour
 {
     public Animator doorAnim;
-    [SerializeField] private AudioSource doorOpenAudioSource;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             doorAnim.SetTrigger("open");
-            doorOpenAudioSource.Play();
+            
+            if (SoundManager.Instance)
+            {
+                SoundManager.Instance.PlayGeneralAudio(GameEnums.GeneralAudio.DOOROPEN);
+            }
             Destroy(gameObject);
         }
     }

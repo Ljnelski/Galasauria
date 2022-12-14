@@ -24,7 +24,7 @@ public abstract class PlayerState : BaseState<PlayerController>
         Vector3 movementInputTo3DSpace = new Vector3(context.MovementInput.x, 0, context.MovementInput.y);
 
         // Move Character
-        Vector3 movementVector = Vector3.Lerp(context.Rb.velocity, movementInputTo3DSpace * (context.BaseSpeed + 1 - context.Acceleration), context.Acceleration);
+        Vector3 movementVector = Vector3.Lerp(context.Rb.velocity, movementInputTo3DSpace * (context.CurrentSpeed + 1 - context.Acceleration), context.Acceleration);
         context.Rb.velocity = movementVector;
 
 
