@@ -122,14 +122,11 @@ public class PlayerController : BaseController<PlayerController>
         Health = GetComponent<HealthSystem>();
         Health.ReceiveDamage += ReceiveDamage;
 
-        // Reset current health
-        CurrentHealth = MaxHealth;
-
         // Reset current speed
         CurrentSpeed = BaseSpeed;
 
         // Reset current dash cool down
-        CurrentDashCoolDown = DashCoolDownMiliseconds;
+        CurrentDashCoolDown = 0f;
 
         // Reset can dash
         CanDash = true;
