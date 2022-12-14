@@ -20,4 +20,4 @@ MonoBehaviour:
     itemCount: 1
   outputItems:
   - data: {fileID: 11400000, guid: 30dfc2f2606a1ea4d90c6b7982c310b1, type: 2}
-    itemCount: 3
+    itemCount: 20

@@ -29,6 +29,7 @@ public class CyberBlade :  EquipableItem
     {
         ScaleHandle();
         ScaleBlade();
+        DeactivateHitBox();
     }
     public override void BeginUse(GameEnums.EquipableInput attack)
     {
