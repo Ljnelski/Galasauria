@@ -71,6 +71,7 @@ public class GameEnums
         TOGGLE = 3,
         CHECKBOX = 4,
         SCORE = 5,
+        DOOROPEN = 6,
     }
 
     public enum EquipableInput

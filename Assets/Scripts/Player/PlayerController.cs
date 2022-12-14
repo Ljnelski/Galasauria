@@ -125,6 +125,15 @@ public class PlayerController : BaseController<PlayerController>
         // Reset current health
         CurrentHealth = MaxHealth;
 
+        // Reset current speed
+        CurrentSpeed = BaseSpeed;
+
+        // Reset current dash cool down
+        CurrentDashCoolDown = DashCoolDownMiliseconds;
+
+        // Reset can dash
+        CanDash = true;
+
         // Reset score
         CurrentScore = 0;
 
