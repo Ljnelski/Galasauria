@@ -119,6 +119,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
         foreach (Destroyer destroyer in destroyers)
         {
             destroyer.gameObject.SetActive(enable);
+            Debug.Log(destroyer.gameObject.activeInHierarchy);
         }
     }
 
@@ -132,7 +133,7 @@ public class TyrannosaurusController : BaseController<TyrannosaurusController>
         }
     }
 
-    public void Charge()
+    public void Run()
     {
         if (animator)
         {

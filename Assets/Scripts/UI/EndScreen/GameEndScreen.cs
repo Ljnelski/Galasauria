@@ -12,6 +12,8 @@ public class GameEndScreen : BaseScreen
 {
     [SerializeField] private GameObject winLabel;
     [SerializeField] private GameObject loseLabel;
+
+    [Header("Optional")]
     [SerializeField] private Button nextDifficultyButton;
 
     public void Open(bool win)
@@ -20,6 +22,9 @@ public class GameEndScreen : BaseScreen
         winLabel.SetActive(win);
         loseLabel.SetActive(!win);
 
-        nextDifficultyButton.gameObject.SetActive(win);
+        if (nextDifficultyButton != null)
+        {
+            nextDifficultyButton.gameObject.SetActive(win);
+        }
     }
 }

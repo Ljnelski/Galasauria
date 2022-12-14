@@ -61,6 +61,7 @@ public class TyrannosaurusAttackState : TyrannosaurusState
         else if (!_attacking && _attackCoolDown)
         {
             context.FaceTarget();
+            context.Run();
         }
         else if (!_attackCoolDown)
         {

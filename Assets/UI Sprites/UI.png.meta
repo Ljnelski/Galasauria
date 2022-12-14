@@ -911,6 +911,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DashBar
+      rect:
+        serializedVersion: 2
+        x: 1982
+        y: 1116
+        width: 996
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 20, y: 20, z: 20, w: 20}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e871730d8cbd62845a3d0f18f1d5062d
+      internalID: 16140536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -934,6 +955,7 @@ TextureImporter:
       back_arrow: 21300030
       pause: 21300018
       progress_bar_background: 21300010
+      DashBar: 16140536
       bar_blue1: 21300052
       button1: 21300014
       bullets: 21300022

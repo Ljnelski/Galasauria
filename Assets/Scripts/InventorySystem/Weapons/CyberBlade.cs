@@ -21,6 +21,10 @@ public class CyberBlade :  EquipableItem
     [SerializeField] private CapsuleCollider hitBox;
     [SerializeField] private Animator animator;
 
+    [Header("SFXs")]
+    [SerializeField] private AudioSource primaryAttackSFX;
+    [SerializeField] private AudioSource secondaryAttackSFX;
+
     private void Start()
     {
         ScaleHandle();
@@ -33,9 +37,11 @@ public class CyberBlade :  EquipableItem
             case GameEnums.EquipableInput.PRIMARY:
             default:
                 animator.SetTrigger("primaryAttack");
+                primaryAttackSFX.Play();
                 break;
             case GameEnums.EquipableInput.SECONDARY:
                 animator.SetTrigger("secondaryAttack");
+                secondaryAttackSFX.Play();
                 break;
         }
         InUse = true;

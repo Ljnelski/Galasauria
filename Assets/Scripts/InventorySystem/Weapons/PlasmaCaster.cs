@@ -31,6 +31,9 @@ public class PlasmaCaster : EquipableItem
     [SerializeField] private ActionTimerPool _timers;
     [SerializeField] private Animator _animator;
 
+    [Header("SFXs")]
+    [SerializeField] private AudioSource shootSFX;
+
     public override void BeginUse(GameEnums.EquipableInput attack) 
     {
         ItemOwnerInventory.itemDictionary.TryGetValue(_plasmaCartridgeitemData, out Item plasmaCartridge);
@@ -57,6 +60,7 @@ public class PlasmaCaster : EquipableItem
 
         // Animate Shoot 
         _animator.SetTrigger("shoot");
+        shootSFX.Play();
     }
 
     public override void EndUse()
