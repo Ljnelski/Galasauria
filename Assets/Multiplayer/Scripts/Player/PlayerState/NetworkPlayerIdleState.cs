@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/*  Filename:           NetworkPlayerIdleState.cs
+ *  Author:             Yuk Yee Wong (301234795)
+ *  Last Update:        December 13, 2022
+ *  Description:        
+ *  Revision History:   December 13, 2022 (Yuk Yee Wong): Initial script.
+ */
 
 public class NetworkPlayerIdleState : NetworkPlayerState
 {
