@@ -16,7 +16,7 @@ public class SpeedBoostPowerUp : UseableItem
         _targetPlayerController.CurrentSpeed = _targetPlayerController.BaseSpeed * speedMultiplier;
 
         // Create Action Timer to reset player Speed
-        _targetPlayerController.Timers.CreateTimer(boostTime, () =>
+        _targetPlayerController.Timers.CreateTimer(boostTime / 1000f, () =>
         {
             _targetPlayerController.CurrentSpeed = _targetPlayerController.BaseSpeed;
         });        
