@@ -122,6 +122,9 @@ public class PlayerController : BaseController<PlayerController>
         Health = GetComponent<HealthSystem>();
         Health.ReceiveDamage += ReceiveDamage;
 
+        // Reset current health
+        CurrentHealth = MaxHealth;
+
         // Reset current speed
         CurrentSpeed = BaseSpeed;
 
