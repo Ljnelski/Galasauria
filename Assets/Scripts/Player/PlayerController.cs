@@ -139,6 +139,9 @@ public class PlayerController : BaseController<PlayerController>
 
         activeState = idleState;
         activeState.OnStateEnter();
+
+        // Equip
+        SwapWeapon();
     }  
 
     private void AddInputActions()
@@ -225,6 +228,11 @@ public class PlayerController : BaseController<PlayerController>
     }
 
     public void OnSwapWeaponInput(InputAction.CallbackContext context)
+    {
+        SwapWeapon();
+    }
+
+    private void SwapWeapon()
     {
         if (equipables.Count == 0)
         {
