@@ -2,31 +2,33 @@
  *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
  *  Last Update:        October 10th, 2022
  *  Description:        Controls the player
- *  Revision History:   October 10th (Liam Nelski): Inital Script.
- *                      October 16th (Liam Nelski): Added Use of Equipable Items
- *                      November 3th (Liam Nelski): Moved Equipable from interface to script
- *                      November 3th (Liam Nelski): Made Player Point to the mouse.
- *                      November 12th (Liam Nelski): Moved Values to Scriptable Object.
- *                      November 13th (Liam Nelski): Added Event for value changes For UI Accessiblity
- *                      November 14th (Liam Nelski): Added IK for arms to Weapon, and Serialized Script Properties to show in Editor
- *                      November 25th (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
- *                      November 26th (Yuk Yee Wong): Added input actions for crate answer and interaction
+ *  Revision History:   October 10, 2022 (Liam Nelski): Inital Script.
+ *                      October 16, 2022 (Liam Nelski): Added Use of Equipable Items
+ *                      November 3, 2022 (Liam Nelski): Moved Equipable from interface to script
+ *                      November 3, 2022 (Liam Nelski): Made Player Point to the mouse.
+ *                      November 12v (Liam Nelski): Moved Values to Scriptable Object.
+ *                      November 13, 2022 (Liam Nelski): Added Event for value changes For UI Accessiblity
+ *                      November 14, 2022 (Liam Nelski): Added IK for arms to Weapon, and Serialized Script Properties to show in Editor
+ *                      November 25, 2022 (Yuk Yee Wong): Added OnEnemyDestroyMethod; passed as an argument in LoadWeapon, implemented health system to receive damage; reset current health and current score in awake.
+ *                      November 26, 2022 (Yuk Yee Wong): Added input actions for crate answer and interaction
+ *                      June 29, 2023 (Liam Nelski): Added suport for interaction script
+ *                      July 07, 2023 (Liam Nelski): Pass Interactable Value and inventory to interactable script
  */
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class PlayerController : BaseController<PlayerController>
 {
     // Scripts
-    [field:SerializeField] private Camera mainCamera;
-    [field:SerializeField] public  Animator Animator { get; private set; }
+    [field: SerializeField] private Camera mainCamera;
+    [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public EquipSlot EquipedItem { get; private set; }
     [field: SerializeField] public Rigidbody Rb { get; private set; }
     [field: SerializeField] public HealthSystem Health { get; private set; }
     [field: SerializeField] public Inventory Inventory { get; private set; }
+    [field: SerializeField] public Interactor Interactor { get; private set; }
     [field: SerializeField] public ActionTimerPool Timers { get; private set; }
 
     [Header("Animation Constraints")]
@@ -142,7 +144,7 @@ public class PlayerController : BaseController<PlayerController>
 
         // Equip
         SwapWeapon();
-    }  
+    }
 
     private void AddInputActions()
     {
@@ -215,10 +217,10 @@ public class PlayerController : BaseController<PlayerController>
     public void OnMovementInput(InputAction.CallbackContext context)
     {
         MovementInput = context.ReadValue<Vector2>();
-        if(MovementInput.magnitude < 0.01f)
+        if (MovementInput.magnitude < 0.01f)
         {
             return;
-        }        
+        }
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
@@ -299,26 +301,30 @@ public class PlayerController : BaseController<PlayerController>
 
     public void OnInteractInput(InputAction.CallbackContext context)
     {
-        OnCrateInteracted?.Invoke(Inventory);
+        Interactor.Interact(0, Inventory);
     }
 
     public void OnInputOne(InputAction.CallbackContext context)
     {
+        Interactor.Interact(InteractValue.One, Inventory);
         OnCrateQuestAnswered?.Invoke(Inventory, 1);
     }
 
     public void OnInputTwo(InputAction.CallbackContext context)
     {
+        Interactor.Interact(InteractValue.Two, Inventory);
         OnCrateQuestAnswered?.Invoke(Inventory, 2);
     }
 
     public void OnInputThree(InputAction.CallbackContext context)
     {
+        Interactor.Interact(InteractValue.Three, Inventory);
         OnCrateQuestAnswered?.Invoke(Inventory, 3);
     }
 
     public void OnInputFour(InputAction.CallbackContext context)
     {
+        Interactor.Interact(InteractValue.Four, Inventory);
         OnCrateQuestAnswered?.Invoke(Inventory, 4);
     }
     private void OnDrawGizmos()
@@ -326,7 +332,7 @@ public class PlayerController : BaseController<PlayerController>
         Gizmos.DrawWireSphere(FacingLocation.localPosition, 1f);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(Rb.velocity.normalized, 1f);
-        Gizmos.color = Color.blue;    
+        Gizmos.color = Color.blue;
     }
     private void OnDestroy()
     {

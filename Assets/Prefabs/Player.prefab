@@ -892,6 +892,7 @@ GameObject:
   - component: {fileID: 5069461504538144184}
   - component: {fileID: 5069461504538144176}
   - component: {fileID: 5069461504538144177}
+  - component: {fileID: 5787914254198918341}
   - component: {fileID: 3567150591900579573}
   - component: {fileID: 10795596}
   - component: {fileID: 7382768922392580795}
@@ -912,14 +913,14 @@ Transform:
   m_GameObject: {fileID: 5069461504538144185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8392746213629428854}
   - {fileID: 2363613057063667788}
   - {fileID: 1274016554}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5069461504538144189
 CapsuleCollider:
@@ -989,6 +990,7 @@ MonoBehaviour:
   <Rb>k__BackingField: {fileID: 5069461504538144186}
   <Health>k__BackingField: {fileID: 10795596}
   <Inventory>k__BackingField: {fileID: 5069461504538144176}
+  <Interactor>k__BackingField: {fileID: 5787914254198918341}
   <Timers>k__BackingField: {fileID: 3567150591900579573}
   LookLocation: {fileID: 1189479763}
   lastDirectionFaced: {x: 0, y: 0, z: 0}
@@ -1023,6 +1025,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59deb3e7de434674c99db8986d3554a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5787914254198918341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069461504538144185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ce76ef8bfc6af44ac4fa2aa33c7b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactableLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3567150591900579573
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,11 +11,11 @@ using Cinemachine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private CinemachineVirtualCamera camera;
+    private CinemachineVirtualCamera mainCamera;
     // Start is called before the first frame update
     void Start()
     {
-        camera = GetComponent<CinemachineVirtualCamera>();        
+        mainCamera = GetComponent<CinemachineVirtualCamera>();        
         Transform playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         
         if(playerPos == null)
@@ -24,8 +24,8 @@ public class PlayerCamera : MonoBehaviour
         }
         else
         {
-            camera.Follow = playerPos;
-            camera.LookAt = playerPos;
+            mainCamera.Follow = playerPos;
+            mainCamera.LookAt = playerPos;
         }
         
     }
