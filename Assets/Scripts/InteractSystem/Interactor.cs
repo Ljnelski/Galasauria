@@ -81,8 +81,6 @@ public class Interactor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collided With:" + other.gameObject.name);
-
         IInteractable newInteractable;
 
         if (other.gameObject.TryGetComponent<IInteractable>(out newInteractable))

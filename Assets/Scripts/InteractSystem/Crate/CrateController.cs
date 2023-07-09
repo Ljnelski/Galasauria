@@ -21,6 +21,7 @@ public class CrateController : MonoBehaviour, IInteractable
     [SerializeField] private RandomListItemCollectableData unlockingCollectable;
     [SerializeField] private RandomListItemCollectableData breakableCollectable;
     [SerializeField] private AudioSource openingSFX;
+    [SerializeField] private AudioSource breakingSFX;
     [SerializeField] private GameObject interactSign;
 
     // Crate Stats
@@ -35,6 +36,7 @@ public class CrateController : MonoBehaviour, IInteractable
     private PigpenCipherPuzzleUI quest;
     private Animation crateAnimation;
     private string crateOpenAnimation = "Crate_Open";
+    private string crateBreakAnimation = "Crate_Break";
 
     void Awake()
     {
@@ -60,41 +62,7 @@ public class CrateController : MonoBehaviour, IInteractable
         Health.ReceiveDamage += ReceiveDamage;
     }
 
-    private void ReceiveDamage(float damage)
-    {
-        //// Debug.Log($"{CurrentHealth} - {damage}");
-        //if (CurrentHealth > 0)
-        //{
-        //    if (CurrentHealth - damage > 0)
-        //    {
-        //        CurrentHealth -= damage;
-        //    }
-        //    else
-        //    {
-        //        Health.ReceiveDamage -= ReceiveDamage;
-        //        CurrentHealth = 0;
-                
-        //        if (!Unlocked)
-        //        {
-        //            // Temp solution, assign to the nearest player
-        //            FindPlayers();
-        //            if (players.Length > 0)
-        //            {
-        //                float shortestDistance = Mathf.Infinity;
-        //                foreach (Transform playerTransform in players)
-        //                {
-        //                    float distance = Vector3.Distance(transform.position, playerTransform.position);
-        //                    if (distance < shortestDistance)
-        //                    {
-        //                        inventoryOwner = playerTransform.GetComponent<Inventory>();
-        //                    }
-        //                }
-        //                breakableCollectable.Collect(inventoryOwner);
-        //            }
-        //        }
-        //    }
-        //}
-    }
+   
 
     public void OpenQuestInterface()
     {
@@ -125,9 +93,8 @@ public class CrateController : MonoBehaviour, IInteractable
         interactSign.gameObject.SetActive(false);
     }
 
-    public void OpenCrate()
+    private void OpenCrate()
     {
-        Debug.Log("Open Crate");
         // Disable the puzzle UI
         CloseQuestInterface();
 
@@ -136,6 +103,18 @@ public class CrateController : MonoBehaviour, IInteractable
 
         // Play the opening sound
         openingSFX.Play();
+    }
+
+    private void BreakCrate()
+    {
+        // Disable the puzzle UI
+        CloseQuestInterface();
+
+        // Play the open crate animation
+        crateAnimation.CrossFade(crateBreakAnimation);
+
+        // Play the opening sound
+        breakingSFX.Play();
     }
 
     public void AnswerQuest(Inventory inventory, int answer)
@@ -151,6 +130,26 @@ public class CrateController : MonoBehaviour, IInteractable
             else
             {
                 quest.Refresh(); 
+            }
+        }
+    }
+
+    private void ReceiveDamage(float damage)
+    {
+        if (CurrentHealth > 0)
+        {
+            if (CurrentHealth - damage > 0)
+            {
+                CurrentHealth -= damage;
+            }
+            else
+            {
+                Health.ReceiveDamage -= ReceiveDamage;
+                CurrentHealth = 0;
+                Unlocked = true;
+                                
+                BreakCrate();
+                HideInteractIndicator();
             }
         }
     }
