@@ -105,10 +105,6 @@ public class Interactor : MonoBehaviour
                 StartCoroutine(SearchAndTargetClosestInteractable());
             }
         }
-        else
-        {
-            Debug.Log("Interactor ERROR: GameObject with interactable layer does not have a Script with a IInteractable interface");
-        }
     }
 
     private void OnTriggerExit(Collider other)

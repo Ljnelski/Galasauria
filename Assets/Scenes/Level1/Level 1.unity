@@ -1636,6 +1636,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &426457531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426457532}
+  m_Layer: 0
+  m_Name: SpiderHives
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &426457532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426457531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7595797214633129439}
+  m_Father: {fileID: 691849156}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &465207951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2348,7 +2380,7 @@ GameObject:
   - component: {fileID: 507792327}
   - component: {fileID: 507792330}
   - component: {fileID: 507792329}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Ground Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3019,7 +3051,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2080436902}
+  - {fileID: 426457532}
   m_Father: {fileID: 1951423312}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5610,6 +5644,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6334795677829556885, guid: bb2551ff4498cc34a99d96cc1f9a861a, type: 3}
   m_PrefabInstance: {fileID: 2057865012}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2080436900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2080436902}
+  - component: {fileID: 2080436901}
+  m_Layer: 0
+  m_Name: SpiderPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2080436901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080436900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a4977f3e682f8499fffcbca49de516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 516453621466483704, guid: 2c6c3ddac038fdd4f82d195805a367c4, type: 3}
+  poolSize: 0
+  totalPooledObject: 0
+--- !u!4 &2080436902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080436900}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 691849156}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2110329411
 GameObject:
   m_ObjectHideFlags: 0
@@ -6902,6 +6983,80 @@ MeshFilter:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3288983353040873635, guid: 0bef88ced1983124f97a4e408574256d, type: 3}
   m_PrefabInstance: {fileID: 436712445199248510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7595797214633129438
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 426457532}
+    m_Modifications:
+    - target: {fileID: 697846438324017610, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_Name
+      value: Hive
+      objectReference: {fileID: 0}
+    - target: {fileID: 697846438324017610, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -26.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0037213813
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99999315
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -540.426
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130762996518295304, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+      propertyPath: spiderPoolManager
+      value: 
+      objectReference: {fileID: 2080436901}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+--- !u!4 &7595797214633129439 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
+  m_PrefabInstance: {fileID: 7595797214633129438}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7868333923887727492
 PrefabInstance:

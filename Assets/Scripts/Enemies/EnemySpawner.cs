@@ -7,35 +7,34 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private SpiderPoolManager spiderPoolManager;
     [SerializeField] private float interval;
 
-    private bool startedSpawn;
-    private float timePassed;
-
-    private void Start()
+    private bool startedSpawn = false;
+    
+    public void StartSpawn()
     {
-        timePassed = interval;
-    }
-
-    private void Update()
-    {
-        if (startedSpawn)
+        Debug.Log("Starting Spawn:" + !startedSpawn);
+        if(!startedSpawn)
         {
-            timePassed += Time.deltaTime;
-
-            if (timePassed > interval)
-            {
-                Spawn();
-                timePassed = 0;
-            }
+            startedSpawn = true;
+            StartCoroutine(SpawnEnemy());
         }
     }
 
-    public void StartSpawn()
+    public void StopSpawn()
     {
-        startedSpawn = true;
+        startedSpawn = false;
     }
 
     private void Spawn()
     {
         spiderPoolManager.GetPooledEnemy(transform.position);
+    }
+
+    private IEnumerator SpawnEnemy()
+    {
+        while (startedSpawn)
+        {
+            Spawn();
+            yield return new WaitForSeconds(interval);
+        }
     }
 }
