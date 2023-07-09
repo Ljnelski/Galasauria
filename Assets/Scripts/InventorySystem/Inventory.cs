@@ -1,11 +1,12 @@
 /*  Filename:           InventoryManager.cs
  *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
- *  Last Update:        November 13th, 2022
+ *  Last Update:        July 07, 2023, 2022
  *  Description:        Attaches a inventory to the gameobject
  *  Revision History:   October 12, 2022 (Liam Nelski): Initial script.
  *                      November 12, 2022 (Yuk Yee Wong): Replace the notification call with inventoryIncrementAction
- *                      November 13th, 2022 (Liam Nelski): Rename Action and added two more
- *                      December 5th, 2022 (Yuk Yee Wong): Initiate new dictionary when declare.
+ *                      November 13, 2022 (Liam Nelski): Rename Action and added two more
+ *                      December 05, 2022 (Yuk Yee Wong): Initiate new dictionary when declare.
+ *                      July 07, 2023 (Liam Nelski): Removed Unessisary Log
  */
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,7 +98,6 @@ public class Inventory : MonoBehaviour
             itemDictionary.TryGetValue(recipeItem.data, out Item inventoryItem);
             if (inventoryItem == null || inventoryItem.stackSize < recipeItem.itemCount)
             {
-                Debug.Log("Does not have the required number of " + recipeItem.data.itemName);
                 return false;
             }
         }

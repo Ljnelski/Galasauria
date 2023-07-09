@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 500
   _currentHealth: 500
-  _interactionDistance: 3
+  _interactionDistance: 1
