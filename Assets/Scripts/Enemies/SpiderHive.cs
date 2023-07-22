@@ -6,46 +6,55 @@ using UnityEngine;
 public class SpiderHive : MonoBehaviour
 {
     [SerializeField] private HealthSystem _healthSystem;
-    [SerializeField] private EnemySpawner spawner;
-    [SerializeField] private SphereCollider sphereCollider;
-    [SerializeField] private GameObject HiveMesh;
-    [SerializeField] private GameObject BrokenHiveMesh;
+    [SerializeField] private EnemySpawner _spawner;
+    [SerializeField] private PlayerDetector _playerDetector;
 
-    [SerializeField] private float _hiveDetectionRange;
+    [SerializeField] private GameObject _hiveObject;
+    [SerializeField] private GameObject _brokenHiveObject;
+
     [SerializeField] private float _hiveHealth;
+    [SerializeField] private float _hiveDetectionRange;
 
-    private void Awake()
+    private void Start()
     {
-        sphereCollider.radius = _hiveDetectionRange;
         _healthSystem.ReceiveDamage += TakeDamage;
+        _playerDetector.SetDetectionRadius(_hiveDetectionRange);
+
+        _playerDetector.PlayerEntered += PlayerDetected;
+        _playerDetector.PlayerExited += PlayerUndetected;
     }
+
+    private void PlayerDetected(PlayerController playerController)
+    {
+        if (_hiveHealth > 0f)
+        {
+            _spawner.StartSpawn();
+        }
+    }
+    private void PlayerUndetected(PlayerController playerController)
+    {
+        _spawner.StopSpawn();
+    }   
 
     private void TakeDamage(float Damage)
     {
+        Debug.Log("Take Damage Called from SpiderHive");
         _hiveHealth -= Damage;
 
         if(_hiveHealth < 0)
         {
             _hiveHealth = 0;
 
-            sphereCollider.enabled = false;
-            spawner.StopSpawn();
+            _spawner.StopSpawn();
 
-            HiveMesh.SetActive(false);
-            BrokenHiveMesh.SetActive(true);
+            _hiveObject.SetActive(false);
+            _playerDetector.gameObject.SetActive(false);
+            _brokenHiveObject.SetActive(true);
 
             _healthSystem.ReceiveDamage -= TakeDamage;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Exit" + other.name);
-        spawner.StartSpawn();
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Exit " + other.name);
-        spawner.StopSpawn();
+            _playerDetector.PlayerEntered -= PlayerDetected;
+            _playerDetector.PlayerExited -= PlayerUndetected;
+        }
     }
 }

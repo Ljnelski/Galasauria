@@ -6996,10 +6996,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hive
       objectReference: {fileID: 0}
-    - target: {fileID: 697846438324017610, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 1039726855277277014, guid: 1a4a5fa14a1d1d34fb8017f203e2f2cd, type: 3}
       propertyPath: m_RootOrder
       value: -1
