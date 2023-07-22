@@ -40,13 +40,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 892028807908233538}
-  - component: {fileID: 3216115321155615563}
   - component: {fileID: 5445457441882226433}
+  - component: {fileID: 4667552657175369518}
+  - component: {fileID: 3751025727519641369}
   - component: {fileID: 979895940737206641}
   - component: {fileID: 7301187167385141350}
   - component: {fileID: 4755822514928529815}
   - component: {fileID: 473277652524326054}
-  - component: {fileID: 3751025727519641369}
   m_Layer: 8
   m_Name: Spider
   m_TagString: Untagged
@@ -71,27 +71,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3216115321155615563
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516453621466483704}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.88367367, y: 1.2684456, z: 1.0402668}
-  m_Center: {x: 0, y: 0.58610624, z: -0.020133436}
 --- !u!95 &5445457441882226433
 Animator:
   serializedVersion: 5
@@ -113,66 +92,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &979895940737206641
-MonoBehaviour:
+--- !u!136 &4667552657175369518
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516453621466483704}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d19c5731f076e54b9069dc05e0bfa69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageTag: Weapon
---- !u!114 &7301187167385141350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516453621466483704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d69d917ff3d7042928555ec855aa0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spiderContext: {fileID: 11400000, guid: 23a6d06d7f22dd547884321e22d4e27e, type: 2}
---- !u!195 &4755822514928529815
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516453621466483704}
-  m_Enabled: 1
-  m_AgentTypeID: 0
+  serializedVersion: 2
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &473277652524326054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516453621466483704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c22635b2a2b1fe41b72da563dbdc159, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Height: 1.4174293
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7726392, z: 0}
 --- !u!82 &3751025727519641369
 AudioSource:
   m_ObjectHideFlags: 0
@@ -269,6 +211,66 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &979895940737206641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516453621466483704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d19c5731f076e54b9069dc05e0bfa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageTag: Weapon
+--- !u!114 &7301187167385141350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516453621466483704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d69d917ff3d7042928555ec855aa0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderContext: {fileID: 11400000, guid: 23a6d06d7f22dd547884321e22d4e27e, type: 2}
+--- !u!195 &4755822514928529815
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516453621466483704}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0.1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 3
+--- !u!114 &473277652524326054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516453621466483704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c22635b2a2b1fe41b72da563dbdc159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &738105329554022977
 GameObject:
   m_ObjectHideFlags: 0

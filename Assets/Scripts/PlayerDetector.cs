@@ -1,8 +1,8 @@
 /*  Filename:           PLayerDetector.cs
- *  Author:             Liam Nelski (301064116), Yuk Yee Wong (301234795)
- *  Last Update:        October 10th, 2022
+ *  Author:             Liam Nelski (301064116)
+ *  Last Update:        July 22, 2022
  *  Description:        Detects if the player enters or exits on a trigger
- *  Revision History:   October 10, 2022 (Liam Nelski): Inital Script.
+ *  Revision History:   July 22, 2023 (Liam Nelski): Inital Script.
  */
 using System;
 using UnityEngine;
@@ -24,11 +24,6 @@ public class PlayerDetector : MonoBehaviour
         }
 
     }
-    private void Awake()
-    {
-
-    }
-
     public void SetDetectionRadius(float detectionRadius)
     {
         GetComponent<SphereCollider>().radius = _detectionRadius;
@@ -39,17 +34,15 @@ public class PlayerDetector : MonoBehaviour
         PlayerController player = other.GetComponent<PlayerController>();
         if (player != null)
         {
-            Debug.Log("PlayerEntered");
             PlayerEntered?.Invoke(player);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         PlayerController player = other.GetComponent<PlayerController>();
-        if (other.gameObject.GetComponent<PlayerController>() != null)
+        if (player != null)
         {
-            Debug.Log("PlayerExited");
-            PlayerEntered?.Invoke(player);
+            PlayerExited?.Invoke(player);
         }
     }
 }

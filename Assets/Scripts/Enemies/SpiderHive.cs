@@ -1,6 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+/*  Filename:           TestNavMeshAgent.cs
+ *  Author:             Liam Nelski (301064116)
+ *  Last Update:        July 22, 2023
+ *  Description:        Controls all the logic that the spider hives need
+ *  Revision History:   July 22, 2023 (Liam Nelski): Initial script.
+ */
 using UnityEngine;
 
 public class SpiderHive : MonoBehaviour
