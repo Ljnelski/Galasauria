@@ -6,6 +6,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpiderPoolManager : PoolManager<SpiderController>
 {
