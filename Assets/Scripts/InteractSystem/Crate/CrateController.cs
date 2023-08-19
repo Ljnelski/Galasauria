@@ -28,8 +28,10 @@ public class CrateController : MonoBehaviour, IInteractable
     public float MaxHealth { get => crateContext._maxHealth; }
     public float CurrentHealth { get; set; }
     public float InteractionDistance { get => crateContext._interactionDistance; }
-    public bool Unlocked { get; private set; }
-    public bool IsInteractable { get => Unlocked; }
+    public bool IsInteractable { get => _unlocked; }
+
+    private bool _unlocked;
+
 
     public Vector3 WorldPosition { get => transform.position; }
 
@@ -66,7 +68,7 @@ public class CrateController : MonoBehaviour, IInteractable
 
     public void OpenQuestInterface()
     {
-        if (!Unlocked)
+        if (!_unlocked)
         {
             quest.gameObject.SetActive(true);
             quest.Refresh();
@@ -119,11 +121,11 @@ public class CrateController : MonoBehaviour, IInteractable
 
     public void AnswerQuest(Inventory inventory, int answer)
     {
-        if (!Unlocked && inventory != null)
+        if (!_unlocked && inventory != null)
         {
             if (answer == quest.AnswerIndex + 1)
             { 
-                Unlocked = true; 
+                _unlocked = true; 
                 unlockingCollectable.Collect(inventory);
                 OpenCrate();
             }
@@ -146,7 +148,7 @@ public class CrateController : MonoBehaviour, IInteractable
             {
                 Health.ReceiveDamage -= ReceiveDamage;
                 CurrentHealth = 0;
-                Unlocked = true;
+                _unlocked = true;
                                 
                 BreakCrate();
                 HideInteractIndicator();
